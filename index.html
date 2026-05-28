@@ -195,6 +195,29 @@
   .v-no{color: var(--muted); background: var(--page)}
   .v-pend{color: var(--orange); background: #FFF1E2}
 
+  /* Inquiry timeline */
+  .inquiry-block{margin-top: 36px; background: var(--card); border-radius: var(--radius-lg); padding: 36px 40px; box-shadow: var(--shadow-sm); border: 1px solid var(--line)}
+  .inquiry-head{display:flex; align-items:baseline; gap: 16px; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap}
+  .inquiry-head h3{font-size: 22px; font-weight: 800; letter-spacing: -0.01em; margin: 0; color: var(--ink)}
+  .inquiry-head .inq-sub{font-size: 14px; color: var(--muted); margin: 0}
+  .inquiry-timeline{display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px; position: relative}
+  .inq-step{background: var(--page); border-radius: 14px; padding: 20px 18px; position: relative; border: 1px solid var(--line)}
+  .inq-step .inq-num{font-size: 11px; font-weight: 800; color: var(--violet); letter-spacing: 0.08em; margin-bottom: 6px; display: block}
+  .inq-step .inq-name{font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em}
+  .inq-step .inq-desc{font-size: 13px; color: var(--ink-2); line-height: 1.5; margin: 0}
+  .inq-step.is-final{background: linear-gradient(135deg, #FFF0F6 0%, #FFE0EC 100%); border-color: #FFC2DC}
+  .inq-step.is-final .inq-num{color: var(--pink)}
+  .inq-step:not(:last-child)::after{
+    content: ''; position: absolute; top: 50%; right: -12px; transform: translateY(-50%);
+    width: 12px; height: 2px; background: var(--line); z-index: 1;
+  }
+  .inq-step:not(:last-child)::before{
+    content: ''; position: absolute; top: 50%; right: -16px; transform: translateY(-50%);
+    width: 0; height: 0; border-left: 6px solid var(--line); border-top: 4px solid transparent; border-bottom: 4px solid transparent; z-index: 2;
+  }
+  .inquiry-footnote{margin-top: 18px; font-size: 13px; color: var(--ink-2); text-align: center; padding: 12px 16px; background: rgba(110,88,232,.06); border-radius: 10px; line-height: 1.5}
+  .inquiry-footnote strong{color: var(--violet)}
+
   /* ============ AFTERLIFE TIMING ============ */
   .timing-grid{display:grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1080px; margin: 0 auto}
   .timing-card{background: var(--card); border-radius: var(--radius-lg); padding: 36px 28px; border:1px solid var(--line); box-shadow: var(--shadow-sm); display:flex; flex-direction:column; align-items:center; text-align:center; transition: transform .25s ease, box-shadow .25s ease; position:relative}
@@ -375,6 +398,13 @@
     .standalone-right{padding: 24px}
     .split, .duo{grid-template-columns: 1fr; gap: 40px}
     .sec-grid{grid-template-columns: 1fr 1fr}
+
+    /* Inquiry timeline: 2x2 on mobile */
+    .inquiry-block{padding: 28px 22px}
+    .inquiry-timeline{grid-template-columns: 1fr 1fr; gap: 10px}
+    .inq-step:not(:last-child)::after,
+    .inq-step:not(:last-child)::before{display: none}
+    .inq-step{padding: 16px 14px}
     .security{padding: 48px 28px; border-radius: 24px}
     .final-cta{padding: 48px 28px; border-radius: 24px}
     .duo-card{padding: 32px 28px}
@@ -589,7 +619,7 @@
           Make sure your <span class="underline">digital life</span> reaches the <span class="accent">right hands.</span>
         </h1>
         <p class="hero-sub">
-          Loomkeeper is a private, end-to-end encrypted vault for the documents, accounts and memories you want delivered to your loved ones — exactly when, and to whom, you decide.
+          Loomkeeper is the private vault for the documents, accounts and memories you want delivered to your loved ones &mdash; exactly when, and to whom, you decide.
         </p>
         <div class="hero-cta">
           <a href="/auth/register" class="btn btn-primary btn-lg" data-cta="register" data-cta-on="Start your vault" data-cta-off="Join the waitlist">
@@ -697,7 +727,7 @@
           </div>
           <div>
             <strong style="display:block;font-size:13px;color:var(--ink);font-weight:700">256-bit secure</strong>
-            <span style="font-size:11px;color:var(--muted)">Zero-knowledge</span>
+            <span style="font-size:11px;color:var(--muted)">Encrypted on device</span>
           </div>
         </div>
       </div>
@@ -789,7 +819,7 @@
             <div class="check">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <div class="ft"><strong>Cold storage, by design</strong> No editing or downloading after upload — your archive is tamper-resistant by default.</div>
+            <div class="ft"><strong>Cold storage, by design.</strong> Loomkeeper is built for static assets &mdash; wills, deeds, photos, letters, the master password to your password manager. Not a password manager itself: if it changes often, it belongs somewhere else.</div>
           </li>
         </ul>
       </div>
@@ -1004,9 +1034,39 @@
         </div>
       </article>
     </div>
+
+    <!-- Inquiry timeline -->
+    <div class="inquiry-block reveal">
+      <div class="inquiry-head">
+        <h3>How a release actually happens</h3>
+        <p class="inq-sub">From silence to handover &middot; designed to be slow on purpose.</p>
+      </div>
+      <div class="inquiry-timeline">
+        <div class="inq-step">
+          <span class="inq-num">STEP 01</span>
+          <div class="inq-name">Trigger</div>
+          <p class="inq-desc">Payment fails and we can&rsquo;t reach you, or an emergency contact reports your passing.</p>
+        </div>
+        <div class="inq-step">
+          <span class="inq-num">STEP 02</span>
+          <div class="inq-name">60-day silence window</div>
+          <p class="inq-desc">We try to reach you several times by email. A single click &mdash; any time &mdash; ends the inquiry.</p>
+        </div>
+        <div class="inq-step">
+          <span class="inq-num">STEP 03</span>
+          <div class="inq-name">7-day contact vote</div>
+          <p class="inq-desc">Your emergency contacts confirm. A sign of life still stops it instantly, even mid-vote.</p>
+        </div>
+        <div class="inq-step is-final">
+          <span class="inq-num">STEP 04</span>
+          <div class="inq-name">Release</div>
+          <p class="inq-desc">Your folders reach the Loomkeepers you chose. Each person sees only what you assigned them.</p>
+        </div>
+      </div>
+      <div class="inquiry-footnote"><strong>Sign of life ends the inquiry instantly</strong> &mdash; at any step, including mid-vote. One click is all it takes.</div>
+    </div>
   </div>
 </section>
-
 <!-- ============ AFTERLIFE MESSAGES ============ -->
 <section id="messages">
   <div class="wrap">
@@ -1091,8 +1151,8 @@
             <div class="ic">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2"/></svg>
             </div>
-            <h4>End-to-end encrypted</h4>
-            <p>Industry-standard client-side encryption with multiple layers of protection &mdash; engineered so no single system holds the keys to your files.</p>
+            <h4>Encrypted on your device</h4>
+            <p>Files are sealed in your browser before upload, so what arrives on our servers is ciphertext we can&rsquo;t tamper with. Keys live in an encrypted store, released only after the multi-party inquiry concludes.</p>
           </div>
           <div class="sec-item">
             <div class="ic">
@@ -1105,15 +1165,15 @@
             <div class="ic">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3a13 13 0 010 18M12 3a13 13 0 000 18" stroke="currentColor" stroke-width="2"/></svg>
             </div>
-            <h4>Regional storage</h4>
-            <p>Pick a GDPR-compliant region. Your data, your jurisdiction.</p>
+            <h4>Your region, your choice</h4>
+            <p>Pick where your files live before you upload. US-incorporated company; your data stays in the region you choose.</p>
           </div>
           <div class="sec-item">
             <div class="ic">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21V3M5 10l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <h4>Cold-storage by design</h4>
-            <p>Write-once. Files cannot be modified after upload.</p>
+            <h4>Static assets only</h4>
+            <p>Designed for things you set once &mdash; wills, deeds, credentials, photos. Not a password manager. Not a sync tool.</p>
           </div>
         </div>
       </div>
@@ -1150,7 +1210,7 @@
             <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> 10 MB encrypted storage</li>
             <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Up to 5 files</li>
             <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Assign Loomkeepers &amp; Emergency Contacts</li>
-            <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> End-to-end encryption &amp; cold storage</li>
+            <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Encrypted on your device &middot; cold storage</li>
             <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Choose your storage region</li>
           </ul>
           <a href="/auth/register" class="btn btn-outline" style="width:100%; padding: 14px 22px" data-cta="register" data-cta-on="Start free" data-cta-off="Join the waitlist">Start free</a>
@@ -1259,7 +1319,7 @@
           What is the Vault?
           <svg class="chev" width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <div class="faq-a">A one-way cold storage vault for your digital assets — documents, photos, account credentials, anything you'd hate to lose. Files are <strong>encrypted</strong> on your device before upload, stored in a region you choose, and cannot be edited or downloaded after upload (so they can't be tampered with).</div>
+        <div class="faq-a"><p style="margin:0 0 10px">A one-way cold storage vault for your digital assets &mdash; documents, photos, account credentials, anything you&rsquo;d hate to lose. Files are <strong>encrypted</strong> on your device before upload, stored in a region you choose, and cannot be edited or downloaded after upload (so they can&rsquo;t be tampered with).</p><p style="margin:0 0 10px"><strong>The Vault is for assets that rarely change.</strong> It&rsquo;s a vault, not a hard drive &mdash; built for wills, deeds, photos, letters, the master password to your password manager: things you set once and want kept safely until they&rsquo;re needed. If something changes weekly, store it somewhere else.</p><p style="margin:0"><strong>Updating an asset</strong> means deleting the previous version and uploading a new one &mdash; there&rsquo;s no in-place edit. That&rsquo;s deliberate: it&rsquo;s what makes the archive tamper-resistant.</p></div>
       </details>
 
       <details class="faq-item">
@@ -1291,7 +1351,7 @@
           Can Loomkeeper read my files?
           <svg class="chev" width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <div class="faq-a">Files are encrypted on your device before they ever leave you, using industry-standard cryptography. They&rsquo;re held behind multiple isolated layers of protection, so nothing is browsable, previewable or readable in transit or at rest &mdash; not by us, not by anyone else. <strong>In fact, your Loomkeepers don&rsquo;t even know they&rsquo;ve been named</strong> &mdash; we never notify them, contact them, or hint at their role until your digital inheritance is actually released. Until that day, they have no idea you&rsquo;ve chosen them.</div>
+        <div class="faq-a"><p style="margin:0 0 10px">Your files are encrypted in your browser before they leave you, so what arrives on our servers is ciphertext we can&rsquo;t tamper with. The decryption keys live in an encrypted store and are only released when the multi-party inquiry concludes &mdash; never browsed, indexed or previewed by us in the meantime.</p><p style="margin:0 0 10px"><strong>We&rsquo;re transparent about why this isn&rsquo;t a zero-knowledge model.</strong> If the only person who could ever decrypt your files were you, your files would vanish with you &mdash; which defeats the entire purpose of a digital inheritance product. Instead, the key sits behind a multi-party process none of us controls unilaterally: a 60-day silence window, then a 7-day vote by your emergency contacts, before anything is released.</p><p style="margin:0"><strong>Your Loomkeepers don&rsquo;t even know they&rsquo;ve been named</strong> &mdash; we never notify them, contact them, or hint at their role until your digital inheritance is actually released. Until that day, they have no idea you&rsquo;ve chosen them.</p></div>
       </details>
     </div>
   </div>
@@ -1339,7 +1399,7 @@
         <ul>
           <li><a href="#">About</a></li>
           <li><a href="#security">Security</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#2d4e4243594c4e596d414242404648485d485f034e4240">Contact</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#8be8e4e5ffeae8ffcbe7e4e4e6e0eeeefbeef9a5e8e4e6">Contact</a></li>
         </ul>
       </div>
 
@@ -1361,7 +1421,7 @@
         <a href="#" aria-label="LinkedIn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8 17v-7H5.5v7H8zm-1.25-8.08a1.45 1.45 0 100-2.9 1.45 1.45 0 000 2.9zM18.5 17v-3.9c0-2.27-1.21-3.32-2.83-3.32-1.3 0-1.89.72-2.22 1.22V10H11v7h2.45v-3.7c0-.2.01-.4.07-.55.16-.4.52-.81 1.13-.81.8 0 1.12.6 1.12 1.48V17h2.73z"/></svg>
         </a>
-        <a href="/cdn-cgi/l/email-protection#c6a5a9a8b2a7a5b286aaa9a9abada3a3b6a3b4e8a5a9ab" aria-label="Email">
+        <a href="/cdn-cgi/l/email-protection#2f4c40415b4e4c5b6f43404042444a4a5f4a5d014c4042" aria-label="Email">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 8l9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         </a>
       </div>
