@@ -55,9 +55,8 @@
   .logo svg{margin-right: 4px}
   .logo img{height: 32px; width:auto; display:block}
   .nav-links{display:flex; gap: 36px; font-size:15px; font-weight:500; color: var(--ink-2)}
-  .nav-links a{position:relative; transition: color .15s}
+  .nav-links a{transition:color .15s}
   .nav-links a:hover{color: var(--pink)}
-  .nav-links a.active{color: var(--pink); font-weight: 600}
   .nav-cta{display:flex; align-items:center; gap: 12px}
   .btn{display:inline-flex; align-items:center; justify-content:center; gap: 8px; font-weight:600; padding: 12px 22px; border-radius: 999px; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; font-size: 15px; white-space:nowrap}
   .btn-primary{background: var(--pink); color:white; box-shadow: 0 8px 18px -6px rgba(255, 61, 140, .55)}
@@ -177,9 +176,9 @@
   .contact-list{display:flex; flex-direction:column; gap: 10px; margin-top: 12px}
   .contact-row{display:flex; align-items:center; gap: 14px; padding: 12px 14px; background: var(--page); border-radius: 14px}
   .avatar{width: 36px; height: 36px; border-radius:50%; color:white; font-weight:700; font-size: 13px; display:grid; place-items:center; flex-shrink:0}
-  .contact-row .name{font-weight:600; font-size: 14.5px; color: var(--ink); white-space: nowrap}
-  .contact-row .role{font-size: 12.5px; color: var(--muted); margin-left:auto; white-space: nowrap; flex-shrink: 0}
-  .contact-row .chips{display:flex; gap:4px; flex-shrink: 0}
+  .contact-row .name{font-weight:600; font-size: 14.5px; color: var(--ink)}
+  .contact-row .role{font-size: 12.5px; color: var(--muted); margin-left:auto}
+  .contact-row .chips{display:flex; gap:4px}
   .contact-row .chips span{width:22px; height: 22px; border-radius:50%; border: 2px solid white; font-size: 9px; font-weight:700; color:white; display:grid; place-items:center; margin-left:-6px}
   .contact-row .chips span:first-child{margin-left:0}
 
@@ -270,6 +269,16 @@
   .price-features{list-style:none; padding:0; margin: 0 0 32px; display:flex; flex-direction:column; gap: 12px}
   .price-features li{display:flex; gap:10px; align-items:center; font-size: 14.5px; color: var(--ink-2)}
   .price-features .pc{width:20px; height:20px; border-radius:50%; background: var(--violet-tint); color: var(--violet); display:grid; place-items:center; flex-shrink:0}
+
+  /* Billing toggle inside Premium card */
+  .billing-toggle{display:inline-flex; align-self:flex-start; background: var(--page); border-radius: 999px; padding: 4px; margin-bottom: 20px; gap: 2px; border: 1px solid var(--line)}
+  .bt-opt{appearance:none; border:none; background:transparent; cursor:pointer; font: inherit; font-size: 13px; font-weight: 600; color: var(--muted); padding: 7px 14px; border-radius: 999px; transition: all .18s ease; display:inline-flex; align-items:center; gap: 6px; letter-spacing: 0.01em}
+  .bt-opt:hover{color: var(--ink-2)}
+  .bt-opt.is-active{background: var(--card); color: var(--ink); box-shadow: 0 1px 3px rgba(20,20,30,.08), 0 1px 1px rgba(20,20,30,.04)}
+  .bt-save{font-size: 10.5px; font-weight: 700; color: var(--pink); background: var(--pink-tint); padding: 2px 7px; border-radius: 999px; letter-spacing: 0.02em; text-transform: uppercase}
+  .bt-opt.is-active .bt-save{color: var(--pink)}
+  .price .price-amount{display:inline-block}
+  .price small{font-size: 16px; font-weight:600; color: var(--muted); margin-left: 2px}
 
   /* Afterlife messages standalone card */
   .standalone-card{
@@ -403,10 +412,10 @@
     .pre-banner{font-size: 12px; padding: 9px 14px; gap: 8px}
 
     /* Nav */
-    .nav-wrap{padding: 14px 0; padding-top: max(14px, env(safe-area-inset-top))}
+    .nav-wrap{padding: 12px 0}
     .logo{font-size: 18px}
     .logo svg{width: 22px; height: 22px}
-    .logo img{height: 22px}
+    .logo img{height: 24px}
     .nav-cta{gap: 4px}
     .nav-cta .btn-ghost{padding: 8px 10px; font-size: 14px}
     .nav-cta .btn-primary{padding: 9px 14px; font-size: 13px}
@@ -434,12 +443,6 @@
     .standalone-title{font-size: 20px}
     .standalone-price{font-size: 44px}
     .vault-mock{padding: 18px}
-
-    /* Loomkeepers rows: tighter on phones */
-    .contact-row{gap: 10px; padding: 11px 12px}
-    .contact-row .name{font-size: 13.5px}
-    .contact-row .role{font-size: 11.5px}
-    .contact-row .chips span{width: 18px; height: 18px; font-size: 8px; margin-left: -5px}
     .vm-bar{margin-bottom: 16px; padding-bottom: 14px; flex-wrap: wrap}
 
     /* Security & final CTA */
@@ -1157,16 +1160,24 @@
           <div class="featured-tag">Premium</div>
           <h3>Loomkeeper Premium</h3>
           <p class="tagline">For anyone who takes their legacy seriously.</p>
-          <div class="price">TBD</div>
-          <div class="per">Final pricing coming soon &middot; monthly &amp; annual plans</div>
+
+          <div class="billing-toggle" role="tablist" aria-label="Billing period">
+            <button class="bt-opt is-active" data-billing="monthly" role="tab" aria-selected="true">Monthly</button>
+            <button class="bt-opt" data-billing="yearly" role="tab" aria-selected="false">Yearly <span class="bt-save">Save 17%</span></button>
+          </div>
+
+          <div class="price">
+            <span class="price-amount" data-monthly="$4.90" data-yearly="$49">$4.90</span><small class="price-period" data-monthly="/month" data-yearly="/year">/month</small>
+          </div>
+          <div class="per" data-monthly="Billed monthly &middot; cancel anytime" data-yearly="Billed annually &middot; $4.08/mo equivalent">Billed monthly &middot; cancel anytime</div>
           <ul class="price-features">
             <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> 100 GB encrypted storage</li>
             <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Unlimited files &amp; folders</li>
             <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Unlimited Loomkeepers &amp; Emergency Contacts</li>
             <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Priority support &amp; faster restores</li>
-            <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Annual plan saves ~2 months vs. monthly</li>
+            <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> 7-day grace period if you cancel</li>
           </ul>
-          <a href="/auth/register" class="btn btn-primary" style="width:100%; padding: 14px 22px" data-cta="register" data-cta-on="Notify me when ready" data-cta-off="Join the waitlist">Notify me when ready</a>
+          <a href="/auth/register" class="btn btn-primary" style="width:100%; padding: 14px 22px" data-cta="register" data-cta-on="Start Premium" data-cta-off="Join the waitlist" data-cta-coming="Coming soon">Start Premium</a>
         </article>
       </div>
     </div>
@@ -1191,6 +1202,7 @@
             <div class="standalone-desc">Works on its own &mdash; you don&rsquo;t need a Vault subscription to schedule and send Afterlife Messages.</div>
             <ul class="standalone-feats">
               <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Video, audio or written messages</li>
+              <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Up to 1.5 GB per message</li>
               <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Three delivery rules (date, recurring, period)</li>
               <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> Released only after Emergency Contact confirmation</li>
               <li><div class="pc"><svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3 8l3 3 7-7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div> No recurring charges, ever</li>
@@ -1198,9 +1210,9 @@
           </div>
         </div>
         <div class="standalone-right">
-          <div class="standalone-price">TBD</div>
+          <div class="standalone-price">$10</div>
           <div class="standalone-unit">per message &middot; one-time</div>
-          <div class="standalone-note">Final pricing coming soon</div>
+          <div class="standalone-note">Up to 1.5 GB &middot; no recurring charges</div>
           <a href="/auth/register" class="btn btn-primary" style="margin-top: 16px; padding: 12px 22px" data-cta="register" data-cta-on="Create a message" data-cta-off="Join the waitlist">Create a message</a>
         </div>
       </div>
@@ -1247,7 +1259,7 @@
           What is the Vault?
           <svg class="chev" width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <div class="faq-a">A one-way cold storage vault for your digital assets — documents, photos, account credentials, anything you'd hate to lose. Files are encrypted on your device before upload, stored in a region you choose, and cannot be edited or downloaded after upload (so they can't be tampered with).</div>
+        <div class="faq-a">A one-way cold storage vault for your digital assets — documents, photos, account credentials, anything you'd hate to lose. Files are <strong>encrypted</strong> on your device before upload, stored in a region you choose, and cannot be edited or downloaded after upload (so they can't be tampered with).</div>
       </details>
 
       <details class="faq-item">
@@ -1327,7 +1339,7 @@
         <ul>
           <li><a href="#">About</a></li>
           <li><a href="#security">Security</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#3e5d51504a5f5d4a7e52515153555b5b4e5b4c105d5153">Contact</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#2d4e4243594c4e596d414242404648485d485f034e4240">Contact</a></li>
         </ul>
       </div>
 
@@ -1349,7 +1361,7 @@
         <a href="#" aria-label="LinkedIn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8 17v-7H5.5v7H8zm-1.25-8.08a1.45 1.45 0 100-2.9 1.45 1.45 0 000 2.9zM18.5 17v-3.9c0-2.27-1.21-3.32-2.83-3.32-1.3 0-1.89.72-2.22 1.22V10H11v7h2.45v-3.7c0-.2.01-.4.07-.55.16-.4.52-.81 1.13-.81.8 0 1.12.6 1.12 1.48V17h2.73z"/></svg>
         </a>
-        <a href="/cdn-cgi/l/email-protection#b7d4d8d9c3d6d4c3f7dbd8d8dadcd2d2c7d2c599d4d8da" aria-label="Email">
+        <a href="/cdn-cgi/l/email-protection#c6a5a9a8b2a7a5b286aaa9a9abada3a3b6a3b4e8a5a9ab" aria-label="Email">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 8l9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -1435,6 +1447,28 @@
   }
   applyFlags();
 
+  // ===== Pricing billing toggle (monthly / yearly) =====
+  (function setupBillingToggle(){
+    const toggles = document.querySelectorAll('.billing-toggle');
+    toggles.forEach(group => {
+      const card = group.closest('.price-card');
+      if (!card) return;
+      const swap = (mode) => {
+        card.querySelectorAll('[data-monthly][data-yearly]').forEach(el => {
+          el.innerHTML = el.dataset[mode];
+        });
+        group.querySelectorAll('.bt-opt').forEach(b => {
+          const on = b.dataset.billing === mode;
+          b.classList.toggle('is-active', on);
+          b.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+      };
+      group.querySelectorAll('.bt-opt').forEach(b => {
+        b.addEventListener('click', () => swap(b.dataset.billing));
+      });
+    });
+  })();
+
   // ===== Tweaks panel wiring =====
   const panel = document.getElementById('tweaksPanel');
   const swReg = document.getElementById('twReg');
@@ -1491,46 +1525,6 @@
   const onScroll = () => navWrap.classList.toggle('scrolled', window.scrollY > 8);
   document.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
-
-  // Scroll-spy: highlight the nav link whose section is in view.
-  // Uses a scroll listener (not IO) so scroll-up direction reports correctly.
-  (function setupScrollSpy(){
-    const links = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
-    if (!links.length) return;
-    const pairs = [];
-    links.forEach(a => {
-      const id = a.getAttribute('href').slice(1);
-      const sec = id && document.getElementById(id);
-      if (sec) pairs.push({ link: a, sec });
-    });
-    if (!pairs.length) return;
-    let current = null;
-    const setActive = (link) => {
-      if (current === link) return;
-      current = link;
-      links.forEach(a => a.classList.toggle('active', a === link));
-    };
-    const update = () => {
-      const navH = (document.getElementById('navWrap')?.offsetHeight) || 64;
-      const probe = navH + 24; // activation line just below the sticky nav
-      let active = null;
-      for (const { link, sec } of pairs){
-        const top = sec.getBoundingClientRect().top;
-        if (top - probe <= 0) active = link; // last section whose top crossed the line
-      }
-      // Near the very bottom of the page, force the last link active
-      if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 4){
-        active = pairs[pairs.length - 1].link;
-      }
-      // Above the first section, clear
-      setActive(active);
-    };
-    let raf = 0;
-    const schedule = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; update(); }); };
-    document.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
-    update();
-  })();
 
   // Smooth scroll for nav anchors — custom easing for a slower, nicer ride
   const easeInOutCubic = t => t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
