@@ -270,6 +270,16 @@
   .sec-item h4{font-size: 16px; font-weight:700; margin: 0 0 6px}
   .sec-item p{font-size: 13.5px; opacity: .72; margin:0; line-height:1.5}
 
+  /* Under-the-hood / audit posture strip */
+  .under-hood{margin-top: 28px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 18px 22px; display:flex; flex-direction:column; gap: 12px}
+  .uh-row{display:flex; align-items:center; gap: 16px; flex-wrap:wrap}
+  .uh-label{font-size: 11px; font-weight: 700; color: rgba(255,255,255,.55); letter-spacing: 0.1em; text-transform: uppercase; white-space:nowrap; flex-shrink: 0; min-width: 130px}
+  .uh-label-audit{color: rgba(255,255,255,.55)}
+  .uh-body{flex:1; display:flex; gap: 8px; flex-wrap:wrap; align-items:center; font-size: 13.5px; color: rgba(255,255,255,.82); line-height: 1.55}
+  .uh-body strong{color: #fff; font-weight: 700}
+  .uh-pill{display:inline-flex; align-items:center; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: #fff; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.1); padding: 5px 10px; border-radius: 6px; letter-spacing: 0.02em}
+  .uh-row.uh-audit{border-top: 1px solid rgba(255,255,255,.06); padding-top: 12px}
+
   /* ============ PRICING ============ */
   .pricing-block{max-width: 1080px; margin: 0 auto 56px}
   .pricing-block:last-child{margin-bottom: 0}
@@ -485,6 +495,10 @@
     .compare-vault::before{left: 20px}
     .sec-grid{grid-template-columns: 1fr; gap: 14px; margin-top: 32px}
     .sec-item{padding: 20px}
+    .under-hood{padding: 16px 18px; gap: 14px}
+    .uh-row{flex-direction: column; align-items: flex-start; gap: 8px}
+    .uh-label{min-width: 0}
+    .uh-body{font-size: 13px}
     .final-cta{padding: 40px 22px; border-radius: 22px}
     .final-cta h2{font-size: 26px}
     .final-cta p{font-size: 15.5px; margin-bottom: 22px}
@@ -619,7 +633,7 @@
           Make sure your <span class="underline">digital life</span> reaches the <span class="accent">right hands.</span>
         </h1>
         <p class="hero-sub">
-          Loomkeeper is the private vault for the documents, accounts and memories you want delivered to your loved ones &mdash; exactly when, and to whom, you decide.
+          Loomkeeper is the private vault for the wills, deeds, accounts and memories you want delivered to your loved ones &mdash; exactly when, and to whom, you decide.
         </p>
         <div class="hero-cta">
           <a href="/auth/register" class="btn btn-primary btn-lg" data-cta="register" data-cta-on="Start your vault" data-cta-off="Join the waitlist">
@@ -1152,7 +1166,7 @@
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2"/></svg>
             </div>
             <h4>Encrypted on your device</h4>
-            <p>Files are sealed in your browser before upload, so what arrives on our servers is ciphertext we can&rsquo;t tamper with. Keys live in an encrypted store, released only after the multi-party inquiry concludes.</p>
+            <p>Files are encrypted in your browser with <strong style="color:#fff">AES-256-GCM</strong> before upload, so what arrives on our servers is ciphertext we can&rsquo;t tamper with. Decryption keys are wrapped with an account-derived key and stored encrypted at rest &mdash; released only after the multi-party inquiry concludes.</p>
           </div>
           <div class="sec-item">
             <div class="ic">
@@ -1174,6 +1188,25 @@
             </div>
             <h4>Static assets only</h4>
             <p>Designed for things you set once &mdash; wills, deeds, credentials, photos. Not a password manager. Not a sync tool.</p>
+          </div>
+        </div>
+
+        <!-- Under the hood / audit posture strip -->
+        <div class="under-hood">
+          <div class="uh-row">
+            <div class="uh-label">Under the hood</div>
+            <div class="uh-body">
+              <span class="uh-pill">AES-256-GCM</span>
+              <span class="uh-pill">Browser-side encryption</span>
+              <span class="uh-pill">Account-derived key wrapping</span>
+              <span class="uh-pill">Region-pinned storage</span>
+            </div>
+          </div>
+          <div class="uh-row uh-audit">
+            <div class="uh-label uh-label-audit">Pre-launch audit</div>
+            <div class="uh-body">
+              Independent <strong>penetration testing</strong> and <strong>security audits</strong> will be completed before public launch.
+            </div>
           </div>
         </div>
       </div>
@@ -1351,7 +1384,7 @@
           Can Loomkeeper read my files?
           <svg class="chev" width="20" height="20" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </summary>
-        <div class="faq-a"><p style="margin:0 0 10px">Your files are encrypted in your browser before they leave you, so what arrives on our servers is ciphertext we can&rsquo;t tamper with. The decryption keys live in an encrypted store and are only released when the multi-party inquiry concludes &mdash; never browsed, indexed or previewed by us in the meantime.</p><p style="margin:0 0 10px"><strong>We&rsquo;re transparent about why this isn&rsquo;t a zero-knowledge model.</strong> If the only person who could ever decrypt your files were you, your files would vanish with you &mdash; which defeats the entire purpose of a digital inheritance product. Instead, the key sits behind a multi-party process none of us controls unilaterally: a 60-day silence window, then a 7-day vote by your emergency contacts, before anything is released.</p><p style="margin:0"><strong>Your Loomkeepers don&rsquo;t even know they&rsquo;ve been named</strong> &mdash; we never notify them, contact them, or hint at their role until your digital inheritance is actually released. Until that day, they have no idea you&rsquo;ve chosen them.</p></div>
+        <div class="faq-a"><p style="margin:0 0 10px">Your files are encrypted in your browser with <strong>AES-256-GCM</strong> before they leave you, so what arrives on our servers is ciphertext we can&rsquo;t tamper with. The decryption keys are wrapped with an account-derived key and stored encrypted at rest &mdash; only released when the multi-party inquiry concludes, never browsed, indexed or previewed in the meantime.</p><p style="margin:0 0 10px"><strong>We&rsquo;re transparent about why this isn&rsquo;t a zero-knowledge model.</strong> If the only person who could ever decrypt your files were you, your files would vanish with you &mdash; which defeats the entire purpose of a digital inheritance product. Instead, the key sits behind a multi-party process none of us controls unilaterally: a 60-day silence window, then a 7-day vote by your emergency contacts, before anything is released.</p><p style="margin:0"><strong>Your Loomkeepers don&rsquo;t even know they&rsquo;ve been named</strong> &mdash; we never notify them, contact them, or hint at their role until your digital inheritance is actually released. Until that day, they have no idea you&rsquo;ve chosen them.</p></div>
       </details>
     </div>
   </div>
@@ -1399,7 +1432,7 @@
         <ul>
           <li><a href="#">About</a></li>
           <li><a href="#security">Security</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#8be8e4e5ffeae8ffcbe7e4e4e6e0eeeefbeef9a5e8e4e6">Contact</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#7b1814150f1a180f3b17141416101e1e0b1e0955181416">Contact</a></li>
         </ul>
       </div>
 
@@ -1421,7 +1454,7 @@
         <a href="#" aria-label="LinkedIn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8 17v-7H5.5v7H8zm-1.25-8.08a1.45 1.45 0 100-2.9 1.45 1.45 0 000 2.9zM18.5 17v-3.9c0-2.27-1.21-3.32-2.83-3.32-1.3 0-1.89.72-2.22 1.22V10H11v7h2.45v-3.7c0-.2.01-.4.07-.55.16-.4.52-.81 1.13-.81.8 0 1.12.6 1.12 1.48V17h2.73z"/></svg>
         </a>
-        <a href="/cdn-cgi/l/email-protection#2f4c40415b4e4c5b6f43404042444a4a5f4a5d014c4042" aria-label="Email">
+        <a href="/cdn-cgi/l/email-protection#3d5e5253495c5e497d515252505658584d584f135e5250" aria-label="Email">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 8l9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         </a>
       </div>
