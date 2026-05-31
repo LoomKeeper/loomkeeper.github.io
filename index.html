@@ -163,6 +163,26 @@
   .vm-folder .name{font-size: 13px; font-weight:600; color: var(--ink)}
   .vm-folder.add{border: 1.5px dashed var(--pink-soft); background: transparent; color: var(--pink); justify-content:center; min-height: 120px; font-weight:700}
 
+  /* Vault file-list view */
+  .vm-assign{display:flex; align-items:center; gap: 10px; background: var(--violet-tint); border-radius: 12px; padding: 10px 14px; margin-bottom: 16px}
+  .vm-assign .lab{font-size: 12.5px; color: var(--ink-2); font-weight: 500}
+  .vm-assign .who{display:flex; align-items:center; gap: 7px; margin-left:auto; font-size: 13px; font-weight: 700; color: var(--violet)}
+  .vm-assign .who .av{width: 22px; height: 22px; border-radius: 50%; background: var(--violet); color:#fff; font-size: 10px; font-weight:700; display:grid; place-items:center}
+  .vm-files{display:flex; flex-direction: column; gap: 8px}
+  .vm-file{display:flex; align-items:center; gap: 13px; padding: 12px 14px; background: var(--page); border-radius: 14px; transition: transform .15s ease}
+  .vm-file:hover{transform: translateX(3px)}
+  .vm-file .fi{width: 38px; height: 38px; border-radius: 10px; display:grid; place-items:center; flex-shrink:0}
+  .vm-file .fi svg{width: 19px; height: 19px}
+  .fi-pdf{background:#FDE6E9; color:#D6314B}
+  .fi-doc{background:#E2ECFD; color:#2D6CDF}
+  .fi-img{background:#E5F7EE; color:#1E9E5E}
+  .fi-key{background:#F0EBFE; color:#6E58E8}
+  .vm-file .fmeta{min-width:0; flex:1}
+  .vm-file .fname{font-size: 14px; font-weight: 600; color: var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .vm-file .fsub{font-size: 12px; color: var(--muted); margin-top: 1px}
+  .vm-file .flock{flex-shrink:0; color: var(--muted); opacity:.55; display:flex}
+  .vm-add-file{display:flex; align-items:center; justify-content:center; gap: 8px; padding: 12px; border: 1.5px dashed var(--pink-soft); border-radius: 14px; color: var(--pink); font-weight: 700; font-size: 13px; margin-top: 2px}
+
   /* ============ LOOMKEEPERS / EM CONTACTS SPLIT ============ */
   .duo{display:grid; grid-template-columns: 1fr 1fr; gap: 24px}
   .duo-card{background: var(--card); border-radius: var(--radius-lg); padding: 40px; box-shadow: var(--shadow-sm); border:1px solid var(--line); position:relative; overflow:hidden}
@@ -202,6 +222,9 @@
   .inquiry-head .inq-sub{font-size: 14px; color: var(--muted); margin: 0}
   .inquiry-timeline{display:grid; grid-template-columns: repeat(4, 1fr); gap: 12px; position: relative}
   .inq-step{background: var(--page); border-radius: 14px; padding: 20px 18px; position: relative; border: 1px solid var(--line)}
+  .inq-ic{width: 38px; height: 38px; border-radius: 11px; background: var(--violet-tint); color: var(--violet); display:grid; place-items:center; margin-bottom: 14px}
+  .inq-ic svg{width: 20px; height: 20px}
+  .inq-step.is-final .inq-ic{background: #FFD9E7; color: var(--pink)}
   .inq-step .inq-num{font-size: 11px; font-weight: 800; color: var(--violet); letter-spacing: 0.08em; margin-bottom: 6px; display: block}
   .inq-step .inq-name{font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em}
   .inq-step .inq-desc{font-size: 13px; color: var(--ink-2); line-height: 1.5; margin: 0}
@@ -522,6 +545,13 @@
     .vm-folder .name{font-size: 11.5px}
     .vm-folder.add{min-height: 80px; font-size: 12px}
     .vm-folder.add svg{width: 16px; height: 16px}
+    .vm-file{padding: 11px 12px; gap: 11px}
+    .vm-file .fi{width: 34px; height: 34px}
+    .vm-file .fname{font-size: 13px}
+    .vm-file .fsub{font-size: 11px}
+
+    /* Loomkeepers: hide the "N folders" role text on phones */
+    .contact-row .role{display: none}
 
     /* Tweaks panel — pin to corners properly on phone */
     .tweaks-panel{bottom: 12px; right: 12px; left: 12px; width: auto}
@@ -838,39 +868,80 @@
         </ul>
       </div>
 
-      <!-- Mock vault grid -->
+      <!-- Mock vault: opened folder, files view -->
       <div class="vault-mock reveal">
         <div class="vm-bar">
-          <div class="vm-crumb">Vault <span class="sep">›</span> Folders</div>
+          <div class="vm-crumb">Vault <span class="sep">›</span> Legal</div>
           <div style="margin-left:auto" class="vm-pill">
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-            New folder
+            Add file
           </div>
         </div>
-        <div class="vm-grid">
-          <div class="vm-folder">
-            <svg class="folder" viewBox="0 0 100 90" fill="none" style="max-width:80px"><defs><linearGradient id="vmg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FE5F8"/><stop offset="1" stop-color="#1FB5E0"/></linearGradient></defs><path d="M6 22 Q6 14 14 14 H38 L46 22 H86 Q94 22 94 30 V78 Q94 86 86 86 H14 Q6 86 6 78 Z" fill="#1AA1D0"/><rect x="14" y="26" width="72" height="6" rx="2" fill="white" opacity=".9"/><path d="M6 36 Q6 28 14 28 H86 Q94 28 94 36 V78 Q94 86 86 86 H14 Q6 86 6 78 Z" fill="url(#vmg1)"/></svg>
-            <div class="name">All</div>
+
+        <div class="vm-assign">
+          <span class="lab">This folder is delivered to</span>
+          <span class="who"><span class="av">BL</span> Barbara Lewis</span>
+        </div>
+
+        <div class="vm-files">
+          <div class="vm-file">
+            <div class="fi fi-pdf">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6 2h8l4 4v16H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 2v4h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="fmeta">
+              <div class="fname">Last Will &amp; Testament.pdf</div>
+              <div class="fsub">2.4 MB &middot; added Mar 2026</div>
+            </div>
+            <span class="flock"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
           </div>
-          <div class="vm-folder">
-            <svg class="folder" viewBox="0 0 100 90" fill="none" style="max-width:80px"><defs><linearGradient id="vmg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C7BBFB"/><stop offset="1" stop-color="#8A6CF0"/></linearGradient></defs><path d="M6 22 Q6 14 14 14 H38 L46 22 H86 Q94 22 94 30 V78 Q94 86 86 86 H14 Q6 86 6 78 Z" fill="#7B5DEA"/><rect x="14" y="26" width="72" height="6" rx="2" fill="white" opacity=".9"/><path d="M6 36 Q6 28 14 28 H86 Q94 28 94 36 V78 Q94 86 86 86 H14 Q6 86 6 78 Z" fill="url(#vmg2)"/></svg>
-            <div class="name">Legal</div>
+
+          <div class="vm-file">
+            <div class="fi fi-pdf">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6 2h8l4 4v16H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 2v4h4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="fmeta">
+              <div class="fname">Power of Attorney.pdf</div>
+              <div class="fsub">880 KB &middot; added Mar 2026</div>
+            </div>
+            <span class="flock"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
           </div>
-          <div class="vm-folder">
-            <svg class="folder" viewBox="0 0 100 90" fill="none" style="max-width:80px"><defs><linearGradient id="vmg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB0CF"/><stop offset="1" stop-color="#E64593"/></linearGradient></defs><path d="M6 22 Q6 14 14 14 H38 L46 22 H86 Q94 22 94 30 V78 Q94 86 86 86 H14 Q6 86 6 78 Z" fill="#CC3179"/><rect x="14" y="26" width="72" height="6" rx="2" fill="white" opacity=".9"/><path d="M6 36 Q6 28 14 28 H86 Q94 28 94 36 V78 Q94 86 86 86 H14 Q6 86 6 78 Z" fill="url(#vmg3)"/></svg>
-            <div class="name">Children</div>
+
+          <div class="vm-file">
+            <div class="fi fi-key">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="14" r="4" stroke="currentColor" stroke-width="2"/><path d="M11 11l8-8M16 3h4v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="fmeta">
+              <div class="fname">Password manager — master key</div>
+              <div class="fsub">Secure item &middot; updated Feb 2026</div>
+            </div>
+            <span class="flock"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
           </div>
-          <div class="vm-folder">
-            <svg class="folder" viewBox="0 0 100 90" fill="none" style="max-width:80px"><defs><linearGradient id="vmg4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCC58D"/><stop offset="1" stop-color="#F08436"/></linearGradient></defs><path d="M6 22 Q6 14 14 14 H38 L46 22 H86 Q94 22 94 30 V78 Q94 86 86 86 H14 Q6 86 6 78 Z" fill="#DC6E20"/><rect x="14" y="26" width="72" height="6" rx="2" fill="white" opacity=".9"/><path d="M6 36 Q6 28 14 28 H86 Q94 28 94 36 V78 Q94 86 86 86 H14 Q6 86 6 78 Z" fill="url(#vmg4)"/></svg>
-            <div class="name">Real Estate</div>
+
+          <div class="vm-file">
+            <div class="fi fi-doc">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6 2h8l4 4v16H6z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 2v4h4M9 13h6M9 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="fmeta">
+              <div class="fname">Letter to my children.docx</div>
+              <div class="fsub">36 KB &middot; added Jan 2026</div>
+            </div>
+            <span class="flock"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
           </div>
-          <div class="vm-folder">
-            <svg class="folder" viewBox="0 0 100 90" fill="none" style="max-width:80px"><defs><linearGradient id="vmg5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E5DDFE"/><stop offset="1" stop-color="#B5A1F5"/></linearGradient></defs><path d="M6 22 Q6 14 14 14 H38 L46 22 H86 Q94 22 94 30 V78 Q94 86 86 86 H14 Q6 86 6 78 Z" fill="#A78BFA"/><rect x="14" y="26" width="72" height="6" rx="2" fill="white" opacity=".9"/><path d="M6 36 Q6 28 14 28 H86 Q94 28 94 36 V78 Q94 86 86 86 H14 Q6 86 6 78 Z" fill="url(#vmg5)"/></svg>
-            <div class="name">Barbara</div>
+
+          <div class="vm-file">
+            <div class="fi fi-img">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="9.5" r="1.8" fill="currentColor"/><path d="M5 18l5-5 4 4 3-3 3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="fmeta">
+              <div class="fname">Wedding photo.jpg</div>
+              <div class="fsub">5.1 MB &middot; added Dec 2025</div>
+            </div>
+            <span class="flock"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke="currentColor" stroke-width="2"/></svg></span>
           </div>
-          <div class="vm-folder add">
-            <svg width="22" height="22" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-            Folder
+
+          <div class="vm-add-file">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+            Drag a file here, or browse
           </div>
         </div>
       </div>
@@ -1057,21 +1128,25 @@
       </div>
       <div class="inquiry-timeline">
         <div class="inq-step">
+          <div class="inq-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 8v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="1.2" fill="currentColor"/><path d="M10.3 3.9 2.7 17.5c-.6 1 .2 2.3 1.4 2.3h15.8c1.2 0 2-1.3 1.4-2.3L13.7 3.9c-.6-1.1-2.8-1.1-3.4 0z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
           <span class="inq-num">STEP 01</span>
           <div class="inq-name">Trigger</div>
           <p class="inq-desc">Payment fails and we can&rsquo;t reach you, or an emergency contact reports your passing.</p>
         </div>
         <div class="inq-step">
+          <div class="inq-ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <span class="inq-num">STEP 02</span>
           <div class="inq-name">60-day silence window</div>
           <p class="inq-desc">We try to reach you several times by email. A single click &mdash; any time &mdash; ends the inquiry.</p>
         </div>
         <div class="inq-step">
+          <div class="inq-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M9 7a3 3 0 116 0 3 3 0 01-6 0z" stroke="currentColor" stroke-width="2"/><path d="M4 20c0-3.3 2.7-6 6-6h4c3.3 0 6 2.7 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M15.5 12.5l1.4 1.4 2.6-2.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <span class="inq-num">STEP 03</span>
           <div class="inq-name">7-day contact vote</div>
           <p class="inq-desc">Your emergency contacts confirm. A sign of life still stops it instantly, even mid-vote.</p>
         </div>
         <div class="inq-step is-final">
+          <div class="inq-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M21 8.5c0 5-4.5 8.5-9 11-4.5-2.5-9-6-9-11a4.5 4.5 0 018.1-2.7l.9 1.1.9-1.1A4.5 4.5 0 0121 8.5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
           <span class="inq-num">STEP 04</span>
           <div class="inq-name">Release</div>
           <p class="inq-desc">Your folders reach the Loomkeepers you chose. Each person sees only what you assigned them.</p>
@@ -1432,7 +1507,7 @@
         <ul>
           <li><a href="#">About</a></li>
           <li><a href="#security">Security</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#7b1814150f1a180f3b17141416101e1e0b1e0955181416">Contact</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#0b6864657f6a687f4b67646466606e6e7b6e7925686466">Contact</a></li>
         </ul>
       </div>
 
@@ -1454,7 +1529,7 @@
         <a href="#" aria-label="LinkedIn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8 17v-7H5.5v7H8zm-1.25-8.08a1.45 1.45 0 100-2.9 1.45 1.45 0 000 2.9zM18.5 17v-3.9c0-2.27-1.21-3.32-2.83-3.32-1.3 0-1.89.72-2.22 1.22V10H11v7h2.45v-3.7c0-.2.01-.4.07-.55.16-.4.52-.81 1.13-.81.8 0 1.12.6 1.12 1.48V17h2.73z"/></svg>
         </a>
-        <a href="/cdn-cgi/l/email-protection#3d5e5253495c5e497d515252505658584d584f135e5250" aria-label="Email">
+        <a href="/cdn-cgi/l/email-protection#c1a2aeafb5a0a2b581adaeaeacaaa4a4b1a4b3efa2aeac" aria-label="Email">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 8l9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         </a>
       </div>
