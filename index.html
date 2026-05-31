@@ -1507,7 +1507,7 @@
         <ul>
           <li><a href="#">About</a></li>
           <li><a href="#security">Security</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#0b6864657f6a687f4b67646466606e6e7b6e7925686466">Contact</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#8fece0e1fbeeecfbcfe3e0e0e2e4eaeaffeafda1ece0e2">Contact</a></li>
         </ul>
       </div>
 
@@ -1529,7 +1529,7 @@
         <a href="#" aria-label="LinkedIn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14zM8 17v-7H5.5v7H8zm-1.25-8.08a1.45 1.45 0 100-2.9 1.45 1.45 0 000 2.9zM18.5 17v-3.9c0-2.27-1.21-3.32-2.83-3.32-1.3 0-1.89.72-2.22 1.22V10H11v7h2.45v-3.7c0-.2.01-.4.07-.55.16-.4.52-.81 1.13-.81.8 0 1.12.6 1.12 1.48V17h2.73z"/></svg>
         </a>
-        <a href="/cdn-cgi/l/email-protection#c1a2aeafb5a0a2b581adaeaeacaaa4a4b1a4b3efa2aeac" aria-label="Email">
+        <a href="/cdn-cgi/l/email-protection#15767a7b6174766155797a7a787e70706570673b767a78" aria-label="Email">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 8l9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -1739,6 +1739,21 @@
       }
     });
   });
+</script>
+
+<!-- Cloudflare Web Analytics — only loads on a real domain (skipped for file:// and the offline standalone bundle) -->
+<script>
+  (function () {
+    var host = window.location.hostname;
+    var isLive = window.location.protocol.indexOf('http') === 0 &&
+                 host !== 'localhost' && host !== '127.0.0.1' && host !== '';
+    if (!isLive) return;
+    var s = document.createElement('script');
+    s.defer = true;
+    s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    s.setAttribute('data-cf-beacon', '{"token": "deab199f96b649ad916cfdf1d533e02f"}');
+    document.head.appendChild(s);
+  })();
 </script>
 </body>
 </html>
