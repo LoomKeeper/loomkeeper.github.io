@@ -1699,6 +1699,8 @@
       // Allow same-page section jumps (#vault, #faq…) and email links
       if (href === '' || href.startsWith('mailto:')) return;
       if (href.startsWith('#') && href.length > 1) return;
+      // Allow real external destinations we've set up (social profiles)
+      if (/^https?:\/\/(www\.)?(facebook|instagram)\.com\//i.test(href)) return;
       // Everything else (auth, app, legal, logo → loomkeeper.com) isn't live yet
       e.preventDefault();
     }, true);
