@@ -67,8 +67,8 @@ export const LandingFrame = ({
 
     const controller = new AbortController()
 
-    const getPricing = async (path: string) => {
-      const response = await fetch(`${apiGateway}/api/v1${path}`, {
+    const getPricing = async () => {
+      const response = await fetch(`${apiGateway}/api/v1/pricing`, {
         headers: { Accept: 'application/json' },
         signal: controller.signal,
       })
@@ -80,44 +80,61 @@ export const LandingFrame = ({
       return response.json() as Promise<unknown>
     }
 
-    Promise.allSettled([
-      getPricing('/billing/plan'),
-      getPricing('/messages/credits/price'),
-    ]).then(([subscriptionResult, afterlifeResult]) => {
-      if (controller.signal.aborted) {
-        return
-      }
-
-      const nextPricing: LandingPagePricing = {}
-
-      if (
-        subscriptionResult.status === 'fulfilled' &&
-        isPricingRecord(subscriptionResult.value) &&
-        typeof subscriptionResult.value.monthlyAmount === 'number' &&
-        typeof subscriptionResult.value.yearlyAmount === 'number' &&
-        typeof subscriptionResult.value.currency === 'string'
-      ) {
-        nextPricing.subscriptionPlan = {
-          monthlyAmount: subscriptionResult.value.monthlyAmount,
-          yearlyAmount: subscriptionResult.value.yearlyAmount,
-          currency: subscriptionResult.value.currency,
+    getPricing()
+      .then(pricingResult => {
+        if (controller.signal.aborted) {
+          return
         }
-      }
 
-      if (
-        afterlifeResult.status === 'fulfilled' &&
-        isPricingRecord(afterlifeResult.value) &&
-        typeof afterlifeResult.value.effectiveAmount === 'number' &&
-        typeof afterlifeResult.value.currency === 'string'
-      ) {
-        nextPricing.afterlifeMessage = {
-          amount: afterlifeResult.value.effectiveAmount,
-          currency: afterlifeResult.value.currency,
+        const nextPricing: LandingPagePricing = {}
+        const subscription =
+          isPricingRecord(pricingResult) &&
+          isPricingRecord(pricingResult.subscription)
+            ? pricingResult.subscription
+            : null
+        const monthly =
+          subscription && isPricingRecord(subscription.monthly)
+            ? subscription.monthly
+            : null
+        const yearly =
+          subscription && isPricingRecord(subscription.yearly)
+            ? subscription.yearly
+            : null
+        const messages =
+          isPricingRecord(pricingResult) &&
+          isPricingRecord(pricingResult.messages)
+            ? pricingResult.messages
+            : null
+
+        if (
+          subscription &&
+          monthly &&
+          yearly &&
+          typeof monthly.effectiveAmount === 'number' &&
+          typeof yearly.effectiveAmount === 'number' &&
+          typeof subscription.currency === 'string'
+        ) {
+          nextPricing.subscriptionPlan = {
+            monthlyAmount: monthly.effectiveAmount,
+            yearlyAmount: yearly.effectiveAmount,
+            currency: subscription.currency,
+          }
         }
-      }
 
-      setPricing(nextPricing)
-    })
+        if (
+          messages &&
+          typeof messages.effectiveAmount === 'number' &&
+          typeof messages.currency === 'string'
+        ) {
+          nextPricing.afterlifeMessage = {
+            amount: messages.effectiveAmount,
+            currency: messages.currency,
+          }
+        }
+
+        setPricing(nextPricing)
+      })
+      .catch(() => undefined)
 
     return () => controller.abort()
   }, [])
