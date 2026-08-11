@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { useGateValue } from '@statsig/react-bindings'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { StatsigContext, useGateValue } from '@statsig/react-bindings'
 
 const APP_ORIGIN = (import.meta.env.VITE_APP_ORIGIN || '').replace(/\/+$/, '')
 
@@ -186,13 +186,20 @@ export const LandingFrame = ({
 }
 
 const LandingPage = () => {
+  const { isLoading } = useContext(StatsigContext)
   const infoOnlyMode = useGateValue('info-only-mode')
   const waitlistEnabled = useGateValue('waitlist-enabled')
 
+  // One LandingFrame for the whole session. Rendering a second copy while
+  // Statsig initialises (as a provider loadingComponent did) unmounts this
+  // iframe and remounts a new one, reloading the whole landing document and
+  // flashing the page. Gate reads default to false before the client is ready,
+  // so hold the cautious values until it settles rather than briefly showing
+  // the non-waitlist page.
   return (
     <LandingFrame
-      infoOnlyMode={Boolean(infoOnlyMode)}
-      waitlistEnabled={Boolean(waitlistEnabled)}
+      infoOnlyMode={isLoading ? false : Boolean(infoOnlyMode)}
+      waitlistEnabled={isLoading ? true : Boolean(waitlistEnabled)}
     />
   )
 }
