@@ -7,7 +7,7 @@ const App = () => {
   // Without a key there are no gates to read, so let the document's own
   // cautious defaults stand rather than inventing values here.
   if (!statsigClientApiKey) {
-    return <LandingFrame flags={null} />
+    return <LandingFrame config={null} />
   }
 
   return (

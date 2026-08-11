@@ -117,6 +117,34 @@ if (leftover) {
   throw new Error(`unrewritten asset reference remains: ${leftover[0]}`)
 }
 
+// The export declares its feature flags as a literal, under a comment asking
+// for them to be wired to a flag service. Splice the integration in directly
+// after that literal so it can seed FLAGS before the export calls applyFlags(),
+// which is what keeps the page from painting once with the defaults and again
+// with the real values.
+const FLAGS_ANCHOR = '/*EDITMODE-END*/;'
+const anchorAt = template.indexOf(FLAGS_ANCHOR)
+
+if (anchorAt === -1) {
+  throw new Error(
+    `export has no ${FLAGS_ANCHOR} anchor — the flags literal moved, so the ` +
+      'host integration cannot be injected; update scripts/import-landing-bundle.mjs',
+  )
+}
+
+const integration = readFileSync(
+  new URL('./landing-integration.js', import.meta.url),
+  'utf8',
+)
+const insertionPoint = anchorAt + FLAGS_ANCHOR.length
+
+template =
+  template.slice(0, insertionPoint) +
+  '\n\n' +
+  integration.replace(/\n$/, '') +
+  '\n' +
+  template.slice(insertionPoint)
+
 writeFileSync(join(outDir, 'index.html'), template)
 
 const mb = bytes => `${(bytes / 1024 / 1024).toFixed(2)}MB`
