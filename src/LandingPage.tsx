@@ -19,31 +19,39 @@ type LandingPagePricing = {
   }
 }
 
-type LandingFrameProps = {
+// Mirrors the FLAGS object the landing document declares. It ships with the
+// cautious values baked in and applies whatever arrives here on top, so passing
+// null while the gates are still resolving leaves those defaults in place.
+export type LandingFlags = {
   infoOnlyMode: boolean
-  waitlistEnabled: boolean
+  registrationEnabled: boolean
+  showLaunchBanner: boolean
+}
+
+type LandingFrameProps = {
+  flags: LandingFlags | null
 }
 
 const isPricingRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null
 
-export const LandingFrame = ({
-  infoOnlyMode,
-  waitlistEnabled,
-}: LandingFrameProps) => {
+export const LandingFrame = ({ flags }: LandingFrameProps) => {
   const iframeRef = useRef<HTMLIFrameElement | null>(null)
   const [pricing, setPricing] = useState<LandingPagePricing>({})
 
   const sendLandingPageFlags = useCallback(() => {
+    if (!flags) {
+      return
+    }
+
     iframeRef.current?.contentWindow?.postMessage(
       {
         type: 'loomkeeper:landing-flags',
-        infoOnlyMode,
-        waitlistEnabled,
+        flags,
       },
       window.location.origin,
     )
-  }, [infoOnlyMode, waitlistEnabled])
+  }, [flags])
 
   const sendLandingPagePricing = useCallback(() => {
     iframeRef.current?.contentWindow?.postMessage(
@@ -189,17 +197,30 @@ const LandingPage = () => {
   const { isLoading } = useContext(StatsigContext)
   const infoOnlyMode = useGateValue('info-only-mode')
   const waitlistEnabled = useGateValue('waitlist-enabled')
+  const showLaunchBanner = useGateValue('show-launch-banner')
 
   // One LandingFrame for the whole session. Rendering a second copy while
   // Statsig initialises (as a provider loadingComponent did) unmounts this
   // iframe and remounts a new one, reloading the whole landing document and
-  // flashing the page. Gate reads default to false before the client is ready,
-  // so hold the cautious values until it settles rather than briefly showing
-  // the non-waitlist page.
+  // flashing the page.
+  //
+  // Gate reads return false before the client is ready, which would read as
+  // "registration is open" — so send nothing until it settles and let the
+  // document's own cautious defaults stand.
   return (
     <LandingFrame
-      infoOnlyMode={isLoading ? false : Boolean(infoOnlyMode)}
-      waitlistEnabled={isLoading ? true : Boolean(waitlistEnabled)}
+      flags={
+        isLoading
+          ? null
+          : {
+              infoOnlyMode: Boolean(infoOnlyMode),
+              // The waitlist and open registration are the two sides of one
+              // switch: while the waitlist is on, CTAs collect signups instead
+              // of opening the register flow.
+              registrationEnabled: !waitlistEnabled,
+              showLaunchBanner: Boolean(showLaunchBanner),
+            }
+      }
     />
   )
 }
