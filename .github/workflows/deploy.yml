@@ -35,10 +35,12 @@ jobs:
 
       - name: Build
         run: npm run build
+        # Publishable public config. Set these as repository VARIABLES
+        # (Settings -> Secrets and variables -> Actions -> Variables).
         env:
-          VITE_API_GATEWAY: https://api.loomkeeper.com
-          VITE_APP_ORIGIN: https://app.loomkeeper.com
-          VITE_STATSIG_CLIENT_API_KEY: ${{ secrets.VITE_STATSIG_CLIENT_API_KEY }}
+          VITE_API_GATEWAY: ${{ vars.VITE_API_GATEWAY }}
+          VITE_APP_ORIGIN: ${{ vars.VITE_APP_ORIGIN }}
+          VITE_STATSIG_CLIENT_API_KEY: ${{ vars.VITE_STATSIG_CLIENT_API_KEY }}
 
       - name: Configure Pages
         uses: actions/configure-pages@v6
