@@ -1814,6 +1814,37 @@ function setAmount(el, base, effective, currency) {
   if (unit) el.append(unit)
 }
 
+// The yearly figure sits inside a translated sentence rather than in an element
+// of its own, and different languages place the currency differently — "$49" in
+// English and Hebrew, "49 $" in Polish, Spanish and French — so match the amount
+// with a symbol on either side.
+const YEARLY_LITERAL = /(?:[$€£]\s*)?\b49\b(?:\s*[$€£])?/
+
+// Edits the sentence in place. The export's i18n keeps a direct reference to
+// this text node and rewrites it on every language change, so replacing the node
+// would quietly stop that sentence translating.
+function applyYearlyPrice(pricing) {
+  const subscription = pricing && pricing.subscription
+  const yearly = subscription && subscription.yearly
+
+  if (!yearly || typeof yearly.effectiveAmount !== 'number') return
+
+  // The featured card only — the free tier has a .per of its own.
+  const per = document.querySelector('.price-card.featured .per')
+
+  if (!per) return
+
+  const amount = formatAmount(yearly.effectiveAmount, subscription.currency)
+
+  for (const node of per.childNodes) {
+    if (node.nodeType !== Node.TEXT_NODE) continue
+    if (node.nodeValue.includes(amount)) continue
+    if (!YEARLY_LITERAL.test(node.nodeValue)) continue
+
+    node.nodeValue = node.nodeValue.replace(YEARLY_LITERAL, amount)
+  }
+}
+
 function applyPricing(pricing) {
   if (!pricing || typeof pricing !== 'object') return
 
@@ -1838,9 +1869,49 @@ function applyPricing(pricing) {
       pricing.messages.currency,
     )
   }
+
+  // Deliberately not applyYearlyPrice — this runs while the document is still
+  // parsing, and that substitution has to wait until the i18n pass has
+  // registered the sentence. See startYearlyPrice below.
 }
 
-applyPricing(HOST_CONFIG.pricing)
+// The export registers its translatable text nodes on DOMContentLoaded by
+// matching each one against its English source string. Substituting the amount
+// before that runs would leave this sentence unrecognised and permanently
+// untranslated — and because this script is injected higher up the document than
+// the i18n one, its own DOMContentLoaded handler would fire first. Deferring by a
+// task orders the substitution after registration, still ahead of the first
+// paint. The observer then re-applies it whenever a language switch restores the
+// literal; our own edit re-enters and exits on the already-applied check.
+function startYearlyPrice() {
+  const run = () =>
+    setTimeout(() => {
+      applyYearlyPrice(currentPricing)
+
+      const per = document.querySelector('.price-card.featured .per')
+
+      if (!per) return
+
+      new MutationObserver(() => applyYearlyPrice(currentPricing)).observe(per, {
+        characterData: true,
+        childList: true,
+        subtree: true,
+      })
+    }, 0)
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run, { once: true })
+  } else {
+    run()
+  }
+}
+
+// Tracked separately from HOST_CONFIG so a later update over postMessage is
+// what the language-change observer re-applies.
+let currentPricing = HOST_CONFIG.pricing
+
+applyPricing(currentPricing)
+startYearlyPrice()
 
 // Only for values that change while the page is open — a gate flipped
 // mid-session. The first paint is already correct, so this repaint is a
@@ -1860,7 +1931,11 @@ window.addEventListener('message', event => {
   }
 
   if (event.data.type === 'loomkeeper:landing-pricing') {
-    applyPricing(event.data.pricing)
+    currentPricing = event.data.pricing
+    applyPricing(currentPricing)
+    // Safe to run directly here: by the time a message can arrive the i18n pass
+    // has long since registered the sentence.
+    applyYearlyPrice(currentPricing)
   }
 })
 
