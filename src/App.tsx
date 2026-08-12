@@ -16,9 +16,6 @@ const App = () => {
         environment: { tier: import.meta.env.DEV ? 'development' : 'production' },
         loggingEnabled: 'disabled',
       }}
-      loadingComponent={
-        <LandingFrame infoOnlyMode={false} waitlistEnabled />
-      }
     >
       <LandingPage />
     </StatsigProvider>
