@@ -1653,8 +1653,12 @@
     "infoOnlyMode": true
   }/*EDITMODE-END*/;
 
-// Runs immediately after the export's FLAGS literal, before it calls
-// applyFlags().
+// Injected into the landing document by scripts/import-landing-bundle.mjs,
+// immediately after the export's FLAGS literal and before it calls applyFlags().
+//
+// It lives here rather than in public/landing-page/index.html because that file
+// is regenerated from the design-tool export; anything edited into it by hand is
+// lost on the next import.
 //
 // The host resolves the Statsig gates and the billing API before it mounts this
 // frame and puts the result in the URL fragment. Reading it here — while this
@@ -1864,7 +1868,14 @@ window.addEventListener('message', event => {
         // Mixed content (text + svg): update first text node only
         for (const n of el.childNodes){ if (n.nodeType === 3 && n.textContent.trim()){ n.textContent = text; break; } }
       }
-      el.setAttribute('href', info ? '#' : (reg ? hrefOn : hrefOff));
+      const nextHref = info ? '#' : (reg ? hrefOn : hrefOff);
+      el.setAttribute('href', nextHref);
+      // The waitlist lives on auth.loomkeeper.com, which refuses to be framed
+      // (frame-ancestors 'self'). This document is itself in an iframe, so an
+      // off-site CTA has to move the top window — left to itself it navigates
+      // the frame and the click just blanks the page.
+      if (el.origin !== window.location.origin) el.setAttribute('target', '_top');
+      else el.removeAttribute('target');
       el.classList.toggle('is-disabled', info);
       if (info) el.setAttribute('aria-disabled', 'true');
       else el.removeAttribute('aria-disabled');

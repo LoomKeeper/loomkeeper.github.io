@@ -20,17 +20,6 @@ Set `VITE_APP_ORIGIN` to the Kinde-enabled web app origin. Use
 local development. Production receives `https://api.loomkeeper.com` through
 the `VITE_API_GATEWAY` GitHub Actions repository variable.
 
-## The landing document
-
-`public/landing-page/index.html` is the marketing page itself, loaded in an
-iframe by `src/LandingPage.tsx`. It began as a single-file design-tool export
-and is now edited directly — there is no generator behind it, so changes go
-into that file and its `assets/` folder by hand.
-
-A fresh export from the design tool is therefore a starting point, not a
-drop-in replacement: it carries no host integration, and diffing it against the
-current document is the only way to see what a designer actually changed.
-
 ## Deployment
 
 GitHub Actions builds and deploys `dist` on every push to `main`. Configure the
