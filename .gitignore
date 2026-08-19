@@ -4,6 +4,3 @@ dist
 .env
 .env.local
 .DS_Store
-
-# Design-tool export used by scripts/import-landing-bundle.mjs; not served.
-landing-source/
