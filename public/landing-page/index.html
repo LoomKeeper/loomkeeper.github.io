@@ -358,7 +358,11 @@
      aligner at the end of the document sets the inline left/right offsets so
      the crop starts where the copy ends and finishes flush with the nav. */
   .hero-photo-bleed{position:absolute; top:0; bottom:0; left:0; right:0; z-index:0; background:var(--page); display:flex; align-items:center; justify-content:flex-end; overflow:hidden}
-  .hero-photo-bleed img{width:100%; height:100%; object-fit:cover; object-position:center bottom; display:block}
+  /* Anchor the crop to the outer edge: the narrower the column, the more
+     cover() trims, and centring it ate into the subject. The faded half of
+     the photograph is the half meant to disappear, so trim that instead. */
+  .hero-photo-bleed img{width:100%; height:100%; object-fit:cover; object-position:right bottom; display:block}
+  [dir="rtl"] .hero-photo-bleed img{object-position:left bottom}
   .hero-photo-bleed .hp-rtl{display:none}
   [dir="rtl"] .hero-photo-bleed .hp-ltr{display:none}
   [dir="rtl"] .hero-photo-bleed .hp-rtl{display:block}
@@ -624,7 +628,13 @@
   /* ============ RESPONSIVE ============ */
   @media (max-width: 960px){
     .hero{padding: 36px 0 24px}
-    .hero-photo-bleed{position:static; width:100%; height:340px; margin-bottom:28px; border-radius: 20px; overflow:hidden}
+    /* Stacked, the band sits between the nav and the headline, so a fixed
+       height ate half the window on a short one. Scale it with the width. */
+    .hero-photo-bleed{position:static; width:100%; height:clamp(170px, 32vw, 300px); margin-bottom:28px; border-radius: 20px; overflow:hidden}
+    /* The stacked band is far wider than the frame, so here cover() trims
+       vertically instead — off the bottom, or it takes her head. */
+    .hero-photo-bleed img{object-position:right top}
+    [dir="rtl"] .hero-photo-bleed img{object-position:left top}
     .hero-grid{max-width: 560px}
     .hero-sub{font-size: 17px; margin-bottom: 28px}
     .hero-trust{margin-top: 24px; padding-top: 20px; gap: 16px}
@@ -652,7 +662,7 @@
   }
   @media (max-width: 560px){
     .hero{padding: 28px 0 16px}
-    .hero-photo-bleed{height: 220px; margin-bottom:20px}
+    .hero-photo-bleed{margin-bottom:20px}
     h1.hero-title{font-size: 36px; line-height: 1.08; margin: 18px 0 16px}
     .hero-sub{font-size: 16px; margin-bottom: 24px}
     .hero-cta{gap: 10px}
@@ -2310,11 +2320,21 @@ window.addEventListener('message', event => {
     var colWidth = (parseFloat(getComputedStyle(textBox).maxWidth) || 620) - 220;
     var gap = 0, minWidth = 160;
     var isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+    var photo = bleed.querySelector(isRTL ? '.hp-rtl' : '.hp-ltr');
+    // Widest the column can get before cover() starts trimming the top of the
+    // frame instead of the sides — and the top of the frame is her head.
+    var maxWidth = heroRect.height * ((photo && photo.naturalWidth)
+      ? photo.naturalWidth / photo.naturalHeight
+      : 1400 / 781);
     bleed.style.left=''; bleed.style.right='';
     if(isRTL){
       var textColLeftEdge = wrapRect.right - padRight - colWidth;
       var leftPx = Math.max(0, Math.round(btnRect.left - heroRect.left));
       var rightPx = Math.max(0, Math.round(heroRect.right - (textColLeftEdge - gap)));
+      // Never narrower than the photograph's own proportions: a narrower
+      // column makes cover() eat into the subject, so let it grow back under
+      // the copy instead, where the faded half of the frame hides it.
+      rightPx = Math.round(Math.min(rightPx, Math.max(0, heroRect.width - leftPx - maxWidth)));
       if(heroRect.width - leftPx - rightPx < minWidth) rightPx = Math.max(0, heroRect.width - leftPx - minWidth);
       bleed.style.left = leftPx + 'px';
       bleed.style.right = rightPx + 'px';
@@ -2322,6 +2342,7 @@ window.addEventListener('message', event => {
       var textColRightEdge = wrapRect.left + padLeft + colWidth;
       var rightPx2 = Math.max(0, Math.round(heroRect.right - btnRect.right));
       var leftPx2 = Math.max(0, Math.round((textColRightEdge + gap) - heroRect.left));
+      leftPx2 = Math.round(Math.min(leftPx2, Math.max(0, heroRect.width - rightPx2 - maxWidth)));
       if(heroRect.width - leftPx2 - rightPx2 < minWidth) leftPx2 = Math.max(0, heroRect.width - rightPx2 - minWidth);
       bleed.style.right = rightPx2 + 'px';
       bleed.style.left = leftPx2 + 'px';
@@ -2329,6 +2350,17 @@ window.addEventListener('message', event => {
   }
   window.addEventListener('load', align);
   window.addEventListener('resize', align);
+  // The host frames this document, so its own resize event is not a reliable
+  // signal that the column moved, and the language button is only its final
+  // width once the webfont lands. Watch the boxes themselves instead.
+  if(window.ResizeObserver){
+    var ro = new ResizeObserver(function(){ align(); });
+    var heroEl = document.querySelector('.hero');
+    if(heroEl) ro.observe(heroEl);
+    var nav = document.getElementById('navWrap');
+    if(nav) ro.observe(nav);
+  }
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(align);
   document.documentElement.addEventListener('lk:languagechange', function(){ setTimeout(align, 0); });
   if(document.readyState!=='loading') setTimeout(align, 0);
 })();
