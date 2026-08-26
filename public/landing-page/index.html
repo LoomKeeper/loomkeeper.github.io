@@ -2942,7 +2942,7 @@
       <div class="hero-photo-bleed" aria-hidden="true">
         <img class="hp-ltr" src="assets/hero-ltr.png" alt="" /><img
           class="hp-rtl"
-          src="assets/a1c9f2e4-7d3b-4f6a-9e21-8b5c6d0a4f77.jpg"
+          src="assets/hero-rtl.png"
           alt=""
         />
       </div>
@@ -7319,7 +7319,7 @@
 
         function parts(s) {
           var m = s.match(/^(\s*)([\s\S]*?)(\s*)$/)
-          return [m[1], m[2], m[3]]
+          return [m[1], m[2].replace(/\s+/g, ' '), m[3]]
         }
         function tr(lang, key) {
           if (lang === 'en') return key
