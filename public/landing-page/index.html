@@ -7778,6 +7778,13 @@
           display: inline-flex;
         }
       }
+      #navWrap.lk-nav-compact > .wrap > .nav-links,
+      #navWrap.lk-nav-compact > .wrap > .nav-right {
+        display: none;
+      }
+      #navWrap.lk-nav-compact .lk-burger {
+        display: inline-flex;
+      }
       [dir='rtl'] .lk-drawer-inner {
         margin-left: 0;
         margin-right: auto;
@@ -7809,21 +7816,35 @@
           var inner = document.createElement('div')
           inner.className = 'lk-drawer-inner'
           drawer.appendChild(inner)
-          document.getElementById('navWrap').appendChild(drawer)
+          var navWrap = document.getElementById('navWrap')
+          navWrap.appendChild(drawer)
           var mq = window.matchMedia('(max-width: 1180px)')
+          var placeFrame = 0
           function close() {
             drawer.classList.remove('open')
             burger.setAttribute('aria-expanded', 'false')
           }
           function place() {
-            if (mq.matches) {
+            wrap.insertBefore(links, burger)
+            wrap.insertBefore(right, burger)
+            navWrap.classList.remove('lk-nav-compact')
+
+            var shouldCompact = mq.matches || wrap.scrollWidth > wrap.clientWidth
+            navWrap.classList.toggle('lk-nav-compact', shouldCompact)
+
+            if (shouldCompact) {
               inner.appendChild(links)
               inner.appendChild(right)
             } else {
-              wrap.insertBefore(links, burger)
-              wrap.insertBefore(right, burger)
               close()
             }
+          }
+          function schedulePlace() {
+            if (placeFrame) cancelAnimationFrame(placeFrame)
+            placeFrame = requestAnimationFrame(function () {
+              placeFrame = 0
+              place()
+            })
           }
           burger.addEventListener('click', function () {
             var open = drawer.classList.toggle('open')
@@ -7843,8 +7864,22 @@
             )
               close()
           })
-          if (mq.addEventListener) mq.addEventListener('change', place)
-          else mq.addListener(place)
+          if (mq.addEventListener) mq.addEventListener('change', schedulePlace)
+          else mq.addListener(schedulePlace)
+          window.addEventListener('resize', schedulePlace)
+          var contentObserver = new MutationObserver(schedulePlace)
+          contentObserver.observe(links, {
+            childList: true,
+            characterData: true,
+            subtree: true,
+          })
+          contentObserver.observe(right, {
+            childList: true,
+            characterData: true,
+            subtree: true,
+          })
+          if (document.fonts && document.fonts.ready)
+            document.fonts.ready.then(schedulePlace)
           place()
         }
         if (document.readyState === 'loading')
