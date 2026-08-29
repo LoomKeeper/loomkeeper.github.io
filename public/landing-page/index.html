@@ -4287,8 +4287,10 @@
               <p class="tagline">
                 For anyone who takes their legacy seriously.
               </p>
-              <div class="price">$4.90<small> /mo</small></div>
-              <div class="per">or $49 / year · monthly &amp; annual plans</div>
+              <div class="price">4.90 USD<small> /mo</small></div>
+              <div class="per">
+                or 49.00 USD / year · monthly &amp; annual plans
+              </div>
               <ul class="price-features">
                 <li>
                   <div class="pc">
@@ -4514,13 +4516,7 @@
               </div>
             </div>
             <div class="standalone-right">
-              <div class="standalone-price">
-                $10<small
-                  style="font-size: 20px; font-weight: 600; color: var(--muted)"
-                >
-                  USD</small
-                >
-              </div>
+              <div class="standalone-price">10.00 USD</div>
               <div class="standalone-unit">per message · one-time</div>
               <div class="standalone-note">
                 One flat fee — no recurring charges
@@ -5184,13 +5180,9 @@
       // plan costs and what it costs today.
       function formatAmount(minorUnits, currency) {
         const value = minorUnits / 100
+        const normalizedCurrency = (currency || 'usd').toUpperCase()
 
-        return new Intl.NumberFormat(undefined, {
-          style: 'currency',
-          currency: (currency || 'usd').toUpperCase(),
-          minimumFractionDigits: Number.isInteger(value) ? 0 : 2,
-          maximumFractionDigits: 2,
-        }).format(value)
+        return `${value.toFixed(2)} ${normalizedCurrency}`
       }
 
       // Replaces the amount while leaving the trailing <small> unit label — and its
@@ -5215,10 +5207,9 @@
       }
 
       // The yearly figure sits inside a translated sentence rather than in an element
-      // of its own, and different languages place the currency differently — "$49" in
-      // English and Hebrew, "49 $" in Polish, Spanish and French — so match the amount
-      // with a symbol on either side.
-      const YEARLY_LITERAL = /(?:[$€£]\s*)?\b49\b(?:\s*[$€£])?/
+      // of its own, so match the fallback amount and currency wherever they appear in
+      // the translated sentence.
+      const YEARLY_LITERAL = /\b49(?:\.00)?\b(?:\s*(?:USD|[$€£]))?/i
 
       // Edits the sentence in place. The export's i18n keeps a direct reference to
       // this text node and rewrites it on every language change, so replacing the node
@@ -5940,8 +5931,8 @@
             'For anyone who takes their legacy seriously.':
               'Dla każdego, kto poważnie traktuje swoje dziedzictwo.',
             '/mo': '/mies.',
-            'or $49 / year · monthly & annual plans':
-              'lub 49 $ / rok · plany miesięczne i roczne',
+            'or 49.00 USD / year · monthly & annual plans':
+              'lub 49.00 USD / rok · plany miesięczne i roczne',
             '100 GB encrypted storage': '100 GB szyfrowanej pamięci',
             'Unlimited files & folders': 'Nielimitowane pliki i foldery',
             'Unlimited Loomkeepers & Verification Contacts':
@@ -6328,8 +6319,8 @@
             'For anyone who takes their legacy seriously.':
               'Para quienes se toman en serio su legado.',
             '/mo': '/mes',
-            'or $49 / year · monthly & annual plans':
-              'o 49 $ / año · planes mensuales y anuales',
+            'or 49.00 USD / year · monthly & annual plans':
+              'o 49.00 USD / año · planes mensuales y anuales',
             '100 GB encrypted storage': '100 GB de almacenamiento cifrado',
             'Unlimited files & folders': 'Archivos y carpetas ilimitados',
             'Unlimited Loomkeepers & Verification Contacts':
@@ -6720,8 +6711,8 @@
             'For anyone who takes their legacy seriously.':
               'Pour tous ceux qui prennent leur héritage au sérieux.',
             '/mo': '/mois',
-            'or $49 / year · monthly & annual plans':
-              'ou 49 $ / an · formules mensuelles et annuelles',
+            'or 49.00 USD / year · monthly & annual plans':
+              'ou 49.00 USD / an · formules mensuelles et annuelles',
             '100 GB encrypted storage': '100 Go de stockage chiffré',
             'Unlimited files & folders': 'Fichiers et dossiers illimités',
             'Unlimited Loomkeepers & Verification Contacts':
@@ -7105,8 +7096,8 @@
             'For anyone who takes their legacy seriously.':
               'לכל מי שמתייחס למורשת שלו ברצינות.',
             '/mo': '‏/חודש',
-            'or $49 / year · monthly & annual plans':
-              '‏או $49 / שנה · תוכניות חודשיות ושנתיות',
+            'or 49.00 USD / year · monthly & annual plans':
+              '‏או 49.00 USD / שנה · תוכניות חודשיות ושנתיות',
             '100 GB encrypted storage': '‏100 GB אחסון מוצפן',
             'Unlimited files & folders': 'קבצים ותיקיות ללא הגבלה',
             'Unlimited Loomkeepers & Verification Contacts':
@@ -7770,20 +7761,23 @@
         padding: 12px 14px;
       }
       @media (max-width: 1180px) {
-        #navWrap > .wrap > .nav-links,
-        #navWrap > .wrap > .nav-right {
+        #navWrap > .wrap > .nav-links {
           display: none;
         }
         .lk-burger {
           display: inline-flex;
         }
       }
-      #navWrap.lk-nav-compact > .wrap > .nav-links,
-      #navWrap.lk-nav-compact > .wrap > .nav-right {
+      #navWrap.lk-nav-compact > .wrap > .nav-links {
         display: none;
+      }
+      #navWrap.lk-nav-compact > .wrap > .nav-right {
+        display: flex;
+        margin-left: auto;
       }
       #navWrap.lk-nav-compact .lk-burger {
         display: inline-flex;
+        margin-left: 0;
       }
       [dir='rtl'] .lk-drawer-inner {
         margin-left: 0;
@@ -7792,6 +7786,13 @@
       [dir='rtl'] .lk-burger {
         margin-left: 0;
         margin-right: auto;
+      }
+      [dir='rtl'] #navWrap.lk-nav-compact > .wrap > .nav-right {
+        margin-left: 0;
+        margin-right: auto;
+      }
+      [dir='rtl'] #navWrap.lk-nav-compact .lk-burger {
+        margin-right: 0;
       }
     </style>
     <script id="lk-nav-burger">
@@ -7834,7 +7835,13 @@
 
             if (shouldCompact) {
               inner.appendChild(links)
-              inner.appendChild(right)
+
+              // Keep account actions and language visible in the fixed header
+              // while they fit. Only move them into the drawer once the
+              // remaining header itself reaches the mobile-width limit.
+              if (wrap.scrollWidth > wrap.clientWidth) {
+                inner.appendChild(right)
+              }
             } else {
               close()
             }
