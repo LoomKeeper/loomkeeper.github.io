@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Loomkeeper — Your Secure Digital Legacy Vault</title>
+    <title>Loomkeeper — Your Secure Digital Content Vault</title>
     <link
       rel="icon"
       type="image/png"
@@ -919,6 +919,10 @@
         margin-bottom: 22px;
         padding-bottom: 18px;
         border-bottom: 1px solid var(--line);
+        position: relative;
+      }
+      .vm-add-button {
+        margin-left: auto;
       }
       .vm-crumb {
         font-weight: 600;
@@ -2749,10 +2753,8 @@
           />
         </a>
         <nav class="nav-links" aria-label="Primary">
-          <a href="#how">How it works</a>
-          <a href="#vault">Vault</a>
+          <a href="#vault">Features</a>
           <a href="#keepers">Loomkeepers</a>
-          <a href="#messages">Afterlife Messages</a>
           <a href="#pricing">Pricing</a>
           <a href="#faq">Q&amp;A</a>
         </nav>
@@ -2940,7 +2942,7 @@
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="hero-photo-bleed" aria-hidden="true">
-        <img class="hp-ltr" src="assets/hero-ltr.png" alt="" /><img
+        <img class="hp-ltr" src="assets/hero-image.png" alt="" /><img
           class="hp-rtl"
           src="assets/hero-rtl.png"
           alt=""
@@ -2954,9 +2956,7 @@
               the <span class="accent">right hands.</span>
             </h1>
             <p class="hero-sub">
-              Loomkeeper is a private, end-to-end encrypted vault for the
-              documents, accounts and memories you want delivered to your loved
-              ones — exactly when, and to whom, you decide.
+              Loomkeeper is a private, end-to-end encrypted platform for organizing your documents, accounts, and memories, and making sure they reach the people you choose after you pass away.
             </p>
             <div class="hero-cta">
               <a
@@ -3022,13 +3022,10 @@
         <div class="section-head">
           <div class="section-eyebrow">What you get</div>
           <h2>
-            One place to organise, assign and time-release everything that
-            matters.
+            One place to organize everything that matters, and choose exactly who receives it.
           </h2>
           <p>
-            Loomkeeper splits your digital legacy into three clear pieces.
-            Together, they make sure nothing important is lost or sent to the
-            wrong person.
+            Store what matters in the Vault, and choose the Loomkeepers who'll receive it when you're gone. Afterlife Messages works independently, letting you send personal notes on your own schedule.
           </p>
         </div>
 
@@ -3106,8 +3103,8 @@
             <h3>The Vault</h3>
             <p>
               One-way cold storage for documents, photos, login credentials,
-              wills and anything else you'd hate to lose. Organise into folders,
-              set who inherits each one.
+              and anything else you'd hate to lose. Organize into folders, set
+              who receives each one.
             </p>
             <a href="#vault" class="more"
               >Explore the Vault
@@ -3168,6 +3165,9 @@
     <!-- ============ VAULT ============ -->
     <section id="vault">
       <div class="wrap">
+        <div class="section-head">
+          <div class="section-eyebrow">Features</div>
+        </div>
         <div class="split">
           <div class="split-text reveal">
             <span class="eyebrow"><span class="dot"></span> The Vault</span>
@@ -3175,7 +3175,7 @@
               A private cold-storage vault for the things you can't replace.
             </h2>
             <p>
-              Upload once, organise into colour-coded folders, and forget about
+              Upload once, organize into color-coded folders, and forget about
               it. Files are written once, encrypted on your device, and held in
               a hardened storage region you choose.
             </p>
@@ -3251,7 +3251,7 @@
                   border-radius: 8px;
                   box-shadow: 0 4px 12px rgba(255, 61, 140, 0.35);
                 "
-                class="vm-pill"
+                class="vm-pill vm-add-button"
               >
                 <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
                   <path
@@ -4187,7 +4187,7 @@
               Vault · subscription
             </div>
             <p class="pricing-block-sub">
-              Encrypted cold storage for your digital legacy. Start free,
+              Encrypted cold storage for your digital content. Start free,
               upgrade when you need more room.
             </p>
           </div>
@@ -4572,7 +4572,7 @@
               <p style="margin: 0 0 10px">
                 <em>Loomkeeper</em> is a blend of <strong>heirloom</strong> and
                 <strong>keeper</strong> — the people you choose to receive and
-                look after your digital inheritance. You can assign different
+                look after your digital content. You can assign different
                 Loomkeepers to different folders, files or messages, so each
                 thing reaches exactly the right person.
               </p>
@@ -4580,7 +4580,7 @@
                 <strong>We recommend keeping the roles separate</strong> — it’s
                 best not to set the same person as both a Loomkeeper and an
                 verification contact. Verification contacts decide
-                <em>whether</em> your inheritance is released; Loomkeepers are
+                <em>whether</em> your content is released; Loomkeepers are
                 the ones who <em>receive</em> it. Keeping those circles distinct
                 preserves the multi-party check that protects you.
               </p>
@@ -4589,7 +4589,7 @@
 
           <details class="faq-item">
             <summary class="faq-q">
-              What is an Verification Contact?
+              What is a Verification Contact?
               <svg
                 class="chev"
                 width="20"
@@ -4671,7 +4671,7 @@
                 </li>
                 <li>
                   <strong
-                    >An verification contact reports you as deceased.</strong
+                    >A verification contact reports you as deceased.</strong
                   >
                   They log in to the application and submit the report, which
                   starts an inquiry.
@@ -4689,7 +4689,7 @@
               <p style="margin: 0">
                 <strong>A sign of life ends the inquiry instantly.</strong> At
                 any point during the inquiry — including during the
-                emergency-contact vote — if we receive a sign of life from you,
+                verification-contact vote — if we receive a sign of life from you,
                 the entire process is stopped immediately and your account
                 returns to normal.
               </p>
@@ -4782,7 +4782,7 @@
               irreversibly deleted. Gone forever, with no recovery.
               <em
                 >Afterlife Messages are a separate, standalone service — they’re
-                not affected by cancelling your Vault subscription.</em
+                not affected by canceling your Vault subscription.</em
               >
             </div>
           </details>
@@ -4879,7 +4879,7 @@
                 named</strong
               >
               — we never notify them, contact them, or hint at their role until
-              your digital inheritance is actually released. Until that day,
+              your digital content is actually released. Until that day,
               they have no idea you’ve chosen them.
             </div>
           </details>
@@ -4995,8 +4995,8 @@
               />
             </a>
             <p class="foot-blurb">
-              A private, encrypted vault for your digital legacy. Decide what's
-              saved, who receives it, and exactly when.
+              A private, encrypted platform for your digital content management.
+              Decide what's saved, who receives it, after you pass away.
             </p>
           </div>
 
@@ -5271,7 +5271,7 @@
 
       // The export registers its translatable text nodes on DOMContentLoaded by
       // matching each one against its English source string. Substituting the amount
-      // before that runs would leave this sentence unrecognised and permanently
+      // before that runs would leave this sentence unrecognized and permanently
       // untranslated — and because this script is injected higher up the document than
       // the i18n one, its own DOMContentLoaded handler would fire first. Deferring by a
       // task orders the substitution after registration, still ahead of the first
@@ -5721,10 +5721,14 @@
         margin-left: 0 !important;
         margin-right: 8px !important;
       }
-      [dir='rtl'] .contact-row .chips[style],
-      [dir='rtl'] .vm-bar [style*='margin-left:auto'] {
+      [dir='rtl'] .contact-row .chips[style] {
         margin-left: 0 !important;
         margin-right: auto !important;
+      }
+      [dir='rtl'] .vm-add-button {
+        position: absolute;
+        left: 0;
+        margin: 0 !important;
       }
       /* flip directional chevron/arrow glyphs so they point the RTL way */
       [dir='rtl'] .more svg {
@@ -5740,7 +5744,7 @@
       ;(function () {
         var TR = {
           pl: {
-            'Loomkeeper — Your Secure Digital Legacy Vault':
+            'Loomkeeper — Your Secure Digital Content Vault':
               'Loomkeeper — Twój bezpieczny cyfrowy skarbiec dziedzictwa',
             'Loomkeeper is launching soon —': 'Loomkeeper już wkrótce —',
             'join the waitlist': 'dołącz do listy oczekujących',
@@ -5749,6 +5753,7 @@
               'Loomkeeper już wkrótce — dopracowujemy ostatnie szczegóły czegoś, z czego jesteśmy dumni.',
             'How it works': 'Jak to działa',
             Vault: 'Skarbiec',
+            Features: 'Funkcje',
             'Afterlife Messages': 'Wiadomości pośmiertne',
             Pricing: 'Cennik',
             'Q&A': 'Pytania',
@@ -5759,8 +5764,8 @@
             'digital life': 'cyfrowe życie',
             'reaches the': 'trafiło we',
             'right hands.': 'właściwe ręce.',
-            'Loomkeeper is a private, end-to-end encrypted vault for the documents, accounts and memories you want delivered to your loved ones — exactly when, and to whom, you decide.':
-              'Loomkeeper to prywatny, szyfrowany end-to-end skarbiec na dokumenty, konta i wspomnienia, które chcesz przekazać bliskim — dokładnie wtedy i dokładnie tym osobom, które wskażesz.',
+            'Loomkeeper is a private, end-to-end encrypted platform for organizing your documents, accounts, and memories, and making sure they reach the people you choose after you pass away.':
+              'Loomkeeper to prywatna platforma szyfrowana end-to-end, która pomaga uporządkować dokumenty, konta i wspomnienia oraz zadbać o to, by po Twojej śmierci trafiły do wybranych przez Ciebie osób.',
             'Start your vault': 'Załóż swój skarbiec',
             'See how it works': 'Zobacz, jak to działa',
             'Industry-leading encryption': 'Szyfrowanie na najwyższym poziomie',
@@ -5771,23 +5776,23 @@
             'Real Estate': 'Nieruchomości',
             '256-bit secure': 'Zabezpieczenie 256-bitowe',
             'What you get': 'Co otrzymujesz',
-            'One place to organise, assign and time-release everything that matters.':
-              'Jedno miejsce, w którym uporządkujesz, przypiszesz i zaplanujesz udostępnienie wszystkiego, co ważne.',
-            'Loomkeeper splits your digital legacy into three clear pieces. Together, they make sure nothing important is lost or sent to the wrong person.':
-              'Loomkeeper dzieli Twoje cyfrowe dziedzictwo na trzy przejrzyste części. Razem sprawiają, że nic ważnego nie zostanie utracone ani wysłane do niewłaściwej osoby.',
+            'One place to organize everything that matters, and choose exactly who receives it.':
+              'Jedno miejsce, w którym uporządkujesz wszystko, co ważne, i wybierzesz dokładnie, kto to otrzyma.',
+            "Store what matters in the Vault, and choose the Loomkeepers who'll receive it when you're gone. Afterlife Messages works independently, letting you send personal notes on your own schedule.":
+              "Przechowuj to, co ważne, w Skarbcu i wybierz Loomkeeperów, którzy otrzymają te rzeczy po Twojej śmierci. Wiadomości pośmiertne działają niezależnie, pozwalając wysyłać osobiste wiadomości według własnego harmonogramu.",
             'The people you choose to receive your folders when the time comes. Pick one or more per folder — everything inside goes to those Loomkeepers.':
               'Osoby, które wskażesz do odbioru Twoich folderów, gdy nadejdzie czas. Wybierz jedną lub więcej dla każdego folderu — wszystko, co w nim jest, trafi do tych Loomkeeperów.',
             'Choose your Loomkeepers': 'Wybierz swoich Loomkeeperów',
             'The Vault': 'Skarbiec',
-            "One-way cold storage for documents, photos, login credentials, wills and anything else you'd hate to lose. Organise into folders, set who inherits each one.":
-              'Jednokierunkowe zimne przechowywanie dokumentów, zdjęć, danych logowania, testamentów i wszystkiego, czego nie chcesz stracić. Uporządkuj w folderach i ustal, kto dziedziczy każdy z nich.',
+            "One-way cold storage for documents, photos, login credentials, and anything else you'd hate to lose. Organize into folders, set who receives each one.":
+              'Jednokierunkowe zimne przechowywanie dokumentów, zdjęć, danych logowania i wszystkiego, czego nie chcesz stracić. Uporządkuj w folderach i ustal, kto otrzyma każdy z nich.',
             'Explore the Vault': 'Poznaj Skarbiec',
             "Record video, audio or written messages and choose exactly when they're delivered — on a specific date, an anniversary, or a year after you're gone.":
               'Nagraj wiadomości wideo, audio lub napisz je i wybierz dokładnie, kiedy zostaną dostarczone — w konkretnym dniu, w rocznicę lub rok po Twoim odejściu.',
             'Schedule a message': 'Zaplanuj wiadomość',
             "A private cold-storage vault for the things you can't replace.":
               'Prywatny skarbiec w zimnym przechowywaniu na rzeczy nie do zastąpienia.',
-            'Upload once, organise into colour-coded folders, and forget about it. Files are written once, encrypted on your device, and held in a hardened storage region you choose.':
+            'Upload once, organize into color-coded folders, and forget about it. Files are written once, encrypted on your device, and held in a hardened storage region you choose.':
               'Prześlij raz, uporządkuj w oznaczonych kolorami folderach i zapomnij o sprawie. Pliki są zapisywane jednorazowo, szyfrowane na Twoim urządzeniu i przechowywane w wybranym przez Ciebie, zabezpieczonym regionie.',
             'Folders, files & items': 'Foldery, pliki i wpisy',
             'Drag-drop any file type. Add structured "items" for credentials, accounts and notes.':
@@ -5911,7 +5916,7 @@
             'are a standalone service, billed once per message. No subscription required for either to work alongside the other.':
               'to samodzielna usługa, rozliczana jednorazowo za każdą wiadomość. Żadna z nich nie wymaga subskrypcji, aby działać obok drugiej.',
             'Vault · subscription': 'Skarbiec · subskrypcja',
-            'Encrypted cold storage for your digital legacy. Start free, upgrade when you need more room.':
+            'Encrypted cold storage for your digital content. Start free, upgrade when you need more room.':
               'Szyfrowane zimne przechowywanie Twojego cyfrowego dziedzictwa. Zacznij za darmo, przejdź na wyższy plan, gdy potrzebujesz więcej miejsca.',
             Free: 'Za darmo',
             'A first look — plenty for a small handover.':
@@ -5968,19 +5973,19 @@
             'What is a Loomkeeper?': 'Kim jest Loomkeeper?',
             'is a blend of': 'to połączenie słów',
             and: 'i',
-            '— the people you choose to receive and look after your digital inheritance. You can assign different Loomkeepers to different folders, files or messages, so each thing reaches exactly the right person.':
+            '— the people you choose to receive and look after your digital content. You can assign different Loomkeepers to different folders, files or messages, so each thing reaches exactly the right person.':
               ' — czyli osoby, które wybierasz, aby odebrały Twoje cyfrowe dziedzictwo i zaopiekowały się nim. Różnym folderom, plikom czy wiadomościom możesz przypisać różnych Loomkeeperów, tak aby każda rzecz trafiła dokładnie do właściwej osoby.',
             'We recommend keeping the roles separate':
               'Zalecamy rozdzielenie ról',
-            '— it’s best not to set the same person as both a Loomkeeper and an verification contact. Verification contacts decide':
+            '— it’s best not to set the same person as both a Loomkeeper and a verification contact. Verification contacts decide':
               ' — najlepiej nie ustawiać tej samej osoby jednocześnie jako Loomkeepera i kontaktu weryfikacyjnego. Kontakty weryfikacyjne decydują,',
             whether: 'czy',
-            'your inheritance is released; Loomkeepers are the ones who':
+            'your content is released; Loomkeepers are the ones who':
               'Twoje dziedzictwo zostaje udostępnione; Loomkeeperzy to ci, którzy je',
             receive: 'otrzymują',
             'it. Keeping those circles distinct preserves the multi-party check that protects you.':
               '. Utrzymanie tych kręgów osobno zachowuje kontrolę wielu stron, która Cię chroni.',
-            'What is an Verification Contact?':
+            'What is a Verification Contact?':
               'Czym jest kontakt weryfikacyjny?',
             'People you trust to confirm your passing when the time comes. We recommend adding at least 2–3 contacts — they need to sign up so we have their details on file, but that’s it.':
               'Osoby, którym ufasz, że potwierdzą Twoje odejście, gdy nadejdzie czas. Zalecamy dodanie co najmniej 2–3 kontaktów — muszą się zarejestrować, abyśmy mieli ich dane, i to wszystko.',
@@ -5999,7 +6004,7 @@
               'Nieudana płatność bez odpowiedzi.',
             'If your subscription payment fails and we can’t reach you to update or cancel after several attempts, that’s treated as a suspicious silence and starts an inquiry.':
               'Jeśli płatność za subskrypcję się nie powiedzie, a mimo kilku prób nie uda nam się do Ciebie dotrzeć, aby ją zaktualizować lub anulować, traktujemy to jako podejrzaną ciszę i wszczynamy dochodzenie.',
-            'An verification contact reports you as deceased.':
+            'A verification contact reports you as deceased.':
               'Kontakt weryfikacyjny zgłasza Twój zgon.',
             'They log in to the application and submit the report, which starts an inquiry.':
               'Loguje się do aplikacji i przesyła zgłoszenie, co rozpoczyna dochodzenie.',
@@ -6014,7 +6019,7 @@
               '. Po zakończeniu głosowania dochodzenie stwierdza, że żyjesz albo że odszedłeś.',
             'A sign of life ends the inquiry instantly.':
               'Znak życia natychmiast kończy dochodzenie.',
-            'At any point during the inquiry — including during the emergency-contact vote — if we receive a sign of life from you, the entire process is stopped immediately and your account returns to normal.':
+            'At any point during the inquiry — including during the verification-contact vote — if we receive a sign of life from you, the entire process is stopped immediately and your account returns to normal.':
               'W dowolnym momencie dochodzenia — w tym podczas głosowania kontaktów alarmowych — jeśli otrzymamy od Ciebie znak życia, cały proces zostaje natychmiast wstrzymany, a Twoje konto wraca do normy.',
             'What is the Vault?': 'Czym jest Skarbiec?',
             "A one-way cold storage vault for your digital assets — documents, photos, account credentials, anything you'd hate to lose. Files are encrypted on your device before upload, stored in a region you choose, and cannot be edited or downloaded after upload (so they can't be tampered with).":
@@ -6033,7 +6038,7 @@
               'Nie ma możliwości pobrania Twoich plików',
             '— the Vault is one-way cold storage by design, and that doesn’t change at cancellation. If you don’t reactivate within those 7 days, every file and folder in your Vault is permanently and irreversibly deleted. Gone forever, with no recovery.':
               ' — Skarbiec jest z założenia jednokierunkowym zimnym przechowywaniem i przy anulowaniu to się nie zmienia. Jeśli w ciągu tych 7 dni nie dokonasz reaktywacji, każdy plik i folder w Twoim Skarbcu zostanie trwale i nieodwracalnie usunięty. Przepadnie na zawsze, bez możliwości odzyskania.',
-            'Afterlife Messages are a separate, standalone service — they’re not affected by cancelling your Vault subscription.':
+            'Afterlife Messages are a separate, standalone service — they’re not affected by canceling your Vault subscription.':
               'Wiadomości pośmiertne to odrębna, samodzielna usługa — anulowanie subskrypcji Skarbca ich nie dotyczy.',
             'How do Afterlife Messages work?':
               'Jak działają wiadomości pośmiertne?',
@@ -6058,7 +6063,7 @@
               'Pliki są szyfrowane na Twoim urządzeniu, zanim je opuszczą, z użyciem standardowej w branży kryptografii. Chronią je liczne odizolowane warstwy zabezpieczeń, więc nic nie da się przeglądać, podejrzeć ani odczytać — ani w trakcie przesyłania, ani w spoczynku — ani nam, ani nikomu innemu.',
             'In fact, your Loomkeepers don’t even know they’ve been named':
               'Co więcej, Twoi Loomkeeperzy nawet nie wiedzą, że zostali wskazani',
-            '— we never notify them, contact them, or hint at their role until your digital inheritance is actually released. Until that day, they have no idea you’ve chosen them.':
+            '— we never notify them, contact them, or hint at their role until your digital content is actually released. Until that day, they have no idea you’ve chosen them.':
               ' — nigdy ich nie powiadamiamy, nie kontaktujemy się z nimi ani nie sugerujemy ich roli, dopóki Twoje cyfrowe dziedzictwo faktycznie nie zostanie udostępnione. Do tego dnia nie mają pojęcia, że ich wybrałeś.',
             'Why it matters': 'Dlaczego to ważne',
             'The moments worth keeping.': 'Chwile warte zachowania.',
@@ -6077,8 +6082,8 @@
               'Skonfiguruj swój skarbiec w niecałe pięć minut. Start za darmo — bez karty.',
             'Create your free vault': 'Utwórz darmowy skarbiec',
             'I already have one': 'Już go mam',
-            "A private, encrypted vault for your digital legacy. Decide what's saved, who receives it, and exactly when.":
-              'Prywatny, szyfrowany skarbiec na Twoje cyfrowe dziedzictwo. Ty decydujesz, co zostaje zapisane, kto to otrzyma i dokładnie kiedy.',
+            "A private, encrypted platform for your digital content management. Decide what's saved, who receives it, after you pass away.":
+              'Prywatna, szyfrowana platforma do zarządzania cyfrową zawartością. Ty decydujesz, co zostaje zapisane, kto to otrzyma i po Twojej śmierci.',
             Product: 'Produkt',
             Company: 'Firma',
             About: 'O nas',
@@ -6126,7 +6131,7 @@
             'Coming soon': 'Wkrótce',
           },
           es: {
-            'Loomkeeper — Your Secure Digital Legacy Vault':
+            'Loomkeeper — Your Secure Digital Content Vault':
               'Loomkeeper — Tu bóveda digital segura para tu legado',
             'Loomkeeper is launching soon —':
               'Loomkeeper se lanza muy pronto —',
@@ -6136,6 +6141,7 @@
               'Loomkeeper llega muy pronto: estamos dando los últimos retoques a algo de lo que estamos orgullosos.',
             'How it works': 'Cómo funciona',
             Vault: 'Bóveda',
+            Features: 'Funciones',
             'Afterlife Messages': 'Mensajes póstumos',
             Pricing: 'Precios',
             'Q&A': 'Preguntas',
@@ -6146,8 +6152,8 @@
             'digital life': 'vida digital',
             'reaches the': 'llegue a las',
             'right hands.': 'manos correctas.',
-            'Loomkeeper is a private, end-to-end encrypted vault for the documents, accounts and memories you want delivered to your loved ones — exactly when, and to whom, you decide.':
-              'Loomkeeper es una bóveda privada y cifrada de extremo a extremo para los documentos, cuentas y recuerdos que quieres entregar a tus seres queridos, exactamente cuándo y a quién tú decidas.',
+            'Loomkeeper is a private, end-to-end encrypted platform for organizing your documents, accounts, and memories, and making sure they reach the people you choose after you pass away.':
+              'Loomkeeper es una plataforma privada y cifrada de extremo a extremo para organizar tus documentos, cuentas y recuerdos, y garantizar que lleguen a las personas que elijas después de tu fallecimiento.',
             'Start your vault': 'Crea tu bóveda',
             'See how it works': 'Descubre cómo funciona',
             'Industry-leading encryption': 'Cifrado líder del sector',
@@ -6158,23 +6164,23 @@
             'Real Estate': 'Inmuebles',
             '256-bit secure': 'Seguridad de 256 bits',
             'What you get': 'Qué obtienes',
-            'One place to organise, assign and time-release everything that matters.':
-              'Un único lugar para organizar, asignar y programar la entrega de todo lo que importa.',
-            'Loomkeeper splits your digital legacy into three clear pieces. Together, they make sure nothing important is lost or sent to the wrong person.':
-              'Loomkeeper divide tu legado digital en tres partes claras. Juntas garantizan que nada importante se pierda ni llegue a la persona equivocada.',
+            'One place to organize everything that matters, and choose exactly who receives it.':
+              'Un solo lugar para organizar todo lo que importa y elegir exactamente quién lo recibe.',
+            "Store what matters in the Vault, and choose the Loomkeepers who'll receive it when you're gone. Afterlife Messages works independently, letting you send personal notes on your own schedule.":
+              "Guarda lo que importa en la Bóveda y elige a los Loomkeepers que lo recibirán cuando ya no estés. Mensajes póstumos funciona de forma independiente y te permite enviar notas personales según tu propio calendario.",
             'The people you choose to receive your folders when the time comes. Pick one or more per folder — everything inside goes to those Loomkeepers.':
               'Las personas que eliges para recibir tus carpetas cuando llegue el momento. Elige una o varias por carpeta: todo lo que contiene irá a esos Loomkeepers.',
             'Choose your Loomkeepers': 'Elige a tus Loomkeepers',
             'The Vault': 'La Bóveda',
-            "One-way cold storage for documents, photos, login credentials, wills and anything else you'd hate to lose. Organise into folders, set who inherits each one.":
-              'Almacenamiento en frío de un solo sentido para documentos, fotos, credenciales de acceso, testamentos y todo lo que no querrías perder. Organízalo en carpetas y define quién hereda cada una.',
+            "One-way cold storage for documents, photos, login credentials, and anything else you'd hate to lose. Organize into folders, set who receives each one.":
+              'Almacenamiento en frío de un solo sentido para documentos, fotos, credenciales de acceso y todo lo que no querrías perder. Organízalo en carpetas y define quién recibe cada una.',
             'Explore the Vault': 'Explora la Bóveda',
             "Record video, audio or written messages and choose exactly when they're delivered — on a specific date, an anniversary, or a year after you're gone.":
               'Graba mensajes en vídeo, audio o escritos y elige exactamente cuándo se entregan: en una fecha concreta, en un aniversario o un año después de tu partida.',
             'Schedule a message': 'Programa un mensaje',
             "A private cold-storage vault for the things you can't replace.":
               'Una bóveda privada en almacenamiento en frío para lo que no tiene reemplazo.',
-            'Upload once, organise into colour-coded folders, and forget about it. Files are written once, encrypted on your device, and held in a hardened storage region you choose.':
+            'Upload once, organize into color-coded folders, and forget about it. Files are written once, encrypted on your device, and held in a hardened storage region you choose.':
               'Súbelo una vez, organízalo en carpetas con códigos de color y olvídate. Los archivos se escriben una sola vez, se cifran en tu dispositivo y se guardan en una región de almacenamiento reforzada que tú eliges.',
             'Folders, files & items': 'Carpetas, archivos y elementos',
             'Drag-drop any file type. Add structured "items" for credentials, accounts and notes.':
@@ -6298,7 +6304,7 @@
             'are a standalone service, billed once per message. No subscription required for either to work alongside the other.':
               'son un servicio independiente, con un cobro único por mensaje. Ninguno requiere suscripción para funcionar junto al otro.',
             'Vault · subscription': 'Bóveda · suscripción',
-            'Encrypted cold storage for your digital legacy. Start free, upgrade when you need more room.':
+            'Encrypted cold storage for your digital content. Start free, upgrade when you need more room.':
               'Almacenamiento en frío cifrado para tu legado digital. Empieza gratis y mejora tu plan cuando necesites más espacio.',
             Free: 'Gratis',
             'A first look — plenty for a small handover.':
@@ -6356,19 +6362,19 @@
             'What is a Loomkeeper?': '¿Qué es un Loomkeeper?',
             'is a blend of': 'es una mezcla de',
             and: 'y',
-            '— the people you choose to receive and look after your digital inheritance. You can assign different Loomkeepers to different folders, files or messages, so each thing reaches exactly the right person.':
+            '— the people you choose to receive and look after your digital content. You can assign different Loomkeepers to different folders, files or messages, so each thing reaches exactly the right person.':
               ' — las personas que eliges para recibir y cuidar tu herencia digital. Puedes asignar distintos Loomkeepers a distintas carpetas, archivos o mensajes, de modo que cada cosa llegue exactamente a la persona adecuada.',
             'We recommend keeping the roles separate':
               'Recomendamos mantener los roles separados',
-            '— it’s best not to set the same person as both a Loomkeeper and an verification contact. Verification contacts decide':
+            '— it’s best not to set the same person as both a Loomkeeper and a verification contact. Verification contacts decide':
               ': es mejor no asignar a la misma persona como Loomkeeper y como contacto de verificación a la vez. Los contactos de verificación deciden',
             whether: 'si',
-            'your inheritance is released; Loomkeepers are the ones who':
+            'your content is released; Loomkeepers are the ones who':
               'se libera tu herencia; los Loomkeepers son quienes la',
             receive: 'reciben',
             'it. Keeping those circles distinct preserves the multi-party check that protects you.':
               '. Mantener esos círculos separados preserva el control multiparte que te protege.',
-            'What is an Verification Contact?':
+            'What is a Verification Contact?':
               '¿Qué es un contacto de verificación?',
             'People you trust to confirm your passing when the time comes. We recommend adding at least 2–3 contacts — they need to sign up so we have their details on file, but that’s it.':
               'Personas de tu confianza que confirmarán tu fallecimiento cuando llegue el momento. Recomendamos añadir al menos 2 o 3 contactos: solo tienen que registrarse para que tengamos sus datos, nada más.',
@@ -6387,7 +6393,7 @@
               'Un pago fallido sin respuesta.',
             'If your subscription payment fails and we can’t reach you to update or cancel after several attempts, that’s treated as a suspicious silence and starts an inquiry.':
               'Si falla el pago de tu suscripción y, tras varios intentos, no logramos contactarte para actualizarlo o cancelarlo, se considera un silencio sospechoso y se inicia una investigación.',
-            'An verification contact reports you as deceased.':
+            'A verification contact reports you as deceased.':
               'Un contacto de verificación te reporta como fallecido.',
             'They log in to the application and submit the report, which starts an inquiry.':
               'Inicia sesión en la aplicación y envía el reporte, lo que da comienzo a una investigación.',
@@ -6402,7 +6408,7 @@
               '. Al final de la votación, la investigación concluye que estás vivo o que has fallecido.',
             'A sign of life ends the inquiry instantly.':
               'Una señal de vida pone fin a la investigación al instante.',
-            'At any point during the inquiry — including during the emergency-contact vote — if we receive a sign of life from you, the entire process is stopped immediately and your account returns to normal.':
+            'At any point during the inquiry — including during the verification-contact vote — if we receive a sign of life from you, the entire process is stopped immediately and your account returns to normal.':
               'En cualquier momento de la investigación —incluida la votación de los contactos de emergencia—, si recibimos una señal de vida tuya, todo el proceso se detiene de inmediato y tu cuenta vuelve a la normalidad.',
             'What is the Vault?': '¿Qué es la Bóveda?',
             "A one-way cold storage vault for your digital assets — documents, photos, account credentials, anything you'd hate to lose. Files are encrypted on your device before upload, stored in a region you choose, and cannot be edited or downloaded after upload (so they can't be tampered with).":
@@ -6421,7 +6427,7 @@
               'No hay forma de descargar tus archivos',
             '— the Vault is one-way cold storage by design, and that doesn’t change at cancellation. If you don’t reactivate within those 7 days, every file and folder in your Vault is permanently and irreversibly deleted. Gone forever, with no recovery.':
               ': la Bóveda es, por diseño, almacenamiento en frío de un solo sentido, y eso no cambia al cancelar. Si no la reactivas en esos 7 días, todos los archivos y carpetas de tu Bóveda se eliminan de forma permanente e irreversible. Desaparecen para siempre, sin recuperación posible.',
-            'Afterlife Messages are a separate, standalone service — they’re not affected by cancelling your Vault subscription.':
+            'Afterlife Messages are a separate, standalone service — they’re not affected by canceling your Vault subscription.':
               'Los mensajes póstumos son un servicio aparte e independiente: cancelar tu suscripción a la Bóveda no les afecta.',
             'How do Afterlife Messages work?':
               '¿Cómo funcionan los mensajes póstumos?',
@@ -6447,7 +6453,7 @@
               'Los archivos se cifran en tu dispositivo antes de salir de ti, con criptografía estándar del sector. Se guardan tras varias capas aisladas de protección, así que nada se puede explorar, previsualizar ni leer, ni en tránsito ni en reposo, ni por nosotros ni por nadie más.',
             'In fact, your Loomkeepers don’t even know they’ve been named':
               'De hecho, tus Loomkeepers ni siquiera saben que han sido designados',
-            '— we never notify them, contact them, or hint at their role until your digital inheritance is actually released. Until that day, they have no idea you’ve chosen them.':
+            '— we never notify them, contact them, or hint at their role until your digital content is actually released. Until that day, they have no idea you’ve chosen them.':
               ': nunca los avisamos, ni los contactamos, ni insinuamos su papel hasta que tu herencia digital se libera realmente. Hasta ese día, no tienen ni idea de que los has elegido.',
             'Why it matters': 'Por qué importa',
             'The moments worth keeping.':
@@ -6467,8 +6473,8 @@
               'Configura tu bóveda en menos de cinco minutos. Empezar es gratis, sin tarjeta.',
             'Create your free vault': 'Crea tu bóveda gratis',
             'I already have one': 'Ya tengo una',
-            "A private, encrypted vault for your digital legacy. Decide what's saved, who receives it, and exactly when.":
-              'Una bóveda privada y cifrada para tu legado digital. Tú decides qué se guarda, quién lo recibe y exactamente cuándo.',
+            "A private, encrypted platform for your digital content management. Decide what's saved, who receives it, after you pass away.":
+              'Una plataforma privada y cifrada para gestionar tu contenido digital. Tú decides qué se guarda, quién lo recibe y después de tu fallecimiento.',
             Product: 'Producto',
             Company: 'Empresa',
             About: 'Acerca de',
@@ -6517,7 +6523,7 @@
             'Coming soon': 'Próximamente',
           },
           fr: {
-            'Loomkeeper — Your Secure Digital Legacy Vault':
+            'Loomkeeper — Your Secure Digital Content Vault':
               'Loomkeeper — Votre coffre-fort numérique sécurisé pour votre héritage',
             'Loomkeeper is launching soon —':
               'Loomkeeper arrive très bientôt —',
@@ -6527,6 +6533,7 @@
               'Loomkeeper arrive bientôt — nous peaufinons les derniers détails d’un projet dont nous sommes fiers.',
             'How it works': 'Comment ça marche',
             Vault: 'Coffre-fort',
+            Features: 'Fonctionnalités',
             'Afterlife Messages': 'Messages posthumes',
             Pricing: 'Tarifs',
             'Q&A': 'Questions',
@@ -6537,8 +6544,8 @@
             'digital life': 'vie numérique',
             'reaches the': 'parvienne aux',
             'right hands.': 'bonnes mains.',
-            'Loomkeeper is a private, end-to-end encrypted vault for the documents, accounts and memories you want delivered to your loved ones — exactly when, and to whom, you decide.':
-              'Loomkeeper est un coffre-fort privé et chiffré de bout en bout pour les documents, comptes et souvenirs que vous souhaitez transmettre à vos proches — exactement quand et à qui vous le décidez.',
+            'Loomkeeper is a private, end-to-end encrypted platform for organizing your documents, accounts, and memories, and making sure they reach the people you choose after you pass away.':
+              'Loomkeeper est une plateforme privée et chiffrée de bout en bout pour organiser vos documents, comptes et souvenirs, et veiller à ce qu’ils parviennent aux personnes de votre choix après votre décès.',
             'Start your vault': 'Créez votre coffre-fort',
             'See how it works': 'Découvrez comment ça marche',
             'Industry-leading encryption': 'Chiffrement à la pointe du secteur',
@@ -6549,23 +6556,23 @@
             'Real Estate': 'Immobilier',
             '256-bit secure': 'Sécurité 256 bits',
             'What you get': 'Ce que vous obtenez',
-            'One place to organise, assign and time-release everything that matters.':
-              'Un seul endroit pour organiser, attribuer et programmer la remise de tout ce qui compte.',
-            'Loomkeeper splits your digital legacy into three clear pieces. Together, they make sure nothing important is lost or sent to the wrong person.':
-              'Loomkeeper divise votre héritage numérique en trois éléments clairs. Ensemble, ils garantissent que rien d’important ne soit perdu ni envoyé à la mauvaise personne.',
+            'One place to organize everything that matters, and choose exactly who receives it.':
+              'Un seul endroit pour organiser tout ce qui compte et choisir exactement qui le recevra.',
+            "Store what matters in the Vault, and choose the Loomkeepers who'll receive it when you're gone. Afterlife Messages works independently, letting you send personal notes on your own schedule.":
+              "Conservez ce qui compte dans le Coffre-fort et choisissez les Loomkeepers qui le recevront après votre décès. Les Messages posthumes fonctionnent indépendamment et vous permettent d’envoyer des mots personnels selon votre propre calendrier.",
             'The people you choose to receive your folders when the time comes. Pick one or more per folder — everything inside goes to those Loomkeepers.':
               'Les personnes que vous choisissez pour recevoir vos dossiers le moment venu. Désignez-en une ou plusieurs par dossier — tout son contenu ira à ces Loomkeepers.',
             'Choose your Loomkeepers': 'Choisissez vos Loomkeepers',
             'The Vault': 'Le Coffre-fort',
-            "One-way cold storage for documents, photos, login credentials, wills and anything else you'd hate to lose. Organise into folders, set who inherits each one.":
-              'Stockage à froid unidirectionnel pour vos documents, photos, identifiants, testaments et tout ce que vous ne voudriez pas perdre. Organisez le tout en dossiers et définissez qui hérite de chacun.',
+            "One-way cold storage for documents, photos, login credentials, and anything else you'd hate to lose. Organize into folders, set who receives each one.":
+              'Stockage à froid unidirectionnel pour vos documents, photos, identifiants et tout ce que vous ne voudriez pas perdre. Organisez le tout en dossiers et définissez qui reçoit chacun.',
             'Explore the Vault': 'Explorez le Coffre-fort',
             "Record video, audio or written messages and choose exactly when they're delivered — on a specific date, an anniversary, or a year after you're gone.":
               'Enregistrez des messages vidéo, audio ou écrits et choisissez précisément quand ils seront remis — à une date précise, à un anniversaire ou un an après votre départ.',
             'Schedule a message': 'Programmez un message',
             "A private cold-storage vault for the things you can't replace.":
               'Un coffre-fort privé en stockage à froid pour ce qui est irremplaçable.',
-            'Upload once, organise into colour-coded folders, and forget about it. Files are written once, encrypted on your device, and held in a hardened storage region you choose.':
+            'Upload once, organize into color-coded folders, and forget about it. Files are written once, encrypted on your device, and held in a hardened storage region you choose.':
               'Importez une fois, organisez en dossiers à code couleur, puis oubliez. Les fichiers sont écrits une seule fois, chiffrés sur votre appareil et conservés dans une région de stockage renforcée que vous choisissez.',
             'Folders, files & items': 'Dossiers, fichiers et éléments',
             'Drag-drop any file type. Add structured "items" for credentials, accounts and notes.':
@@ -6690,7 +6697,7 @@
             'are a standalone service, billed once per message. No subscription required for either to work alongside the other.':
               'sont un service indépendant, facturé une fois par message. Aucun abonnement n’est requis pour que l’un fonctionne avec l’autre.',
             'Vault · subscription': 'Coffre-fort · abonnement',
-            'Encrypted cold storage for your digital legacy. Start free, upgrade when you need more room.':
+            'Encrypted cold storage for your digital content. Start free, upgrade when you need more room.':
               'Stockage à froid chiffré pour votre héritage numérique. Commencez gratuitement, passez à l’offre supérieure quand il vous faut plus d’espace.',
             Free: 'Gratuit',
             'A first look — plenty for a small handover.':
@@ -6748,19 +6755,19 @@
             'What is a Loomkeeper?': 'Qu’est-ce qu’un Loomkeeper ?',
             'is a blend of': 'est un mélange de',
             and: 'et',
-            '— the people you choose to receive and look after your digital inheritance. You can assign different Loomkeepers to different folders, files or messages, so each thing reaches exactly the right person.':
+            '— the people you choose to receive and look after your digital content. You can assign different Loomkeepers to different folders, files or messages, so each thing reaches exactly the right person.':
               ' — les personnes que vous choisissez pour recevoir et veiller sur votre héritage numérique. Vous pouvez attribuer différents Loomkeepers à différents dossiers, fichiers ou messages, afin que chaque élément parvienne exactement à la bonne personne.',
             'We recommend keeping the roles separate':
               'Nous recommandons de séparer les rôles',
-            '— it’s best not to set the same person as both a Loomkeeper and an verification contact. Verification contacts decide':
+            '— it’s best not to set the same person as both a Loomkeeper and a verification contact. Verification contacts decide':
               ' — il est préférable de ne pas désigner la même personne à la fois comme Loomkeeper et comme contact de vérification. Les contacts de vérification décident',
             whether: 'si',
-            'your inheritance is released; Loomkeepers are the ones who':
+            'your content is released; Loomkeepers are the ones who':
               'votre héritage est communiqué ; les Loomkeepers sont ceux qui le',
             receive: 'reçoivent',
             'it. Keeping those circles distinct preserves the multi-party check that protects you.':
               '. Garder ces cercles distincts préserve le contrôle multipartite qui vous protège.',
-            'What is an Verification Contact?':
+            'What is a Verification Contact?':
               'Qu’est-ce qu’un contact de vérification ?',
             'People you trust to confirm your passing when the time comes. We recommend adding at least 2–3 contacts — they need to sign up so we have their details on file, but that’s it.':
               'Des personnes de confiance qui confirmeront votre décès le moment venu. Nous recommandons d’ajouter au moins 2 à 3 contacts — il leur suffit de s’inscrire pour que nous ayons leurs coordonnées, c’est tout.',
@@ -6779,7 +6786,7 @@
               'Un paiement échoué sans réponse.',
             'If your subscription payment fails and we can’t reach you to update or cancel after several attempts, that’s treated as a suspicious silence and starts an inquiry.':
               'Si le paiement de votre abonnement échoue et que, après plusieurs tentatives, nous ne parvenons pas à vous joindre pour le mettre à jour ou l’annuler, ce silence est jugé suspect et déclenche une enquête.',
-            'An verification contact reports you as deceased.':
+            'A verification contact reports you as deceased.':
               'Un contact de vérification vous signale comme décédé.',
             'They log in to the application and submit the report, which starts an inquiry.':
               'Il se connecte à l’application et soumet le signalement, ce qui ouvre une enquête.',
@@ -6794,7 +6801,7 @@
               '. À l’issue du vote, l’enquête conclut que vous êtes soit en vie, soit décédé.',
             'A sign of life ends the inquiry instantly.':
               'Un signe de vie met fin à l’enquête instantanément.',
-            'At any point during the inquiry — including during the emergency-contact vote — if we receive a sign of life from you, the entire process is stopped immediately and your account returns to normal.':
+            'At any point during the inquiry — including during the verification-contact vote — if we receive a sign of life from you, the entire process is stopped immediately and your account returns to normal.':
               'À tout moment de l’enquête — y compris pendant le vote des contacts d’urgence — si nous recevons un signe de vie de votre part, l’ensemble du processus s’arrête immédiatement et votre compte revient à la normale.',
             'What is the Vault?': 'Qu’est-ce que le Coffre-fort ?',
             "A one-way cold storage vault for your digital assets — documents, photos, account credentials, anything you'd hate to lose. Files are encrypted on your device before upload, stored in a region you choose, and cannot be edited or downloaded after upload (so they can't be tampered with).":
@@ -6814,7 +6821,7 @@
               'Il n’existe aucun moyen de télécharger vos fichiers',
             '— the Vault is one-way cold storage by design, and that doesn’t change at cancellation. If you don’t reactivate within those 7 days, every file and folder in your Vault is permanently and irreversibly deleted. Gone forever, with no recovery.':
               ' — le Coffre-fort est, par conception, un stockage à froid unidirectionnel, et cela ne change pas à la résiliation. Si vous ne réactivez pas dans ces 7 jours, chaque fichier et dossier de votre Coffre-fort est supprimé de façon définitive et irréversible. Perdu à jamais, sans récupération possible.',
-            'Afterlife Messages are a separate, standalone service — they’re not affected by cancelling your Vault subscription.':
+            'Afterlife Messages are a separate, standalone service — they’re not affected by canceling your Vault subscription.':
               'Les messages posthumes sont un service distinct et indépendant — la résiliation de votre abonnement au Coffre-fort ne les affecte pas.',
             'How do Afterlife Messages work?':
               'Comment fonctionnent les messages posthumes ?',
@@ -6840,7 +6847,7 @@
               'Les fichiers sont chiffrés sur votre appareil avant même de vous quitter, avec une cryptographie standard du secteur. Ils sont protégés par plusieurs couches de sécurité isolées : rien n’est consultable, prévisualisable ni lisible, en transit comme au repos — ni par nous, ni par quiconque.',
             'In fact, your Loomkeepers don’t even know they’ve been named':
               'En fait, vos Loomkeepers ignorent même qu’ils ont été désignés',
-            '— we never notify them, contact them, or hint at their role until your digital inheritance is actually released. Until that day, they have no idea you’ve chosen them.':
+            '— we never notify them, contact them, or hint at their role until your digital content is actually released. Until that day, they have no idea you’ve chosen them.':
               ' — nous ne les prévenons jamais, ne les contactons pas et ne laissons rien deviner de leur rôle tant que votre héritage numérique n’est pas réellement communiqué. Jusqu’à ce jour, ils ignorent totalement que vous les avez choisis.',
             'Why it matters': 'Pourquoi c’est important',
             'The moments worth keeping.':
@@ -6860,8 +6867,8 @@
               'Configurez votre coffre-fort en moins de cinq minutes. Gratuit au démarrage — sans carte bancaire.',
             'Create your free vault': 'Créez votre coffre-fort gratuit',
             'I already have one': 'J’en ai déjà un',
-            "A private, encrypted vault for your digital legacy. Decide what's saved, who receives it, and exactly when.":
-              'Un coffre-fort privé et chiffré pour votre héritage numérique. Vous décidez de ce qui est conservé, de qui le reçoit et de quand exactement.',
+            "A private, encrypted platform for your digital content management. Decide what's saved, who receives it, after you pass away.":
+              'Une plateforme privée et chiffrée pour gérer votre contenu numérique. Vous décidez de ce qui est conservé, de qui le reçoit et après votre décès.',
             Product: 'Produit',
             Company: 'Entreprise',
             About: 'À propos',
@@ -6912,7 +6919,7 @@
             'Coming soon': 'Bientôt disponible',
           },
           he: {
-            'Loomkeeper — Your Secure Digital Legacy Vault':
+            'Loomkeeper — Your Secure Digital Content Vault':
               'Loomkeeper — הכספת הדיגיטלית המאובטחת למורשת שלכם',
             'Loomkeeper is launching soon —': 'Loomkeeper יוצא לדרך בקרוב —',
             'join the waitlist': 'הצטרפו לרשימת ההמתנה',
@@ -6921,6 +6928,7 @@
               'Loomkeeper מגיע בקרוב — אנחנו מוסיפים את הנגיעות האחרונות למשהו שאנחנו גאים בו.',
             'How it works': 'איך זה עובד',
             Vault: 'כספת',
+            Features: 'תכונות',
             'Afterlife Messages': 'הודעות לאחר לכתכם',
             Pricing: 'תמחור',
             'Q&A': 'שאלות ותשובות',
@@ -6931,8 +6939,8 @@
             'digital life': 'הדיגיטליים שלכם',
             'reaches the': 'יגיעו לידיים',
             'right hands.': 'הנכונות.',
-            'Loomkeeper is a private, end-to-end encrypted vault for the documents, accounts and memories you want delivered to your loved ones — exactly when, and to whom, you decide.':
-              'Loomkeeper היא כספת פרטית ומוצפנת מקצה לקצה עבור המסמכים, החשבונות והזיכרונות שאתם רוצים למסור ליקיריכם — בדיוק מתי, ולמי, שתחליטו.',
+            'Loomkeeper is a private, end-to-end encrypted platform for organizing your documents, accounts, and memories, and making sure they reach the people you choose after you pass away.':
+              'Loomkeeper היא פלטפורמה פרטית ומוצפנת מקצה לקצה לארגון המסמכים, החשבונות והזיכרונות שלכם, ולהבטחת העברתם לאנשים שתבחרו לאחר פטירתכם.',
             'Start your vault': 'פתחו את הכספת שלכם',
             'See how it works': 'ראו איך זה עובד',
             'Industry-leading encryption': 'הצפנה מובילה בתעשייה',
@@ -6943,23 +6951,23 @@
             'Real Estate': 'נדל"ן',
             '256-bit secure': 'אבטחת 256 ביט',
             'What you get': 'מה מקבלים',
-            'One place to organise, assign and time-release everything that matters.':
-              'מקום אחד לארגן, להקצות ולתזמן שחרור של כל מה שחשוב.',
-            'Loomkeeper splits your digital legacy into three clear pieces. Together, they make sure nothing important is lost or sent to the wrong person.':
-              'Loomkeeper מחלק את המורשת הדיגיטלית שלכם לשלושה חלקים ברורים. יחד הם מבטיחים ששום דבר חשוב לא יאבד ולא יישלח לאדם הלא נכון.',
+            'One place to organize everything that matters, and choose exactly who receives it.':
+              'מקום אחד לארגן את כל מה שחשוב ולבחור בדיוק מי יקבל אותו.',
+            "Store what matters in the Vault, and choose the Loomkeepers who'll receive it when you're gone. Afterlife Messages works independently, letting you send personal notes on your own schedule.":
+              "שמרו את מה שחשוב בכספת ובחרו את ה-Loomkeepers שיקבלו אותו לאחר פטירתכם. הודעות לאחר המוות פועלות באופן עצמאי ומאפשרות לכם לשלוח הודעות אישיות לפי לוח הזמנים שלכם.",
             'The people you choose to receive your folders when the time comes. Pick one or more per folder — everything inside goes to those Loomkeepers.':
               'האנשים שתבחרו שיקבלו את התיקיות שלכם כשיגיע הזמן. בחרו אחד או יותר לכל תיקייה — כל מה שבתוכה יגיע לאותם Loomkeepers.',
             'Choose your Loomkeepers': 'בחרו את ה-Loomkeepers שלכם',
             'The Vault': 'הכספת',
-            "One-way cold storage for documents, photos, login credentials, wills and anything else you'd hate to lose. Organise into folders, set who inherits each one.":
-              'אחסון קר חד-כיווני למסמכים, תמונות, פרטי התחברות, צוואות וכל דבר אחר שלא הייתם רוצים לאבד. ארגנו בתיקיות וקבעו מי יורש כל אחת מהן.',
+            "One-way cold storage for documents, photos, login credentials, and anything else you'd hate to lose. Organize into folders, set who receives each one.":
+              'אחסון קר חד-כיווני למסמכים, תמונות, פרטי התחברות וכל דבר אחר שלא הייתם רוצים לאבד. ארגנו בתיקיות וקבעו מי יקבל כל אחת מהן.',
             'Explore the Vault': 'גלו את הכספת',
             "Record video, audio or written messages and choose exactly when they're delivered — on a specific date, an anniversary, or a year after you're gone.":
               'הקליטו הודעות וידאו, שמע או כתובות ובחרו בדיוק מתי הן יימסרו — בתאריך מסוים, ביום שנה, או שנה לאחר לכתכם.',
             'Schedule a message': 'תזמנו הודעה',
             "A private cold-storage vault for the things you can't replace.":
               'כספת פרטית באחסון קר לדברים שאי אפשר להחליף.',
-            'Upload once, organise into colour-coded folders, and forget about it. Files are written once, encrypted on your device, and held in a hardened storage region you choose.':
+            'Upload once, organize into color-coded folders, and forget about it. Files are written once, encrypted on your device, and held in a hardened storage region you choose.':
               'העלו פעם אחת, ארגנו בתיקיות מסומנות בצבע, ותשכחו מזה. הקבצים נכתבים פעם אחת, מוצפנים במכשיר שלכם, ונשמרים באזור אחסון מוקשח לבחירתכם.',
             'Folders, files & items': 'תיקיות, קבצים ופריטים',
             'Drag-drop any file type. Add structured "items" for credentials, accounts and notes.':
@@ -7077,7 +7085,7 @@
             'are a standalone service, billed once per message. No subscription required for either to work alongside the other.':
               'הן שירות עצמאי, בחיוב חד-פעמי לכל הודעה. אף אחד מהם אינו דורש מנוי כדי לעבוד לצד השני.',
             'Vault · subscription': 'כספת · מנוי',
-            'Encrypted cold storage for your digital legacy. Start free, upgrade when you need more room.':
+            'Encrypted cold storage for your digital content. Start free, upgrade when you need more room.':
               'אחסון קר ומוצפן למורשת הדיגיטלית שלכם. התחילו בחינם, שדרגו כשתזדקקו למקום נוסף.',
             Free: 'חינם',
             'A first look — plenty for a small handover.':
@@ -7131,19 +7139,19 @@
             'What is a Loomkeeper?': 'מהו Loomkeeper?',
             'is a blend of': 'הוא שילוב של המילים',
             and: 'ו-',
-            '— the people you choose to receive and look after your digital inheritance. You can assign different Loomkeepers to different folders, files or messages, so each thing reaches exactly the right person.':
+            '— the people you choose to receive and look after your digital content. You can assign different Loomkeepers to different folders, files or messages, so each thing reaches exactly the right person.':
               '— האנשים שאתם בוחרים שיקבלו את הירושה הדיגיטלית שלכם וישמרו עליה. אפשר להקצות Loomkeepers שונים לתיקיות, לקבצים או להודעות שונים, כך שכל דבר יגיע בדיוק לאדם הנכון.',
             'We recommend keeping the roles separate':
               'אנו ממליצים לשמור על הפרדה בין התפקידים',
-            '— it’s best not to set the same person as both a Loomkeeper and an verification contact. Verification contacts decide':
+            '— it’s best not to set the same person as both a Loomkeeper and a verification contact. Verification contacts decide':
               '— עדיף לא להגדיר את אותו אדם גם כ-Loomkeeper וגם כאיש קשר לאימות. אנשי הקשר לאימות מחליטים',
             whether: 'האם',
-            'your inheritance is released; Loomkeepers are the ones who':
+            'your content is released; Loomkeepers are the ones who':
               'הירושה שלכם משוחררת; ה-Loomkeepers הם אלה',
             receive: 'שמקבלים',
             'it. Keeping those circles distinct preserves the multi-party check that protects you.':
               'אותה. שמירה על מעגלים נפרדים אלה משמרת את הבקרה מרובת-הגורמים שמגינה עליכם.',
-            'What is an Verification Contact?': 'מהו איש קשר לאימות?',
+            'What is a Verification Contact?': 'מהו איש קשר לאימות?',
             'People you trust to confirm your passing when the time comes. We recommend adding at least 2–3 contacts — they need to sign up so we have their details on file, but that’s it.':
               'אנשים שאתם סומכים עליהם שיאשרו את פטירתכם כשיגיע הזמן. אנו ממליצים להוסיף לפחות 2–3 אנשי קשר — עליהם להירשם כדי שיהיו לנו פרטיהם, אבל זה הכול.',
             'We will not contact them until it’s actually required.':
@@ -7160,7 +7168,7 @@
             'A failed payment with no response.': 'תשלום שנכשל ללא מענה.',
             'If your subscription payment fails and we can’t reach you to update or cancel after several attempts, that’s treated as a suspicious silence and starts an inquiry.':
               'אם תשלום המנוי שלכם נכשל ואיננו מצליחים ליצור איתכם קשר כדי לעדכן או לבטל לאחר כמה ניסיונות, הדבר נחשב לשתיקה חשודה ופותח בירור.',
-            'An verification contact reports you as deceased.':
+            'A verification contact reports you as deceased.':
               'איש קשר לאימות מדווח עליכם כנפטרים.',
             'They log in to the application and submit the report, which starts an inquiry.':
               'הוא מתחבר לאפליקציה ומגיש את הדיווח, שפותח בירור.',
@@ -7175,7 +7183,7 @@
               '. בתום ההצבעה, הבירור קובע שאתם או בחיים או שנפטרתם.',
             'A sign of life ends the inquiry instantly.':
               'סימן חיים מסיים את הבירור מיד.',
-            'At any point during the inquiry — including during the emergency-contact vote — if we receive a sign of life from you, the entire process is stopped immediately and your account returns to normal.':
+            'At any point during the inquiry — including during the verification-contact vote — if we receive a sign of life from you, the entire process is stopped immediately and your account returns to normal.':
               'בכל שלב במהלך הבירור — כולל בזמן הצבעת אנשי הקשר לשעת חירום — אם נקבל מכם סימן חיים, כל התהליך נעצר מיד והחשבון שלכם חוזר לתקינותו.',
             'What is the Vault?': 'מהי הכספת?',
             "A one-way cold storage vault for your digital assets — documents, photos, account credentials, anything you'd hate to lose. Files are encrypted on your device before upload, stored in a region you choose, and cannot be edited or downloaded after upload (so they can't be tampered with).":
@@ -7194,7 +7202,7 @@
               'אין דרך להוריד את הקבצים שלכם',
             '— the Vault is one-way cold storage by design, and that doesn’t change at cancellation. If you don’t reactivate within those 7 days, every file and folder in your Vault is permanently and irreversibly deleted. Gone forever, with no recovery.':
               '— הכספת היא אחסון קר חד-כיווני מתוך תכנון, וזה לא משתנה בעת הביטול. אם לא תפעילו מחדש בתוך אותם 7 ימים, כל קובץ וכל תיקייה בכספת שלכם יימחקו לצמיתות וללא אפשרות שחזור. אבודים לתמיד, ללא כל דרך לשחזר.',
-            'Afterlife Messages are a separate, standalone service — they’re not affected by cancelling your Vault subscription.':
+            'Afterlife Messages are a separate, standalone service — they’re not affected by canceling your Vault subscription.':
               'הודעות לאחר לכתכם הן שירות נפרד ועצמאי — ביטול מנוי הכספת אינו משפיע עליהן.',
             'How do Afterlife Messages work?': 'כיצד עובדות הודעות לאחר לכתכם?',
             'Record a video, voice note or written message, choose a single recipient, then pick one of three delivery rules:':
@@ -7217,7 +7225,7 @@
               'הקבצים מוצפנים במכשיר שלכם עוד לפני שהם עוזבים אתכם, באמצעות קריפטוגרפיה תקנית בתעשייה. הם נשמרים מאחורי כמה שכבות הגנה מבודדות, כך ששום דבר אינו ניתן לעיון, לתצוגה מקדימה או לקריאה — לא במעבר ולא במנוחה — לא על ידינו, ולא על ידי אף אחד אחר.',
             'In fact, your Loomkeepers don’t even know they’ve been named':
               'למעשה, ה-Loomkeepers שלכם אפילו לא יודעים שנבחרו',
-            '— we never notify them, contact them, or hint at their role until your digital inheritance is actually released. Until that day, they have no idea you’ve chosen them.':
+            '— we never notify them, contact them, or hint at their role until your digital content is actually released. Until that day, they have no idea you’ve chosen them.':
               '— לעולם איננו מודיעים להם, יוצרים איתם קשר או רומזים על תפקידם עד שהירושה הדיגיטלית שלכם משוחררת בפועל. עד אותו יום, אין להם מושג שבחרתם בהם.',
             'Why it matters': 'למה זה חשוב',
             'The moments worth keeping.': 'הרגעים ששווה לשמור.',
@@ -7236,8 +7244,8 @@
               'הקימו את הכספת שלכם בפחות מחמש דקות. התחלה חינם — ללא צורך בכרטיס.',
             'Create your free vault': 'צרו כספת חינם',
             'I already have one': 'כבר יש לי',
-            "A private, encrypted vault for your digital legacy. Decide what's saved, who receives it, and exactly when.":
-              'כספת פרטית ומוצפנת למורשת הדיגיטלית שלכם. החליטו מה נשמר, מי מקבל אותו, ומתי בדיוק.',
+            "A private, encrypted platform for your digital content management. Decide what's saved, who receives it, after you pass away.":
+              'פלטפורמה פרטית ומוצפנת לניהול התוכן הדיגיטלי שלכם. החליטו מה נשמר, מי יקבל אותו, ולאחר פטירתכם.',
             Product: 'מוצר',
             Company: 'חברה',
             About: 'אודות',
