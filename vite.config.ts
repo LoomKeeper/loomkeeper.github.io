@@ -4,6 +4,70 @@ import { readFileSync } from 'node:fs'
 
 const landingDocument = new URL('./landing-page/index.html', import.meta.url)
 
+const analyticsConsentBootstrap = `    <script id="loomkeeper-consent-mode">
+      (function () {
+        var measurementId = 'G-DNS7RKYSW9'
+        var storageKey = 'loomkeeper_cookie_consent'
+
+        window.dataLayer = window.dataLayer || []
+        window.gtag = window.gtag || function () { window.dataLayer.push(arguments) }
+
+        window.gtag('consent', 'default', {
+          analytics_storage: 'denied',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          wait_for_update: 500,
+        })
+
+        function getChoice() {
+          try {
+            var value = window.localStorage.getItem(storageKey)
+            return value === 'granted' || value === 'denied' ? value : null
+          } catch (_error) {
+            return null
+          }
+        }
+
+        function loadAnalytics() {
+          if (document.getElementById('loomkeeper-google-analytics')) return
+
+          var script = document.createElement('script')
+          script.id = 'loomkeeper-google-analytics'
+          script.async = true
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId
+          document.head.appendChild(script)
+
+          window.gtag('js', new Date())
+          window.gtag('config', measurementId)
+        }
+
+        function setChoice(choice) {
+          try {
+            window.localStorage.setItem(storageKey, choice)
+          } catch (_error) {}
+
+          window.gtag('consent', 'update', {
+            analytics_storage: choice,
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
+          })
+
+          if (choice === 'granted') loadAnalytics()
+        }
+
+        window.loomkeeperAnalyticsConsent = {
+          get: getChoice,
+          set: setChoice,
+        }
+
+        var savedChoice = getChoice()
+        if (savedChoice) setChoice(savedChoice)
+      })()
+    </script>
+`
+
 const directLandingPage = () => ({
   name: 'direct-landing-page',
   transformIndexHtml: {
@@ -17,8 +81,8 @@ const directLandingPage = () => ({
       return html
         .replace(
           '</head>',
-          `    <style id="landing-host-boot">
-      body:not(.landing-host-ready) > :not(#landing-host-loader):not(#landing-config-root):not(script) {
+          `${analyticsConsentBootstrap}    <style id="landing-host-boot">
+      body:not(.landing-host-ready) > :not(#landing-host-loader):not(#landing-config-root):not(#cookie-consent-root):not(script) {
         visibility: hidden;
       }
       #landing-host-loader {
@@ -86,6 +150,7 @@ const directLandingPage = () => ({
         <span class="sr-only">Loading Loomkeeper</span>
       </div>
     </div>
+    <div id="cookie-consent-root"></div>
     <div id="landing-config-root" hidden></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
