@@ -11,19 +11,21 @@
 // the markup to point at them, so the page is plain HTML that renders on first
 // paint. Re-run it if the design tool produces a new export:
 //
-//   node scripts/import-landing-bundle.mjs <bundle.html> public/landing-page
+//   node scripts/import-landing-bundle.mjs <bundle.html> \
+//     landing-page/index.html public/landing-page/assets
 //
 // sharp is optional and only used to downscale oversized photographs; without
 // it the images are copied through untouched.
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs'
 import { gunzipSync } from 'node:zlib'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 
-const [bundlePath, outDir] = process.argv.slice(2)
+const [bundlePath, documentPath, assetsDir] = process.argv.slice(2)
 
-if (!bundlePath || !outDir) {
+if (!bundlePath || !documentPath || !assetsDir) {
   console.error(
-    'usage: node scripts/import-landing-bundle.mjs <bundle.html> <out-dir>',
+    'usage: node scripts/import-landing-bundle.mjs ' +
+      '<bundle.html> <document.html> <assets-dir>',
   )
   process.exit(1)
 }
@@ -66,9 +68,9 @@ const payloadAfter = tag => {
 const manifest = payloadAfter('manifest')
 let template = payloadAfter('template')
 
-const assetsDir = join(outDir, 'assets')
 rmSync(assetsDir, { recursive: true, force: true })
 mkdirSync(assetsDir, { recursive: true })
+mkdirSync(dirname(documentPath), { recursive: true })
 
 let originalBytes = 0
 let writtenBytes = 0
@@ -145,7 +147,7 @@ template =
   '\n' +
   template.slice(insertionPoint)
 
-writeFileSync(join(outDir, 'index.html'), template)
+writeFileSync(documentPath, template)
 
 const mb = bytes => `${(bytes / 1024 / 1024).toFixed(2)}MB`
 console.log(`assets:   ${Object.keys(manifest).length}`)

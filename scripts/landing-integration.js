@@ -1,16 +1,13 @@
 // Injected into the landing document by scripts/import-landing-bundle.mjs,
 // immediately after the export's FLAGS literal and before it calls applyFlags().
 //
-// It lives here rather than in public/landing-page/index.html because that file
+// It lives here rather than in landing-page/index.html because that file
 // is regenerated from the design-tool export; anything edited into it by hand is
 // lost on the next import.
 //
-// The host resolves the Statsig gates and the billing API before it mounts this
-// frame and puts the result in the URL fragment. Reading it here — while this
-// script is still parsing, before the first paint — means the page renders once,
-// in its final state. Receiving the same values over postMessage afterwards is
-// what made the CTAs and prices visibly change under the visitor. The fragment
-// never reaches the server, and these values are public either way.
+// The Vite host resolves Statsig gates and billing data, then delivers them to
+// this document before revealing the page. The hash reader remains useful when
+// this source document is opened by itself during design review.
 
 const HOST_CONFIG = (() => {
   const match = /(?:^|[#&])config=([^&]+)/.exec(window.location.hash)

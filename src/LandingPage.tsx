@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { StatsigContext, useGateValue } from '@statsig/react-bindings'
 
 const APP_ORIGIN = (import.meta.env.VITE_APP_ORIGIN || '').replace(/\/+$/, '')
@@ -8,8 +8,6 @@ if (!APP_ORIGIN) {
 }
 
 const API_GATEWAY = (import.meta.env.VITE_API_GATEWAY || '').replace(/\/+$/, '')
-
-const LANDING_DOCUMENT = '/landing-page/index.html'
 
 // How long to wait on the billing API before showing the page with the prices
 // the document ships with. A blank page is worse than a stale price.
@@ -36,11 +34,6 @@ export type LandingPricing = {
     yearly?: Amount
   }
   messages?: Amount & { currency: string }
-}
-
-export type LandingConfig = {
-  flags: LandingFlags
-  pricing: LandingPricing | null
 }
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -132,88 +125,88 @@ const usePricing = () => {
   return state
 }
 
-type LandingFrameProps = {
-  config: LandingConfig | null
-}
-
-export const LandingFrame = ({ config }: LandingFrameProps) => {
-  const iframeRef = useRef<HTMLIFrameElement | null>(null)
-
-  // Fixed for the lifetime of the frame. Changing an iframe's src reloads the
-  // document, so later updates go over postMessage instead.
-  const [src] = useState(() =>
-    config
-      ? `${LANDING_DOCUMENT}#config=${encodeURIComponent(JSON.stringify(config))}`
-      : LANDING_DOCUMENT,
-  )
-
+const useAppNavigation = () => {
   useEffect(() => {
-    const handleLandingPageMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin) {
+    const handleAccountLink = (event: MouseEvent) => {
+      const target = event.target
+      if (!(target instanceof Element)) return
+
+      const anchor = target.closest<HTMLAnchorElement>('a[href]')
+      if (!anchor) return
+
+      const url = new URL(anchor.href, window.location.href)
+      if (url.origin !== window.location.origin) return
+      if (url.pathname !== '/auth/login' && url.pathname !== '/auth/register') {
         return
       }
 
-      if (event.data?.type === 'loomkeeper:login') {
-        window.location.assign(`${APP_ORIGIN}/auth/login`)
-      }
-
-      if (event.data?.type === 'loomkeeper:register') {
-        window.location.assign(`${APP_ORIGIN}/auth/register`)
-      }
+      event.preventDefault()
+      window.location.assign(`${APP_ORIGIN}${url.pathname}`)
     }
 
-    window.addEventListener('message', handleLandingPageMessage)
-    return () => window.removeEventListener('message', handleLandingPageMessage)
+    document.addEventListener('click', handleAccountLink, true)
+    return () => document.removeEventListener('click', handleAccountLink, true)
   }, [])
-
-  // Only for gates that flip while the page is open — the values that matter on
-  // first paint already went in through the src above.
-  useEffect(() => {
-    if (!config) return
-
-    iframeRef.current?.contentWindow?.postMessage(
-      { type: 'loomkeeper:landing-flags', flags: config.flags },
-      window.location.origin,
-    )
-  }, [config])
-
-  return (
-    <iframe
-      ref={iframeRef}
-      className='landing-frame'
-      src={src}
-      title='Loomkeeper landing page'
-    />
-  )
 }
+
+type LandingConfigControllerProps = {
+  flags: LandingFlags
+}
+
+const LandingConfigController = ({ flags }: LandingConfigControllerProps) => {
+  const pricing = usePricing()
+
+  useAppNavigation()
+
+  useEffect(() => {
+    if (!pricing.settled) return
+
+    const dispatch = (data: unknown) => {
+      window.dispatchEvent(
+        new MessageEvent('message', {
+          data,
+          origin: window.location.origin,
+          source: window,
+        }),
+      )
+    }
+
+    dispatch({ type: 'loomkeeper:landing-flags', flags })
+    dispatch({ type: 'loomkeeper:landing-pricing', pricing: pricing.pricing })
+    document.body.classList.add('landing-host-ready')
+  }, [flags, pricing.pricing, pricing.settled])
+
+  return null
+}
+
+const DEFAULT_FLAGS: LandingFlags = {
+  infoOnlyMode: true,
+  registrationEnabled: false,
+  showLaunchBanner: false,
+}
+
+export const StaticLandingPage = () => (
+  <LandingConfigController flags={DEFAULT_FLAGS} />
+)
 
 const LandingPage = () => {
   const { isLoading } = useContext(StatsigContext)
   const infoOnlyMode = useGateValue('info-only-mode')
   const waitlistEnabled = useGateValue('waitlist-enabled')
   const showLaunchBanner = useGateValue('show-launch-banner')
-  const pricing = usePricing()
-
-  // Nothing is rendered until the gates and prices are in hand, so the document
-  // mounts once with its final values in the URL and paints in its end state.
-  // Rendering it earlier and correcting it afterwards is what made the CTAs and
-  // prices visibly change under the visitor.
-  if (isLoading || !pricing.settled) {
+  if (isLoading) {
     return null
   }
 
   return (
-    <LandingFrame
-      config={{
-        flags: {
-          infoOnlyMode: Boolean(infoOnlyMode),
-          // The waitlist and open registration are the two sides of one switch:
-          // while the waitlist is on, CTAs collect signups instead of opening
-          // the register flow.
-          registrationEnabled: !waitlistEnabled,
-          showLaunchBanner: Boolean(showLaunchBanner),
-        },
-        pricing: pricing.pricing,
+    <LandingConfigController
+      flags={{
+        infoOnlyMode: Boolean(infoOnlyMode),
+        // The waitlist and open registration are the two sides of one switch:
+        // while the waitlist is on, CTAs collect signups instead of opening
+        // the register flow.
+        registrationEnabled: !waitlistEnabled,
+        showLaunchBanner: Boolean(showLaunchBanner),
       }}
     />
   )

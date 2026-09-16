@@ -28,3 +28,7 @@ repository's Pages source as **GitHub Actions** and add the
 
 Account links leave the landing page and open the corresponding authentication
 entry route on `https://app.loomkeeper.com`.
+
+The exported landing document is served directly as the root page. React mounts
+only a hidden controller that supplies Statsig gates, pricing, and account-link
+routing; the visible page is not rendered inside an iframe.

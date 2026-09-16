@@ -3,6 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Organize your digital content in a private, end-to-end encrypted platform and choose who receives it after you pass away."
+    />
+    <meta name="theme-color" content="#f2f2f4" />
+    <link rel="canonical" href="https://www.loomkeeper.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Loomkeeper" />
+    <meta
+      property="og:title"
+      content="Loomkeeper — Your Secure Digital Content Vault"
+    />
+    <meta
+      property="og:description"
+      content="Organize your digital content securely and choose who receives it after you pass away."
+    />
+    <meta property="og:url" content="https://www.loomkeeper.com/" />
+    <meta
+      property="og:image"
+      content="https://www.loomkeeper.com/og-image.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Loomkeeper secure digital content" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Loomkeeper — Your Secure Digital Content Vault"
+    />
+    <meta
+      name="twitter:description"
+      content="Organize your digital content securely and choose who receives it after you pass away."
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.loomkeeper.com/og-image.jpg"
+    />
     <title>Loomkeeper — Your Secure Digital Content Vault</title>
     <link
       rel="icon"
@@ -2413,6 +2450,51 @@
         display: none;
       }
 
+      /* Mobile conversion CTA */
+      .mobile-sticky-cta {
+        display: none;
+      }
+      @media (max-width: 720px) {
+        body {
+          padding-bottom: calc(76px + env(safe-area-inset-bottom));
+        }
+        .mobile-sticky-cta {
+          position: fixed;
+          right: 16px;
+          bottom: calc(12px + env(safe-area-inset-bottom));
+          left: 16px;
+          z-index: 190;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          min-height: 52px;
+          padding: 12px 22px;
+          border: 1px solid rgba(255, 255, 255, 0.45);
+          border-radius: 15px;
+          background: linear-gradient(135deg, var(--pink), #e83279);
+          box-shadow: 0 14px 34px -12px rgba(235, 48, 126, 0.72);
+          color: #fff;
+          font-size: 15px;
+          font-weight: 750;
+          text-align: center;
+          transition:
+            transform 0.18s ease,
+            box-shadow 0.18s ease;
+        }
+        .mobile-sticky-cta:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 18px 40px -12px rgba(235, 48, 126, 0.8);
+        }
+        .mobile-sticky-cta:focus-visible {
+          outline: 3px solid var(--violet);
+          outline-offset: 3px;
+        }
+        [dir='rtl'] .mobile-sticky-cta svg {
+          transform: scaleX(-1);
+        }
+      }
+
       /* ============ TWEAKS PANEL ============ */
       .tweaks-panel {
         position: fixed;
@@ -2941,9 +3023,9 @@
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="hero-photo-bleed" aria-hidden="true">
-        <img class="hp-ltr" src="assets/hero-image.png" alt="" /><img
+        <img class="hp-ltr" src="assets/hero-image.webp" alt="" /><img
           class="hp-rtl"
-          src="assets/hero-image-rtl.png"
+          src="assets/hero-image-rtl.webp"
           alt=""
         />
       </div>
@@ -4982,6 +5064,25 @@
       </div>
     </section>
 
+    <a
+      href="/auth/register"
+      class="mobile-sticky-cta"
+      data-cta="register"
+      data-cta-on="Start your vault"
+      data-cta-off="Join the waitlist"
+    >
+      <span class="cta-label">Start your vault</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path
+          d="M5 3l5 5-5 5"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></path>
+      </svg>
+    </a>
+
     <!-- ============ FOOTER ============ -->
     <footer>
       <div class="wrap">
@@ -5014,7 +5115,11 @@
             <ul>
               <li><a href="#">About</a></li>
               <li><a href="#security">Security</a></li>
-              <li><a href="mailto:contact@loomkeeper.com">Contact</a></li>
+              <li>
+                <a href="mailto:contact@loomkeeper.com"
+                  >contact@loomkeeper.com</a
+                >
+              </li>
             </ul>
           </div>
 
@@ -5145,16 +5250,13 @@
       // Injected into the landing document by scripts/import-landing-bundle.mjs,
       // immediately after the export's FLAGS literal and before it calls applyFlags().
       //
-      // It lives here rather than in public/landing-page/index.html because that file
+      // It lives here rather than in landing-page/index.html because that file
       // is regenerated from the design-tool export; anything edited into it by hand is
       // lost on the next import.
       //
-      // The host resolves the Statsig gates and the billing API before it mounts this
-      // frame and puts the result in the URL fragment. Reading it here — while this
-      // script is still parsing, before the first paint — means the page renders once,
-      // in its final state. Receiving the same values over postMessage afterwards is
-      // what made the CTAs and prices visibly change under the visitor. The fragment
-      // never reaches the server, and these values are public either way.
+      // The Vite host resolves Statsig gates and billing data, then delivers them
+      // to this document before revealing the page. The hash reader remains useful
+      // when this source document is opened by itself during design review.
 
       const HOST_CONFIG = (() => {
         const match = /(?:^|[#&])config=([^&]+)/.exec(window.location.hash)
@@ -5364,10 +5466,8 @@
           }
           const nextHref = info ? '#' : reg ? hrefOn : hrefOff
           el.setAttribute('href', nextHref)
-          // The waitlist lives on auth.loomkeeper.com, which refuses to be framed
-          // (frame-ancestors 'self'). This document is itself in an iframe, so an
-          // off-site CTA has to move the top window — left to itself it navigates
-          // the frame and the click just blanks the page.
+          // External account and waitlist destinations should replace the complete
+          // page, including when this source is previewed inside a design tool.
           if (el.origin !== window.location.origin)
             el.setAttribute('target', '_top')
           else el.removeAttribute('target')
