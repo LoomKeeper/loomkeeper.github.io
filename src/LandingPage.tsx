@@ -141,7 +141,14 @@ const useAppNavigation = () => {
       }
 
       event.preventDefault()
-      window.location.assign(`${APP_ORIGIN}${url.pathname}`)
+      const appUrl = `${APP_ORIGIN}${url.pathname}`
+
+      if (anchor.target === '_blank') {
+        window.open(appUrl, '_blank', 'noopener,noreferrer')
+        return
+      }
+
+      window.location.assign(appUrl)
     }
 
     document.addEventListener('click', handleAccountLink, true)

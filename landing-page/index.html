@@ -2841,14 +2841,23 @@
         </nav>
         <div class="nav-right">
           <div class="nav-cta">
-            <a href="/auth/login" class="btn btn-ghost">Log in</a>
+            <a
+              href="/auth/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-ghost"
+              >Open Dashboard</a
+            >
             <a
               href="/auth/register"
+              target="_blank"
+              rel="noopener noreferrer"
               class="btn btn-primary"
               data-cta="register"
-              data-cta-on="Get started"
+              data-open-new-tab="true"
+              data-cta-on="Create Free Account"
               data-cta-off="Join waitlist"
-              >Get started</a
+              >Create Free Account</a
             >
             <a
               href="https://trustee.loomkeeper.com"
@@ -5474,7 +5483,9 @@
           el.setAttribute('href', nextHref)
           // External account and waitlist destinations should replace the complete
           // page, including when this source is previewed inside a design tool.
-          if (el.origin !== window.location.origin)
+          if (reg && el.dataset.openNewTab === 'true')
+            el.setAttribute('target', '_blank')
+          else if (el.origin !== window.location.origin)
             el.setAttribute('target', '_top')
           else el.removeAttribute('target')
           el.classList.toggle('is-disabled', info)
@@ -5862,8 +5873,8 @@
             'Afterlife Messages': 'Wiadomości pośmiertne',
             Pricing: 'Cennik',
             'Q&A': 'Pytania',
-            'Log in': 'Zaloguj się',
-            'Get started': 'Rozpocznij',
+            'Open Dashboard': 'Otwórz panel',
+            'Create Free Account': 'Utwórz bezpłatne konto',
             'Become trustee': 'Zostań powiernikiem',
             'Make sure your': 'Zadbaj o to, aby Twoje',
             'digital life': 'cyfrowe życie',
@@ -6249,8 +6260,8 @@
             'Afterlife Messages': 'Mensajes póstumos',
             Pricing: 'Precios',
             'Q&A': 'Preguntas',
-            'Log in': 'Iniciar sesión',
-            'Get started': 'Empezar',
+            'Open Dashboard': 'Abrir panel',
+            'Create Free Account': 'Crear cuenta gratis',
             'Become trustee': 'Ser fideicomisario',
             'Make sure your': 'Haz que tu',
             'digital life': 'vida digital',
@@ -6640,8 +6651,8 @@
             'Afterlife Messages': 'Messages posthumes',
             Pricing: 'Tarifs',
             'Q&A': 'Questions',
-            'Log in': 'Se connecter',
-            'Get started': 'Commencer',
+            'Open Dashboard': 'Ouvrir le tableau de bord',
+            'Create Free Account': 'Créer un compte gratuit',
             'Become trustee': 'Devenir fiduciaire',
             'Make sure your': 'Faites en sorte que votre',
             'digital life': 'vie numérique',
@@ -7034,8 +7045,8 @@
             'Afterlife Messages': 'הודעות לאחר לכתכם',
             Pricing: 'תמחור',
             'Q&A': 'שאלות ותשובות',
-            'Log in': 'התחברות',
-            'Get started': 'בואו נתחיל',
+            'Open Dashboard': 'פתיחת לוח הבקרה',
+            'Create Free Account': 'יצירת חשבון חינם',
             'Become trustee': 'להיות נאמן',
             'Make sure your': 'ודאו שהחיים',
             'digital life': 'הדיגיטליים שלכם',
@@ -7490,7 +7501,8 @@
         }
 
         function setLanguage(lang, persist) {
-          if (LANGS.indexOf(lang) < 0) lang = 'en'
+          lang = 'en'
+          persist = false
           for (var i = 0; i < textReg.length; i++) {
             var r = textReg[i],
               val = tr(lang, r.key),
@@ -7680,14 +7692,13 @@
               break
             }
           }
-          wireDropdown()
-          window.lkSetLanguage = function (l) {
-            setLanguage(l, true)
+          try {
+            localStorage.removeItem(STORE)
+          } catch (e) {}
+          window.lkSetLanguage = function () {
+            setLanguage('en', false)
           }
-          // apply saved / auto-detected language on first paint
-          var start = detect()
-          if (start !== 'en') setLanguage(start, false)
-          else setLanguage('en', false)
+          setLanguage('en', false)
         }
 
         if (document.readyState === 'loading')
@@ -7697,6 +7708,9 @@
     </script>
 
     <style id="lk-nav-responsive">
+      #lk-lang {
+        display: none !important;
+      }
       #navWrap > .wrap {
         display: flex;
         align-items: center;
@@ -7945,7 +7959,7 @@
             if (shouldCompact) {
               inner.appendChild(links)
 
-              // Keep account actions and language visible in the fixed header
+              // Keep account actions visible in the fixed header
               // while they fit. Only move them into the drawer once the
               // remaining header itself reaches the mobile-width limit.
               if (wrap.scrollWidth > wrap.clientWidth) {
@@ -8011,15 +8025,18 @@
           var btn = document.getElementById('lkLangBtn')
           var textBox = document.querySelector('.hero-grid')
           var wrap = document.querySelector('.hero > .wrap')
-          if (!hero || !bleed || !btn || !textBox || !wrap) return
+          if (!hero || !bleed || !textBox || !wrap) return
           if (getComputedStyle(bleed).position !== 'absolute') {
             bleed.style.left = ''
             bleed.style.right = ''
             return
           }
           var heroRect = hero.getBoundingClientRect()
-          var btnRect = btn.getBoundingClientRect()
           var wrapRect = wrap.getBoundingClientRect()
+          var btnRect =
+            btn && btn.getClientRects().length
+              ? btn.getBoundingClientRect()
+              : wrapRect
           var wrapStyle = getComputedStyle(wrap)
           var padLeft = parseFloat(wrapStyle.paddingLeft) || 0
           var padRight = parseFloat(wrapStyle.paddingRight) || 0
@@ -8083,8 +8100,7 @@
         window.addEventListener('load', align)
         window.addEventListener('resize', align)
         // The host frames this document, so its own resize event is not a reliable
-        // signal that the column moved, and the language button is only its final
-        // width once the webfont lands. Watch the boxes themselves instead.
+        // signal that the column moved. Watch the layout boxes themselves instead.
         if (window.ResizeObserver) {
           var ro = new ResizeObserver(function () {
             align()
