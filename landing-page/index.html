@@ -1631,16 +1631,26 @@
         flex-direction: column;
       }
       .price-card.featured {
-        border-color: var(--pink);
-        box-shadow: 0 20px 50px -20px rgba(217, 138, 122, 0.25);
+        border-color: #ff3d8c;
+        box-shadow: 0 20px 50px -20px rgba(255, 61, 140, 0.25);
         transform: scale(1.03);
+      }
+      .price-card.featured .btn-primary,
+      .standalone-card .btn-primary {
+        background: #ff3d8c;
+        box-shadow: 0 8px 18px -6px rgba(255, 61, 140, 0.55);
+      }
+      .price-card.featured .btn-primary:hover,
+      .standalone-card .btn-primary:hover {
+        background: #ff227c;
+        box-shadow: 0 12px 24px -8px rgba(255, 61, 140, 0.7);
       }
       .featured-tag {
         position: absolute;
         top: -14px;
         left: 50%;
         transform: translateX(-50%);
-        background: var(--pink);
+        background: #ff3d8c;
         color: white;
         font-size: 12px;
         font-weight: 700;
@@ -1705,14 +1715,14 @@
       /* Afterlife messages standalone card */
       .standalone-card {
         background: var(--card);
-        border: 1.5px solid var(--pink);
+        border: 1.5px solid #ff3d8c;
         border-radius: var(--radius-lg);
         padding: 40px;
         display: grid;
         grid-template-columns: 1.4fr 1fr;
         gap: 40px;
         align-items: center;
-        box-shadow: 0 20px 50px -20px rgba(217, 138, 122, 0.18);
+        box-shadow: 0 20px 50px -20px rgba(255, 61, 140, 0.18);
         position: relative;
         overflow: hidden;
       }
