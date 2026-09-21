@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
-import { StatsigContext, useGateValue } from '@statsig/react-bindings'
+import { useEffect, useState } from 'react'
 
 const APP_ORIGIN = (import.meta.env.VITE_APP_ORIGIN || '').replace(/\/+$/, '')
 
@@ -12,13 +11,6 @@ const API_GATEWAY = (import.meta.env.VITE_API_GATEWAY || '').replace(/\/+$/, '')
 // How long to wait on the billing API before showing the page with the prices
 // the document ships with. A blank page is worse than a stale price.
 const PRICING_TIMEOUT_MS = 2500
-
-// Mirrors the FLAGS object the landing document declares.
-export type LandingFlags = {
-  infoOnlyMode: boolean
-  registrationEnabled: boolean
-  showLaunchBanner: boolean
-}
 
 type Amount = {
   baseAmount: number
@@ -156,11 +148,7 @@ const useAppNavigation = () => {
   }, [])
 }
 
-type LandingConfigControllerProps = {
-  flags: LandingFlags
-}
-
-const LandingConfigController = ({ flags }: LandingConfigControllerProps) => {
+const LandingPage = () => {
   const pricing = usePricing()
 
   useAppNavigation()
@@ -178,45 +166,11 @@ const LandingConfigController = ({ flags }: LandingConfigControllerProps) => {
       )
     }
 
-    dispatch({ type: 'loomkeeper:landing-flags', flags })
     dispatch({ type: 'loomkeeper:landing-pricing', pricing: pricing.pricing })
     document.body.classList.add('landing-host-ready')
-  }, [flags, pricing.pricing, pricing.settled])
+  }, [pricing.pricing, pricing.settled])
 
   return null
-}
-
-const DEFAULT_FLAGS: LandingFlags = {
-  infoOnlyMode: true,
-  registrationEnabled: false,
-  showLaunchBanner: false,
-}
-
-export const StaticLandingPage = () => (
-  <LandingConfigController flags={DEFAULT_FLAGS} />
-)
-
-const LandingPage = () => {
-  const { isLoading } = useContext(StatsigContext)
-  const infoOnlyMode = useGateValue('info-only-mode')
-  const waitlistEnabled = useGateValue('waitlist-enabled')
-  const showLaunchBanner = useGateValue('show-launch-banner')
-  if (isLoading) {
-    return null
-  }
-
-  return (
-    <LandingConfigController
-      flags={{
-        infoOnlyMode: Boolean(infoOnlyMode),
-        // The waitlist and open registration are the two sides of one switch:
-        // while the waitlist is on, CTAs collect signups instead of opening
-        // the register flow.
-        registrationEnabled: !waitlistEnabled,
-        showLaunchBanner: Boolean(showLaunchBanner),
-      }}
-    />
-  )
 }
 
 export default LandingPage

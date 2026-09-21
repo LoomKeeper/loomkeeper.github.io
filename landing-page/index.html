@@ -422,7 +422,7 @@
     </style>
     <style>
       :root {
-        --pink: #ff3d8c;
+        --pink: #d98a7a;
         --pink-soft: #ffc2dc;
         --pink-tint: #ffe7f1;
         --violet: #6e58e8;
@@ -554,12 +554,12 @@
       .btn-primary {
         background: var(--pink);
         color: white;
-        box-shadow: 0 8px 18px -6px rgba(255, 61, 140, 0.55);
+        box-shadow: 0 8px 18px -6px rgba(217, 138, 122, 0.55);
       }
       .btn-primary:hover {
         transform: translateY(-1px);
-        background: #ff227c;
-        box-shadow: 0 12px 24px -8px rgba(255, 61, 140, 0.7);
+        background: #d98a7a;
+        box-shadow: 0 12px 24px -8px rgba(217, 138, 122, 0.7);
       }
       .btn-purple {
         background: var(--violet);
@@ -1053,7 +1053,7 @@
         border-radius: 999px;
       }
       .tag-keep {
-        color: var(--pink);
+        color: #ff3d8c;
         background: var(--pink-tint);
       }
       .tag-em {
@@ -1265,7 +1265,7 @@
       }
       .compare-vault {
         border-color: var(--pink);
-        box-shadow: 0 18px 40px -20px rgba(255, 61, 140, 0.18);
+        box-shadow: 0 18px 40px -20px rgba(217, 138, 122, 0.18);
         position: relative;
       }
       .compare-vault::before {
@@ -1304,7 +1304,7 @@
       }
       .compare-ic-vault {
         background: var(--pink-tint);
-        color: var(--pink);
+        color: #ff3d8c;
       }
       .compare-label {
         font-size: 17px;
@@ -1353,7 +1353,7 @@
       }
       .compare-check {
         background: var(--pink-tint);
-        color: var(--pink);
+        color: #ff3d8c;
       }
       .compare-cloud li {
         color: var(--muted);
@@ -1497,7 +1497,7 @@
         height: 400px;
         background: radial-gradient(
           circle,
-          rgba(255, 61, 140, 0.18),
+          rgba(217, 138, 122, 0.18),
           transparent 60%
         );
         border-radius: 50%;
@@ -1595,7 +1595,7 @@
         margin-bottom: 14px;
       }
       .afterlife-eyebrow {
-        color: var(--pink);
+        color: #ff3d8c;
         background: var(--pink-tint);
       }
       .pricing-block-sub {
@@ -1632,7 +1632,7 @@
       }
       .price-card.featured {
         border-color: var(--pink);
-        box-shadow: 0 20px 50px -20px rgba(255, 61, 140, 0.25);
+        box-shadow: 0 20px 50px -20px rgba(217, 138, 122, 0.25);
         transform: scale(1.03);
       }
       .featured-tag {
@@ -1712,7 +1712,7 @@
         grid-template-columns: 1.4fr 1fr;
         gap: 40px;
         align-items: center;
-        box-shadow: 0 20px 50px -20px rgba(255, 61, 140, 0.18);
+        box-shadow: 0 20px 50px -20px rgba(217, 138, 122, 0.18);
         position: relative;
         overflow: hidden;
       }
@@ -1777,7 +1777,7 @@
         height: 18px;
         border-radius: 50%;
         background: var(--pink-tint);
-        color: var(--pink);
+        color: #ff3d8c;
         display: grid;
         place-items: center;
         flex-shrink: 0;
@@ -1861,8 +1861,8 @@
       .final-cta {
         background: linear-gradient(
           135deg,
-          var(--pink) 0%,
-          #e92e7a 50%,
+          #d98a7a 0%,
+          #c1665a 50%,
           var(--violet) 100%
         );
         color: white;
@@ -2154,13 +2154,6 @@
           padding-top: 20px;
         }
 
-        /* Pre-launch banner */
-        .pre-banner {
-          font-size: 12px;
-          padding: 9px 14px;
-          gap: 8px;
-        }
-
         /* Nav */
         .nav-wrap {
           padding: 12px 0;
@@ -2373,14 +2366,6 @@
           width: 16px;
           height: 16px;
         }
-
-        /* Tweaks panel — pin to corners properly on phone */
-        .tweaks-panel {
-          bottom: 12px;
-          right: 12px;
-          left: 12px;
-          width: auto;
-        }
       }
 
       /* utility */
@@ -2397,57 +2382,6 @@
       .reveal.in {
         opacity: 1;
         transform: none;
-      }
-
-      /* ============ COMING-SOON BANNER ============ */
-      .pre-banner {
-        background: linear-gradient(90deg, var(--violet) 0%, var(--pink) 100%);
-        color: white;
-        font-size: 13.5px;
-        font-weight: 600;
-        padding: 10px 16px;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 14px;
-        flex-wrap: wrap;
-      }
-      .pre-banner .b-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #fff;
-        animation: pulse 1.6s ease-in-out infinite;
-      }
-      @keyframes pulse {
-        50% {
-          opacity: 0.35;
-        }
-      }
-      .pre-banner a {
-        text-decoration: underline;
-        text-underline-offset: 3px;
-        font-weight: 700;
-      }
-
-      /* Info-only / coming-soon mode */
-      /* Hide the auth CTAs, but not the trustee link — the trustee portal is a
-     separate origin that is live before the vault opens to registration. */
-      body.info-only .nav-cta > :not(.btn-purple) {
-        display: none !important;
-      }
-      body.info-only a[href='/auth/login'] {
-        display: none !important;
-      }
-      body.info-only [data-cta='register'].is-disabled {
-        cursor: default;
-        pointer-events: none;
-        opacity: 0.85;
-        filter: saturate(0.6);
-      }
-      body.info-only [data-cta='register'].is-disabled svg {
-        display: none;
       }
 
       /* Mobile conversion CTA */
@@ -2493,112 +2427,6 @@
         [dir='rtl'] .mobile-sticky-cta svg {
           transform: scaleX(-1);
         }
-      }
-
-      /* ============ TWEAKS PANEL ============ */
-      .tweaks-panel {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 200;
-        background: var(--card);
-        border: 1px solid var(--line);
-        border-radius: 18px;
-        box-shadow: var(--shadow-lg);
-        padding: 18px 20px;
-        width: 280px;
-        font-family: inherit;
-        display: none;
-      }
-      .tweaks-panel.open {
-        display: block;
-      }
-      .tw-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 14px;
-      }
-      .tw-title {
-        font-size: 13px;
-        font-weight: 800;
-        color: var(--ink);
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-      }
-      .tw-close {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: var(--page);
-        color: var(--ink);
-        display: grid;
-        place-items: center;
-        cursor: pointer;
-        border: none;
-        font-size: 14px;
-        line-height: 1;
-      }
-      .tw-close:hover {
-        background: var(--line);
-      }
-      .tw-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 0;
-        border-top: 1px solid var(--line);
-      }
-      .tw-row:first-of-type {
-        border-top: none;
-      }
-      .tw-label {
-        font-size: 13.5px;
-        font-weight: 600;
-        color: var(--ink);
-      }
-      .tw-sub {
-        font-size: 11.5px;
-        color: var(--muted);
-        margin-top: 2px;
-      }
-      .tw-switch {
-        position: relative;
-        width: 38px;
-        height: 22px;
-        border-radius: 999px;
-        background: var(--line);
-        cursor: pointer;
-        transition: background 0.2s;
-        flex-shrink: 0;
-        border: none;
-        padding: 0;
-      }
-      .tw-switch::after {
-        content: '';
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        width: 18px;
-        height: 18px;
-        background: white;
-        border-radius: 50%;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-        transition: transform 0.2s;
-      }
-      .tw-switch.on {
-        background: var(--pink);
-      }
-      .tw-switch.on::after {
-        transform: translateX(16px);
-      }
-      .tw-note {
-        margin-top: 12px;
-        padding-top: 12px;
-        border-top: 1px solid var(--line);
-        font-size: 11.5px;
-        color: var(--muted);
-        line-height: 1.4;
       }
 
       /* ============ PHOTOGRAPHY ============ */
@@ -2805,21 +2633,6 @@
     </style>
   </head>
   <body>
-    <!-- ============ PRE-LAUNCH BANNER ============ -->
-    <div class="pre-banner" id="preBanner" style="display: none">
-      <span class="b-dot"></span>
-      Loomkeeper is launching soon —
-      <a href="https://auth.loomkeeper.com/knock-knock" data-cta="register"
-        >join the waitlist</a
-      >
-      to be the first to know.
-    </div>
-    <div class="pre-banner" id="preBannerInfo" style="display: none">
-      <span class="b-dot"></span>
-      Loomkeeper is coming soon — we’re putting the finishing touches on
-      something we’re proud of.
-    </div>
-
     <!-- ============ NAV ============ -->
     <div class="nav-wrap" id="navWrap">
       <div class="wrap nav">
@@ -2835,7 +2648,7 @@
         </a>
         <nav class="nav-links" aria-label="Primary">
           <a href="#vault">Features</a>
-          <a href="#keepers">Loomkeepers</a>
+          <a href="#keepers">Trusted People</a>
           <a href="#pricing">Pricing</a>
           <a href="#faq">Q&amp;A</a>
         </nav>
@@ -2846,17 +2659,13 @@
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-ghost"
-              >Open Dashboard</a
+              >My Loomkeeper</a
             >
             <a
               href="/auth/register"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-primary"
-              data-cta="register"
-              data-open-new-tab="true"
-              data-cta-on="Create Free Account"
-              data-cta-off="Join waitlist"
               >Create Free Account</a
             >
             <a
@@ -3032,9 +2841,9 @@
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="hero-photo-bleed" aria-hidden="true">
-        <img class="hp-ltr" src="assets/hero-image.webp" alt="" /><img
+        <img class="hp-ltr" src="assets/hero-image.jpg" alt="" /><img
           class="hp-rtl"
-          src="assets/hero-image-rtl.webp"
+          src="assets/hero-image-rtl.jpg"
           alt=""
         />
       </div>
@@ -3042,19 +2851,16 @@
         <div class="hero-grid">
           <div>
             <h1 class="hero-title">
-              Make sure your <span class="underline">digital life</span> reaches
-              the <span class="accent">right hands.</span>
+              Your <span class="underline">digital life</span>, preserved
+              <span class="accent">for the people you choose.</span>
             </h1>
             <p class="hero-sub">
-              Loomkeeper is a private, end-to-end encrypted platform for organizing your documents, accounts, and memories, and making sure they reach the people you choose after you pass away.
+              Securely prepare the things you want your loved ones to receive, and Loomkeeper will make sure they reach the right people when the time comes.
             </p>
             <div class="hero-cta">
               <a
                 href="/auth/register"
                 class="btn btn-primary btn-lg"
-                data-cta="register"
-                data-cta-on="Create your free account"
-                data-cta-off="Join the waitlist"
               >
                 <span class="cta-label">Create your free account</span>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -3068,38 +2874,6 @@
                 </svg>
               </a>
               <a href="#how" class="btn btn-outline btn-lg">See how it works</a>
-            </div>
-            <div class="hero-trust">
-              <div class="trust-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"
-                    stroke="#6E58E8"
-                    stroke-width="2"
-                    stroke-linejoin="round"
-                  ></path>
-                </svg>
-                Industry-leading encryption
-              </div>
-              <div class="trust-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <rect
-                    x="3"
-                    y="11"
-                    width="18"
-                    height="10"
-                    rx="2"
-                    stroke="#6E58E8"
-                    stroke-width="2"
-                  ></rect>
-                  <path
-                    d="M7 11V7a5 5 0 0110 0v4"
-                    stroke="#6E58E8"
-                    stroke-width="2"
-                  ></path>
-                </svg>
-                One-way cold storage
-              </div>
             </div>
           </div>
         </div>
@@ -3127,18 +2901,18 @@
                   cx="9"
                   cy="7.5"
                   r="3.5"
-                  stroke="#FF3D8C"
+                  stroke="#ff3d8c"
                   stroke-width="2"
                 ></circle>
                 <path
                   d="M3 20c0-3.3 2.7-6 6-6c1.2 0 2.3.35 3.2.95"
-                  stroke="#FF3D8C"
+                  stroke="#ff3d8c"
                   stroke-width="2"
                   stroke-linecap="round"
                 ></path>
                 <path
                   d="M18.4 13.1c-.9-.85-2.35-.82-3.2.1c-.85-.92-2.3-.95-3.2-.1c-.95.9-.9 2.3.05 3.2L15.2 19l3.1-2.7c.95-.9 1-2.3.1-3.2z"
-                  stroke="#FF3D8C"
+                  stroke="#ff3d8c"
                   stroke-width="1.8"
                   stroke-linejoin="round"
                 ></path>
@@ -3227,7 +3001,7 @@
                   stroke-width="2"
                   stroke-linejoin="round"
                 ></path>
-                <circle cx="19" cy="6" r="3" fill="#FF3D8C"></circle>
+                <circle cx="19" cy="6" r="3" fill="#ff3d8c"></circle>
               </svg>
             </div>
             <h3>Afterlife Messages</h3>
@@ -3339,7 +3113,7 @@
                   background: var(--pink);
                   color: #fff;
                   border-radius: 8px;
-                  box-shadow: 0 4px 12px rgba(255, 61, 140, 0.35);
+                  box-shadow: 0 4px 12px rgba(217, 138, 122, 0.35);
                 "
                 class="vm-pill vm-add-button"
               >
@@ -3881,13 +3655,13 @@
                 </div>
                 <div class="chips" style="margin-left: auto">
                   <span style="background: #a78bfa">L</span>
-                  <span style="background: #ff3d8c">C</span>
+                  <span style="background: #d98a7a">C</span>
                   <span style="background: #f08436">R</span>
                 </div>
                 <div class="role" style="margin-left: 8px">3 folders</div>
               </div>
               <div class="contact-row">
-                <div class="avatar" style="background: #ff3d8c">VM</div>
+                <div class="avatar" style="background: #d98a7a">VM</div>
                 <div>
                   <div class="name">Vanessa Mishel</div>
                 </div>
@@ -3905,7 +3679,7 @@
                   <div class="name">David Mishel</div>
                 </div>
                 <div class="chips" style="margin-left: auto">
-                  <span style="background: #ff3d8c">C</span>
+                  <span style="background: #d98a7a">C</span>
                 </div>
                 <div class="role" style="margin-left: 8px">1 folder</div>
               </div>
@@ -3921,7 +3695,7 @@
               />
             </div>
             <span class="tag tag-em">Verification Contacts</span>
-            <h3>The witnesses who unlock it.</h3>
+            <h3>The people who confirm the handover.</h3>
             <p>
               Trusted contacts vote on a death inquiry before anything is
               released. Multi-signature consent prevents accidental or premature
@@ -4019,7 +3793,7 @@
                 <circle cx="32" cy="38" r="2" fill="#6E58E8"></circle>
                 <circle cx="42" cy="38" r="2" fill="#A78BFA"></circle>
                 <circle cx="22" cy="46" r="2" fill="#6E58E8"></circle>
-                <circle cx="32" cy="46" r="2" fill="#FF3D8C"></circle>
+                <circle cx="32" cy="46" r="2" fill="#ff3d8c"></circle>
                 <circle cx="42" cy="46" r="2" fill="#A78BFA"></circle>
               </svg>
             </div>
@@ -4364,9 +4138,6 @@
                 href="/auth/register"
                 class="btn btn-outline"
                 style="width: 100%; padding: 14px 22px"
-                data-cta="register"
-                data-cta-on="Start free"
-                data-cta-off="Join the waitlist"
                 >Start free</a
               >
             </article>
@@ -4457,10 +4228,7 @@
                 href="/auth/register"
                 class="btn btn-primary"
                 style="width: 100%; padding: 14px 22px"
-                data-cta="register"
-                data-cta-on="Notify me when ready"
-                data-cta-off="Join the waitlist"
-                >Notify me when ready</a
+                >Subscribe now</a
               >
             </article>
           </div>
@@ -4514,7 +4282,7 @@
                     stroke-width="2"
                     stroke-linejoin="round"
                   ></path>
-                  <circle cx="19" cy="6" r="3" fill="#FF3D8C"></circle>
+                  <circle cx="19" cy="6" r="3" fill="#ff3d8c"></circle>
                 </svg>
               </div>
               <div>
@@ -4615,9 +4383,6 @@
                 href="/auth/register"
                 class="btn btn-primary"
                 style="margin-top: 16px; padding: 12px 22px"
-                data-cta="register"
-                data-cta-on="Create a message"
-                data-cta-off="Join the waitlist"
                 >Create a message</a
               >
             </div>
@@ -5059,9 +4824,6 @@
               <a
                 href="/auth/register"
                 class="btn btn-lg"
-                data-cta="register"
-                data-cta-on="Create your free account"
-                data-cta-off="Join the waitlist"
                 >Create your free account</a
               >
               <a href="/auth/login" class="btn btn-lg btn-ghost-w"
@@ -5076,9 +4838,6 @@
     <a
       href="/auth/register"
       class="mobile-sticky-cta"
-      data-cta="register"
-      data-cta-on="Create your free account"
-      data-cta-off="Join the waitlist"
     >
       <span class="cta-label">Create your free account</span>
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -5207,69 +4966,15 @@
       </div>
     </footer>
 
-    <!-- ============ TWEAKS PANEL ============ -->
-    <aside class="tweaks-panel" id="tweaksPanel" aria-label="Tweaks">
-      <div class="tw-head">
-        <div class="tw-title">Tweaks</div>
-        <button class="tw-close" id="twClose" aria-label="Close">×</button>
-      </div>
-      <div class="tw-row">
-        <div>
-          <div class="tw-label">Registration enabled</div>
-          <div class="tw-sub">Show “Get started” &amp; sign-up CTAs</div>
-        </div>
-        <button
-          class="tw-switch"
-          id="twReg"
-          aria-label="Toggle registration"
-        ></button>
-      </div>
-      <div class="tw-row">
-        <div>
-          <div class="tw-label">Launch banner</div>
-          <div class="tw-sub">Top “Launching soon” strip</div>
-        </div>
-        <button
-          class="tw-switch"
-          id="twBanner"
-          aria-label="Toggle banner"
-        ></button>
-      </div>
-      <div class="tw-row">
-        <div>
-          <div class="tw-label">Info-only (coming soon)</div>
-          <div class="tw-sub">
-            Hide all sign-up / log-in — static page for GitHub Pages
-          </div>
-        </div>
-        <button
-          class="tw-switch"
-          id="twInfo"
-          aria-label="Toggle info-only mode"
-        ></button>
-      </div>
-      <div class="tw-note">
-        When you launch, set <code>registrationEnabled: true</code> in the
-        config block at the top of the script.
-      </div>
-    </aside>
-
     <script>
-      // ===== Feature flags (frontend team: wire to env / feature flag service) =====
-      const FLAGS = /*EDITMODE-BEGIN*/ {
-        registrationEnabled: false,
-        showLaunchBanner: false,
-        infoOnlyMode: true,
-      } /*EDITMODE-END*/
-
       // Injected into the landing document by scripts/import-landing-bundle.mjs,
-      // immediately after the export's FLAGS literal and before it calls applyFlags().
+      // immediately after the export's FLAGS literal.
       //
       // It lives here rather than in landing-page/index.html because that file
       // is regenerated from the design-tool export; anything edited into it by hand is
       // lost on the next import.
       //
-      // The Vite host resolves Statsig gates and billing data, then delivers them
+      // The Vite host resolves billing data, then delivers it
       // to this document before revealing the page. The hash reader remains useful
       // when this source document is opened by itself during design review.
 
@@ -5285,10 +4990,6 @@
           return {}
         }
       })()
-
-      if (HOST_CONFIG.flags && typeof HOST_CONFIG.flags === 'object') {
-        Object.assign(FLAGS, HOST_CONFIG.flags)
-      }
 
       // ===== Prices from the billing API =====
       // Amounts arrive in minor units. Where a promotion is auto-applied the list
@@ -5432,16 +5133,6 @@
         if (event.origin !== window.location.origin) return
         if (!event.data) return
 
-        if (event.data.type === 'loomkeeper:landing-flags') {
-          const incoming = event.data.flags
-
-          if (!incoming || typeof incoming !== 'object') return
-
-          Object.assign(FLAGS, incoming)
-          applyFlags()
-          syncSwitches()
-        }
-
         if (event.data.type === 'loomkeeper:landing-pricing') {
           currentPricing = event.data.pricing
           applyPricing(currentPricing)
@@ -5450,93 +5141,6 @@
           applyYearlyPrice(currentPricing)
         }
       })
-
-      // Apply registration flag to all CTAs marked data-cta="register"
-      function applyFlags() {
-        const reg = !!FLAGS.registrationEnabled
-        const info = !!FLAGS.infoOnlyMode
-        document.body.classList.toggle('info-only', info)
-        document.querySelectorAll('[data-cta="register"]').forEach(el => {
-          const on = el.dataset.ctaOn || el.textContent.trim()
-          const off = el.dataset.ctaOff || 'Join the waitlist'
-          const coming = el.dataset.ctaComing || 'Coming soon'
-          // Persist original href once
-          if (!el.dataset.hrefOn && el.getAttribute('href'))
-            el.dataset.hrefOn = el.getAttribute('href')
-          const hrefOn = el.dataset.hrefOn || '/auth/register'
-          const hrefOff = 'https://auth.loomkeeper.com/knock-knock'
-          const text = info ? coming : reg ? on : off
-          // Update text (preserve any inline label span / icons)
-          const labelSpan = el.querySelector('.cta-label')
-          if (labelSpan) labelSpan.textContent = text
-          else if (el.childElementCount === 0) el.textContent = text
-          else {
-            // Mixed content (text + svg): update first text node only
-            for (const n of el.childNodes) {
-              if (n.nodeType === 3 && n.textContent.trim()) {
-                n.textContent = text
-                break
-              }
-            }
-          }
-          const nextHref = info ? '#' : reg ? hrefOn : hrefOff
-          el.setAttribute('href', nextHref)
-          // External account and waitlist destinations should replace the complete
-          // page, including when this source is previewed inside a design tool.
-          if (reg && el.dataset.openNewTab === 'true')
-            el.setAttribute('target', '_blank')
-          else if (el.origin !== window.location.origin)
-            el.setAttribute('target', '_top')
-          else el.removeAttribute('target')
-          el.classList.toggle('is-disabled', info)
-          if (info) el.setAttribute('aria-disabled', 'true')
-          else el.removeAttribute('aria-disabled')
-        })
-        // Banners
-        const banner = document.getElementById('preBanner')
-        const bannerInfo = document.getElementById('preBannerInfo')
-        if (info) {
-          banner.style.display = 'none'
-          bannerInfo.style.display = 'flex'
-        } else {
-          bannerInfo.style.display = 'none'
-          banner.style.display =
-            !reg && FLAGS.showLaunchBanner ? 'flex' : 'none'
-        }
-      }
-      applyFlags()
-
-      // ===== Tweaks panel wiring =====
-      const panel = document.getElementById('tweaksPanel')
-      const swReg = document.getElementById('twReg')
-      const swBan = document.getElementById('twBanner')
-      const swInfo = document.getElementById('twInfo')
-      function syncSwitches() {
-        swReg.classList.toggle('on', !!FLAGS.registrationEnabled)
-        swBan.classList.toggle('on', !!FLAGS.showLaunchBanner)
-        swInfo.classList.toggle('on', !!FLAGS.infoOnlyMode)
-      }
-      function setFlag(key, val) {
-        FLAGS[key] = val
-        applyFlags()
-        syncSwitches()
-        try {
-          window.parent.postMessage(
-            { type: '__edit_mode_set_keys', edits: { [key]: val } },
-            '*',
-          )
-        } catch (e) {}
-      }
-      swReg.addEventListener('click', () =>
-        setFlag('registrationEnabled', !FLAGS.registrationEnabled),
-      )
-      swBan.addEventListener('click', () =>
-        setFlag('showLaunchBanner', !FLAGS.showLaunchBanner),
-      )
-      swInfo.addEventListener('click', () =>
-        setFlag('infoOnlyMode', !FLAGS.infoOnlyMode),
-      )
-      syncSwitches()
 
       // Login CTA — when embedded, hand off to the host app instead of navigating
       document.querySelectorAll('a[href="/auth/login"]').forEach(a => {
@@ -5561,23 +5165,6 @@
           )
         })
       })
-
-      // Listen FIRST, then announce availability (per host protocol)
-      window.addEventListener('message', e => {
-        if (!e.data || typeof e.data !== 'object') return
-        if (e.data.type === '__activate_edit_mode') panel.classList.add('open')
-        if (e.data.type === '__deactivate_edit_mode')
-          panel.classList.remove('open')
-      })
-      document.getElementById('twClose').addEventListener('click', () => {
-        panel.classList.remove('open')
-        try {
-          window.parent.postMessage({ type: '__edit_mode_dismissed' }, '*')
-        } catch (e) {}
-      })
-      try {
-        window.parent.postMessage({ type: '__edit_mode_available' }, '*')
-      } catch (e) {}
 
       // Sticky nav scroll state
       const navWrap = document.getElementById('navWrap')
@@ -5862,11 +5449,6 @@
           pl: {
             'Loomkeeper — Your Secure Digital Content Vault':
               'Loomkeeper — Twój bezpieczny cyfrowy skarbiec dziedzictwa',
-            'Loomkeeper is launching soon —': 'Loomkeeper już wkrótce —',
-            'join the waitlist': 'dołącz do listy oczekujących',
-            'to be the first to know.': 'i dowiedz się jako pierwszy.',
-            'Loomkeeper is coming soon — we’re putting the finishing touches on something we’re proud of.':
-              'Loomkeeper już wkrótce — dopracowujemy ostatnie szczegóły czegoś, z czego jesteśmy dumni.',
             'How it works': 'Jak to działa',
             Vault: 'Skarbiec',
             Features: 'Funkcje',
@@ -6208,22 +5790,8 @@
             'Terms of service': 'Regulamin',
             '© Loomkeeper 2026 · Made with care.':
               '© Loomkeeper 2026 · Tworzone z troską.',
-            Tweaks: 'Ustawienia',
-            'Registration enabled': 'Rejestracja włączona',
-            'Show “Get started” & sign-up CTAs':
-              'Pokaż przyciski „Rozpocznij” i rejestracji',
-            'Launch banner': 'Baner startowy',
-            'Top “Launching soon” strip': 'Górny pasek „Już wkrótce”',
-            'Info-only (coming soon)': 'Tylko informacyjnie (wkrótce)',
-            'Hide all sign-up / log-in — static page for GitHub Pages':
-              'Ukryj całą rejestrację / logowanie — strona statyczna dla GitHub Pages',
-            'When you launch, set': 'Przy uruchomieniu ustaw',
-            'in the config block at the top of the script.':
-              'w bloku konfiguracji na początku skryptu.',
             'Loomkeeper home': 'Strona główna Loomkeeper',
             Primary: 'Główna',
-            'Join waitlist': 'Dołącz do listy',
-            'Join the waitlist': 'Dołącz do listy oczekujących',
             'A mother and her young daughter laughing together at the beach':
               'Matka i jej mała córka śmieją się razem na plaży',
             'Three generations of a family walking together':
@@ -6242,18 +5810,10 @@
             Close: 'Zamknij',
             'Toggle registration': 'Przełącz rejestrację',
             'Toggle banner': 'Przełącz baner',
-            'Toggle info-only mode': 'Przełącz tryb tylko informacyjny',
-            'Coming soon': 'Wkrótce',
           },
           es: {
             'Loomkeeper — Your Secure Digital Content Vault':
               'Loomkeeper — Tu bóveda digital segura para tu legado',
-            'Loomkeeper is launching soon —':
-              'Loomkeeper se lanza muy pronto —',
-            'join the waitlist': 'apúntate a la lista de espera',
-            'to be the first to know.': 'y entérate antes que nadie.',
-            'Loomkeeper is coming soon — we’re putting the finishing touches on something we’re proud of.':
-              'Loomkeeper llega muy pronto: estamos dando los últimos retoques a algo de lo que estamos orgullosos.',
             'How it works': 'Cómo funciona',
             Vault: 'Bóveda',
             Features: 'Funciones',
@@ -6598,22 +6158,8 @@
             'Terms of service': 'Términos del servicio',
             '© Loomkeeper 2026 · Made with care.':
               '© Loomkeeper 2026 · Hecho con cariño.',
-            Tweaks: 'Ajustes',
-            'Registration enabled': 'Registro activado',
-            'Show “Get started” & sign-up CTAs':
-              'Mostrar los CTA de «Empezar» y registro',
-            'Launch banner': 'Banner de lanzamiento',
-            'Top “Launching soon” strip': 'Franja superior de «Muy pronto»',
-            'Info-only (coming soon)': 'Solo informativo (próximamente)',
-            'Hide all sign-up / log-in — static page for GitHub Pages':
-              'Ocultar todo el registro / inicio de sesión: página estática para GitHub Pages',
-            'When you launch, set': 'Cuando lances, define',
-            'in the config block at the top of the script.':
-              'en el bloque de configuración al principio del script.',
             'Loomkeeper home': 'Inicio de Loomkeeper',
             Primary: 'Principal',
-            'Join waitlist': 'Unirse a la lista',
-            'Join the waitlist': 'Únete a la lista de espera',
             'A mother and her young daughter laughing together at the beach':
               'Una madre y su hija pequeña riendo juntas en la playa',
             'Three generations of a family walking together':
@@ -6633,18 +6179,10 @@
             Close: 'Cerrar',
             'Toggle registration': 'Alternar registro',
             'Toggle banner': 'Alternar banner',
-            'Toggle info-only mode': 'Alternar modo solo informativo',
-            'Coming soon': 'Próximamente',
           },
           fr: {
             'Loomkeeper — Your Secure Digital Content Vault':
               'Loomkeeper — Votre coffre-fort numérique sécurisé pour votre héritage',
-            'Loomkeeper is launching soon —':
-              'Loomkeeper arrive très bientôt —',
-            'join the waitlist': 'rejoignez la liste d’attente',
-            'to be the first to know.': 'pour être informé·e en premier.',
-            'Loomkeeper is coming soon — we’re putting the finishing touches on something we’re proud of.':
-              'Loomkeeper arrive bientôt — nous peaufinons les derniers détails d’un projet dont nous sommes fiers.',
             'How it works': 'Comment ça marche',
             Vault: 'Coffre-fort',
             Features: 'Fonctionnalités',
@@ -6991,24 +6529,8 @@
             'Terms of service': 'Conditions d’utilisation',
             '© Loomkeeper 2026 · Made with care.':
               '© Loomkeeper 2026 · Fait avec soin.',
-            Tweaks: 'Réglages',
-            'Registration enabled': 'Inscription activée',
-            'Show “Get started” & sign-up CTAs':
-              'Afficher les CTA « Commencer » et d’inscription',
-            'Launch banner': 'Bannière de lancement',
-            'Top “Launching soon” strip':
-              'Bandeau supérieur « Bientôt disponible »',
-            'Info-only (coming soon)':
-              'Informatif uniquement (bientôt disponible)',
-            'Hide all sign-up / log-in — static page for GitHub Pages':
-              'Masquer toute inscription / connexion — page statique pour GitHub Pages',
-            'When you launch, set': 'Au lancement, définissez',
-            'in the config block at the top of the script.':
-              'dans le bloc de configuration en haut du script.',
             'Loomkeeper home': 'Accueil Loomkeeper',
             Primary: 'Principale',
-            'Join waitlist': 'Rejoindre la liste',
-            'Join the waitlist': 'Rejoignez la liste d’attente',
             'A mother and her young daughter laughing together at the beach':
               'Une mère et sa petite fille riant ensemble à la plage',
             'Three generations of a family walking together':
@@ -7028,17 +6550,10 @@
             Close: 'Fermer',
             'Toggle registration': 'Activer/désactiver l’inscription',
             'Toggle banner': 'Activer/désactiver la bannière',
-            'Toggle info-only mode': 'Activer/désactiver le mode informatif',
-            'Coming soon': 'Bientôt disponible',
           },
           he: {
             'Loomkeeper — Your Secure Digital Content Vault':
               'Loomkeeper — הכספת הדיגיטלית המאובטחת למורשת שלכם',
-            'Loomkeeper is launching soon —': 'Loomkeeper יוצא לדרך בקרוב —',
-            'join the waitlist': 'הצטרפו לרשימת ההמתנה',
-            'to be the first to know.': 'כדי להיות הראשונים לדעת.',
-            'Loomkeeper is coming soon — we’re putting the finishing touches on something we’re proud of.':
-              'Loomkeeper מגיע בקרוב — אנחנו מוסיפים את הנגיעות האחרונות למשהו שאנחנו גאים בו.',
             'How it works': 'איך זה עובד',
             Vault: 'כספת',
             Features: 'תכונות',
@@ -7367,22 +6882,8 @@
             'Terms of service': 'תנאי שימוש',
             '© Loomkeeper 2026 · Made with care.':
               '© Loomkeeper 2026 · נעשה באכפתיות.',
-            Tweaks: 'התאמות',
-            'Registration enabled': 'הרשמה מופעלת',
-            'Show “Get started” & sign-up CTAs':
-              'הצג כפתורי "בואו נתחיל" והרשמה',
-            'Launch banner': 'באנר השקה',
-            'Top “Launching soon” strip': 'רצועת "בקרוב" עליונה',
-            'Info-only (coming soon)': 'מידע בלבד (בקרוב)',
-            'Hide all sign-up / log-in — static page for GitHub Pages':
-              'הסתר את כל ההרשמה / ההתחברות — עמוד סטטי ל-GitHub Pages',
-            'When you launch, set': 'בעת ההשקה, הגדירו',
-            'in the config block at the top of the script.':
-              'בבלוק התצורה בראש הסקריפט.',
             'Loomkeeper home': 'דף הבית של Loomkeeper',
             Primary: 'ראשי',
-            'Join waitlist': 'הצטרפו לרשימה',
-            'Join the waitlist': 'הצטרפו לרשימת ההמתנה',
             'A mother and her young daughter laughing together at the beach':
               'אם ובתה הצעירה צוחקות יחד בחוף הים',
             'Three generations of a family walking together':
@@ -7398,8 +6899,6 @@
             Close: 'סגור',
             'Toggle registration': 'החלף מצב הרשמה',
             'Toggle banner': 'החלף מצב באנר',
-            'Toggle info-only mode': 'החלף מצב מידע בלבד',
-            'Coming soon': 'בקרוב',
           },
         }
         var LANGS = ['en', 'pl', 'es', 'fr', 'he']
@@ -7418,8 +6917,6 @@
           'title',
           'alt',
           'aria-label',
-          'data-cta-on',
-          'data-cta-off',
         ]
         var textReg = [] // {node,key,pre,post}
         var attrReg = [] // {el,attr,key}
@@ -7456,8 +6953,6 @@
                   )
                     return NodeFilter.FILTER_REJECT
                   if (el.getAttribute) {
-                    if (el.getAttribute('data-cta'))
-                      return NodeFilter.FILTER_REJECT
                     if (el.id === 'lk-lang') return NodeFilter.FILTER_REJECT
                   }
                   el = el.parentNode
@@ -7532,20 +7027,11 @@
           if (artNode) {
             artNode.nodeValue = lang === 'en' ? artOrig : ART[lang]
           }
-          var coming = tr(lang, 'Coming soon')
-          var ctas = document.querySelectorAll('[data-cta="register"]')
-          for (var k = 0; k < ctas.length; k++)
-            ctas[k].setAttribute('data-cta-coming', coming)
           document.documentElement.setAttribute('lang', HTMLLANG[lang] || lang)
           document.documentElement.setAttribute(
             'dir',
             lang === 'he' ? 'rtl' : 'ltr',
           )
-          if (typeof window.applyFlags === 'function') {
-            try {
-              window.applyFlags()
-            } catch (e) {}
-          }
           // reflect in the dropdown
           var cur = document.getElementById('lkLangCur')
           if (cur) cur.textContent = ENDONYM[lang] || lang

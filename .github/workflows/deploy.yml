@@ -40,7 +40,6 @@ jobs:
         env:
           VITE_API_GATEWAY: ${{ vars.VITE_API_GATEWAY }}
           VITE_APP_ORIGIN: ${{ vars.VITE_APP_ORIGIN }}
-          VITE_STATSIG_CLIENT_API_KEY: ${{ vars.VITE_STATSIG_CLIENT_API_KEY }}
 
       - name: Configure Pages
         uses: actions/configure-pages@v6

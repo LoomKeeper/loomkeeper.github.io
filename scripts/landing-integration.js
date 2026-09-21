@@ -1,11 +1,11 @@
 // Injected into the landing document by scripts/import-landing-bundle.mjs,
-// immediately after the export's FLAGS literal and before it calls applyFlags().
+// immediately after the export's FLAGS literal.
 //
 // It lives here rather than in landing-page/index.html because that file
 // is regenerated from the design-tool export; anything edited into it by hand is
 // lost on the next import.
 //
-// The Vite host resolves Statsig gates and billing data, then delivers them to
+// The Vite host resolves billing data, then delivers it to
 // this document before revealing the page. The hash reader remains useful when
 // this source document is opened by itself during design review.
 
@@ -21,10 +21,6 @@ const HOST_CONFIG = (() => {
     return {}
   }
 })()
-
-if (HOST_CONFIG.flags && typeof HOST_CONFIG.flags === 'object') {
-  Object.assign(FLAGS, HOST_CONFIG.flags)
-}
 
 // ===== Prices from the billing API =====
 // Amounts arrive in minor units. Where a promotion is auto-applied the list
@@ -167,16 +163,6 @@ startYearlyPrice()
 window.addEventListener('message', event => {
   if (event.origin !== window.location.origin) return
   if (!event.data) return
-
-  if (event.data.type === 'loomkeeper:landing-flags') {
-    const incoming = event.data.flags
-
-    if (!incoming || typeof incoming !== 'object') return
-
-    Object.assign(FLAGS, incoming)
-    applyFlags()
-    syncSwitches()
-  }
 
   if (event.data.type === 'loomkeeper:landing-pricing') {
     currentPricing = event.data.pricing
