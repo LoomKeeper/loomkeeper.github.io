@@ -2534,6 +2534,158 @@
           rgba(255, 255, 255, 0.14)
         );
       }
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0;
+        border-top: 1px solid var(--line);
+      }
+      .team-card {
+        padding: 0 20px 0 0;
+        border-right: 1px solid var(--line);
+      }
+      .team-card:last-child {
+        border-right: none;
+        padding-right: 0;
+      }
+      .team-card:not(:first-child) {
+        padding-left: 20px;
+      }
+      .team-photo {
+        width: 128px;
+        height: 128px;
+        overflow: hidden;
+        border-radius: var(--radius);
+        margin-bottom: 16px;
+      }
+      .team-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .team-name {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--ink);
+        letter-spacing: 0.01em;
+      }
+      .team-role {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--pink);
+        margin: 4px 0 10px;
+      }
+      .team-role-alt {
+        color: var(--violet);
+      }
+      .team-bio {
+        font-size: 13.5px;
+        color: var(--ink-2);
+        line-height: 1.5;
+      }
+      .about-layout {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 56px;
+        align-items: start;
+        margin-bottom: 52px;
+      }
+      .about-intro h2 {
+        font-size: clamp(30px, 3.5vw, 42px);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1.12;
+        margin: 12px 0 18px;
+        color: var(--ink);
+      }
+      .about-intro p {
+        font-size: 15.5px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        margin: 0 0 16px;
+      }
+      .founders-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .founder-photo {
+        aspect-ratio: 3 / 4;
+        border-radius: var(--radius);
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+      .founder-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: var(--radius);
+      }
+      .team-divider {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin: 48px 0 40px;
+      }
+      .team-divider::before,
+      .team-divider::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--line);
+      }
+      .team-divider span {
+        font-size: 12.5px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+      .team-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px;
+      }
+      .team-row-card {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+      .team-row-photo {
+        width: 96px;
+        height: 96px;
+        flex-shrink: 0;
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+      .team-row-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: var(--radius);
+      }
+      @media (max-width: 900px) {
+        .about-layout {
+          grid-template-columns: 1fr;
+        }
+        .founders-grid,
+        .team-row {
+          grid-template-columns: 1fr;
+        }
+        .team-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 28px 0;
+        }
+        .team-card,
+        .team-card:not(:first-child) {
+          border-right: none;
+          padding: 0;
+        }
+      }
 
       /* Moments mosaic band */
       .moments {
@@ -2661,6 +2813,7 @@
           <a href="#keepers">Trusted People</a>
           <a href="#pricing">Pricing</a>
           <a href="#faq">Q&amp;A</a>
+          <a href="#about">About</a>
         </nav>
         <div class="nav-right">
           <div class="nav-cta">
@@ -4810,6 +4963,92 @@
       </div>
     </section>
 
+    <!-- ============ ABOUT ============ -->
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head" style="max-width:980px">
+          <div class="section-eyebrow">About us</div>
+          <h2>Why we built Loomkeeper.</h2>
+          <p>
+            We didn't start Loomkeeper because of a crisis. We started it
+            because of a birthday. Turning 50 has a way of changing how you
+            think about time. Not in a dark way — just an honest one. You
+            start noticing how much of what matters to you now lives
+            somewhere only you can reach: crypto wallet keys that exist in
+            exactly one place because sharing them felt too risky,
+            important documents and account details that a family member
+            might need one day but has no way to find, and photos of
+            grandparents and great-grandparents that exist nowhere else —
+            not printed, not backed up, just sitting in cloud storage or
+            scattered across accounts that nobody else knows about.
+          </p>
+          <p>
+            None of it is necessarily going to disappear because of some
+            dramatic event. It can disappear in a much quieter way —
+            because nobody knew it existed, where to look for it, or who it
+            was meant for. That's why we built Loomkeeper: to give the
+            digital things that matter to you a secure place outside your
+            everyday digital life, and a way to make sure they reach the
+            people you choose when the time comes. Not as a response to
+            tragedy, but as a plan made while there's still plenty of time
+            to make one. Because some things are too important to leave to
+            chance.
+          </p>
+          <p style="font-weight:700;color:var(--ink)">— Israel Olcha, Founder</p>
+        </div>
+        <div class="about-layout" style="max-width:980px;margin:72px auto 0">
+          <div class="about-intro">
+            <div class="section-eyebrow">The people who built</div>
+            <h2>Loomkeeper.</h2>
+            <p>
+              Loomkeeper started with a simple question: what happens to
+              the digital things that matter to us when we're no longer
+              around to manage them?
+            </p>
+            <p>
+              Israel Olcha and Agy Mishel built Loomkeeper to create a
+              thoughtful answer — combining decades of technology
+              experience with design, creativity, and a very human
+              understanding of what we want to preserve.
+            </p>
+          </div>
+          <div class="founders-grid">
+            <div class="founder-card">
+              <div class="founder-photo"><img src="assets/team-israel-olcha.jpg" alt="Israel Olcha" style="object-position:50% 0%" /></div>
+              <div class="team-name">Israel Olcha</div>
+              <div class="team-role">CEO, CTO &amp; Founder</div>
+              <p class="team-bio">A software builder and technical leader with 30+ years of experience turning ideas into products.</p>
+            </div>
+            <div class="founder-card">
+              <div class="founder-photo"><img src="assets/team-agy-mishel.jpg" alt="Agy Mishel" style="object-position:50% 15%" /></div>
+              <div class="team-name">Agy Mishel</div>
+              <div class="team-role">Creative Director &amp; Co-Founder</div>
+              <p class="team-bio">Leads the brand, UX/UI and creative direction, shaping how people experience Loomkeeper.</p>
+            </div>
+          </div>
+        </div>
+        <div class="team-divider" style="max-width:980px;margin-left:auto;margin-right:auto"><span>And the team behind the product</span></div>
+        <div class="team-row" style="max-width:980px;margin:0 auto">
+          <div class="team-row-card">
+            <div class="team-row-photo"><img src="assets/team-temur-chitishvili.jpg" alt="Temur Chitishvili" style="object-position:50% 20%" /></div>
+            <div>
+              <div class="team-name">Temur Chitishvili</div>
+              <div class="team-role team-role-alt">Frontend Developer</div>
+              <p class="team-bio">Turns ideas and designs into a simple, intuitive Loomkeeper experience.</p>
+            </div>
+          </div>
+          <div class="team-row-card">
+            <div class="team-row-photo"><img src="assets/team-eran-wyler.jpg" alt="Eran Wyler" style="object-position:50% 0%" /></div>
+            <div>
+              <div class="team-name">Eran Wyler</div>
+              <div class="team-role team-role-alt">AI Lead</div>
+              <p class="team-bio">Explores how AI can make the digital legacy experience more personal and meaningful.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ FINAL CTA ============ -->
     <section>
       <div class="wrap">
@@ -4882,8 +5121,8 @@
             <h5>Product</h5>
             <ul>
               <li><a href="#vault">Vault</a></li>
-              <li><a href="#keepers">Loomkeepers</a></li>
               <li><a href="#messages">Afterlife Messages</a></li>
+              <li><a href="#keepers">Trusted People</a></li>
               <li><a href="#pricing">Pricing</a></li>
             </ul>
           </div>
@@ -4891,7 +5130,7 @@
           <div>
             <h5>Company</h5>
             <ul>
-              <li><a href="#">About</a></li>
+              <li><a href="#about">About</a></li>
               <li><a href="#security">Security</a></li>
               <li>
                 <a href="mailto:contact@loomkeeper.com"
