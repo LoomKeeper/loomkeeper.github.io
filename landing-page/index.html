@@ -2423,8 +2423,13 @@
           font-weight: 750;
           text-align: center;
           transition:
+            opacity 0.32s ease,
             transform 0.18s ease,
             box-shadow 0.18s ease;
+        }
+        .mobile-sticky-cta.is-scroll-hidden {
+          opacity: 0;
+          pointer-events: none;
         }
         .mobile-sticky-cta:hover {
           transform: translateY(-1px);
@@ -5212,7 +5217,7 @@
 
     <a
       href="/auth/register"
-      class="mobile-sticky-cta"
+      class="mobile-sticky-cta is-scroll-hidden"
     >
       <span class="cta-label">Create your free account</span>
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -5547,6 +5552,23 @@
         navWrap.classList.toggle('scrolled', window.scrollY > 8)
       document.addEventListener('scroll', onScroll, { passive: true })
       onScroll()
+
+      // Keep the mobile CTA out of the way while the page is moving, then
+      // softly reveal it once scrolling has been idle for about a second.
+      const mobileStickyCta = document.querySelector('.mobile-sticky-cta')
+      let mobileStickyCtaTimer
+      const scheduleMobileStickyCta = () => {
+        if (!mobileStickyCta) return
+        mobileStickyCta.classList.add('is-scroll-hidden')
+        window.clearTimeout(mobileStickyCtaTimer)
+        mobileStickyCtaTimer = window.setTimeout(() => {
+          mobileStickyCta.classList.remove('is-scroll-hidden')
+        }, 1000)
+      }
+      document.addEventListener('scroll', scheduleMobileStickyCta, {
+        passive: true,
+      })
+      scheduleMobileStickyCta()
 
       // Smooth scroll for nav anchors — custom easing for a slower, nicer ride
       const easeInOutCubic = t =>
@@ -7834,6 +7856,10 @@
             })
           }
           burger.addEventListener('click', function () {
+            if (window.lkMobileMenu) {
+              window.lkMobileMenu.open()
+              return
+            }
             var open = drawer.classList.toggle('open')
             burger.setAttribute('aria-expanded', open ? 'true' : 'false')
           })
@@ -7868,6 +7894,308 @@
           if (document.fonts && document.fonts.ready)
             document.fonts.ready.then(schedulePlace)
           place()
+        }
+        if (document.readyState === 'loading')
+          document.addEventListener('DOMContentLoaded', init, { once: true })
+        else init()
+      })()
+    </script>
+    <style id="lk-mmenu-css">
+      .lk-mm {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: max(16px, env(safe-area-inset-top)) 16px 16px;
+        background: rgba(42, 42, 53, 0.28);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        overflow-y: auto;
+      }
+      .lk-mm.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .lk-mm-card {
+        width: 100%;
+        max-width: 420px;
+        margin: auto 0;
+        padding: 26px 24px 24px;
+        border-radius: 28px;
+        background: #faf9fb;
+        box-shadow: 0 30px 80px -24px rgba(46, 28, 80, 0.35);
+        transform: translateY(-10px) scale(0.98);
+        transition: transform 0.22s ease;
+      }
+      .lk-mm.open .lk-mm-card {
+        transform: none;
+      }
+      .lk-mm-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+      .lk-mm-top img {
+        display: block;
+        width: auto;
+        height: 30px;
+      }
+      .lk-mm-x {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        margin: -8px -10px 0 0;
+        place-items: center;
+        border-radius: 12px;
+        background: none;
+        color: var(--ink-2);
+      }
+      .lk-mm-x:hover {
+        background: var(--violet-tint);
+        color: var(--violet);
+      }
+      .lk-mm-x svg {
+        width: 24px;
+        height: 24px;
+      }
+      .lk-mm-lbl {
+        margin: 0 0 6px;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .lk-mm-list {
+        display: flex;
+        flex-direction: column;
+      }
+      .lk-mm-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        min-height: 52px;
+        margin: 0 -6px;
+        padding: 4px 6px;
+        border-radius: 14px;
+        color: #2e2a4a;
+        font-size: 17px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .lk-mm-item:hover {
+        background: var(--violet-tint);
+        color: var(--violet);
+      }
+      .lk-mm-item > svg:first-child {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+      }
+      .lk-mm-item span {
+        flex: 1;
+      }
+      .lk-mm-chev {
+        width: 18px;
+        height: 18px;
+        flex-shrink: 0;
+        color: var(--muted);
+      }
+      .lk-mm-sep {
+        height: 1px;
+        margin: 16px 0 20px;
+        background: var(--line);
+      }
+      .lk-mm-ctas {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 10px;
+      }
+      .lk-mm-cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 54px;
+        padding: 0 20px 0 24px;
+        border-radius: 14px;
+        font-size: 16.5px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .lk-mm-cta.p {
+        background: var(--pink);
+        color: #fff;
+      }
+      .lk-mm-cta.p:hover {
+        filter: brightness(0.96);
+      }
+      .lk-mm-cta.o {
+        border: 1.5px solid var(--violet);
+        color: var(--violet);
+      }
+      .lk-mm-cta.o:hover {
+        background: var(--violet-tint);
+      }
+      .lk-mm-cta svg {
+        width: 18px;
+        height: 18px;
+      }
+      [dir='rtl'] .lk-mm-chev,
+      [dir='rtl'] .lk-mm-cta svg {
+        transform: scaleX(-1);
+      }
+      [dir='rtl'] .lk-mm-x {
+        margin: -8px 0 0 -10px;
+      }
+      body.lk-mm-lock {
+        overflow: hidden;
+      }
+      .lk-lang {
+        display: none !important;
+      }
+      .lk-mm-x:focus:not(:focus-visible) {
+        outline: none;
+      }
+    </style>
+    <script id="lk-mmenu">
+      ;(function () {
+        function init() {
+          var S = function (p, c) {
+            return (
+              '<svg' +
+              (c ? ' class="' + c + '"' : '') +
+              ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' +
+              p +
+              '</svg>'
+            )
+          }
+          var chev = S(
+              '<path d="M9 6l6 6-6 6"/>',
+              'lk-mm-chev',
+            ),
+            arr = S('<path d="M9 6l6 6-6 6" stroke-width="2"/>')
+          var items = [
+            [
+              '#vault',
+              'Features',
+              '<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/>',
+            ],
+            [
+              '#keepers',
+              'Trusted People',
+              '<circle cx="9" cy="8" r="3.2"/><path d="M3 19.5c0-3.2 2.7-5.5 6-5.5s6 2.3 6 5.5"/><circle cx="16.5" cy="7.5" r="2.6"/><path d="M17 13.2c2.4.3 4 2.2 4 4.8"/>',
+            ],
+            [
+              '#pricing',
+              'Pricing',
+              '<path d="M3.5 12.6V5a1.5 1.5 0 011.5-1.5h7.6l8 8a1.5 1.5 0 010 2.1l-7.5 7.5a1.5 1.5 0 01-2.1 0z"/><circle cx="8.5" cy="8.5" r="1.4"/>',
+            ],
+            [
+              '#faq',
+              'Q&amp;A',
+              '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 015 .9c0 1.7-2.5 2.3-2.5 3.8M12 17h.01"/>',
+            ],
+            [
+              '#about',
+              'About',
+              '<path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+            ],
+            [
+              '#security',
+              'Security',
+              '<path d="M12 3l7 3v5.5c0 4.6-3 8.1-7 9.5-4-1.4-7-4.9-7-9.5V6z"/>',
+            ],
+          ]
+          var logo = document.querySelector('#navWrap .logo img')
+          var el = document.createElement('div')
+          el.className = 'lk-mm'
+          el.id = 'lkMobileMenu'
+          el.setAttribute('role', 'dialog')
+          el.setAttribute('aria-modal', 'true')
+          el.setAttribute('aria-label', 'Menu')
+          var ext = ' target="_blank" rel="noopener noreferrer"'
+          el.innerHTML =
+            '<div class="lk-mm-card"><div class="lk-mm-top"><a href="https://www.loomkeeper.com" aria-label="Loomkeeper home">' +
+            (logo
+              ? '<img src="' + logo.src + '" alt="Loomkeeper">'
+              : 'Loomkeeper') +
+            '</a><button type="button" class="lk-mm-x" aria-label="Close menu">' +
+            S('<path d="M6 6l12 12M18 6L6 18"/>') +
+            '</button></div>' +
+            '<p class="lk-mm-lbl">Explore</p><nav class="lk-mm-list">' +
+            items
+              .map(function (i) {
+                return (
+                  '<a class="lk-mm-item" href="' +
+                  i[0] +
+                  '">' +
+                  S(i[2]) +
+                  '<span>' +
+                  i[1] +
+                  '</span>' +
+                  chev +
+                  '</a>'
+                )
+              })
+              .join('') +
+            '</nav>' +
+            '<div class="lk-mm-sep"></div><p class="lk-mm-lbl">Your Loomkeeper</p><div class="lk-mm-list"><a class="lk-mm-item" href="/auth/login"' +
+            ext +
+            '>' +
+            S(
+              '<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c.6-3.8 3.7-6 7.5-6s6.9 2.2 7.5 6z"/>',
+            ) +
+            '<span>My Loomkeeper</span>' +
+            chev +
+            '</a></div>' +
+            '<div class="lk-mm-sep"></div><p class="lk-mm-lbl">Get started</p><div class="lk-mm-ctas"><a class="lk-mm-cta p" href="/auth/register"' +
+            ext +
+            '>Create Free Account' +
+            arr +
+            '</a><a class="lk-mm-cta o" href="https://trustee.loomkeeper.com"' +
+            ext +
+            '>Become a Trustee' +
+            arr +
+            '</a></div></div>'
+          document.body.appendChild(el)
+          function b() {
+            return document.getElementById('lkBurger')
+          }
+          function open() {
+            el.classList.add('open')
+            document.body.classList.add('lk-mm-lock')
+            if (b()) b().setAttribute('aria-expanded', 'true')
+            el.querySelector('.lk-mm-x').focus()
+          }
+          function close() {
+            el.classList.remove('open')
+            document.body.classList.remove('lk-mm-lock')
+            if (b()) b().setAttribute('aria-expanded', 'false')
+          }
+          el.addEventListener('click', function (e) {
+            if (
+              e.target === el ||
+              e.target.closest('.lk-mm-x') ||
+              e.target.closest('a')
+            )
+              close()
+          })
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') close()
+          })
+          window.addEventListener('resize', function () {
+            var bb = b()
+            if (bb && getComputedStyle(bb).display === 'none') close()
+          })
+          window.lkMobileMenu = { open: open, close: close }
         }
         if (document.readyState === 'loading')
           document.addEventListener('DOMContentLoaded', init, { once: true })
