@@ -5554,20 +5554,42 @@
       onScroll()
 
       // Keep the mobile CTA out of the way while the page is moving, then
-      // softly reveal it once scrolling has been idle for about a second.
+      // softly reveal it once scrolling has been idle for about a second and
+      // the hero's regular signup button is no longer visible.
       const mobileStickyCta = document.querySelector('.mobile-sticky-cta')
+      const heroRegisterCta = document.querySelector(
+        '.hero-cta a[href="/auth/register"]',
+      )
       let mobileStickyCtaTimer
+      const shouldHideMobileStickyCta = () => {
+        if (window.scrollY <= 8) return true
+        if (!heroRegisterCta) return false
+
+        const heroRegisterCtaRect = heroRegisterCta.getBoundingClientRect()
+        return (
+          heroRegisterCtaRect.bottom > 0 &&
+          heroRegisterCtaRect.top < window.innerHeight
+        )
+      }
+      const updateMobileStickyCta = () => {
+        if (!mobileStickyCta) return
+        mobileStickyCta.classList.toggle(
+          'is-scroll-hidden',
+          shouldHideMobileStickyCta(),
+        )
+      }
       const scheduleMobileStickyCta = () => {
         if (!mobileStickyCta) return
         mobileStickyCta.classList.add('is-scroll-hidden')
         window.clearTimeout(mobileStickyCtaTimer)
         mobileStickyCtaTimer = window.setTimeout(() => {
-          mobileStickyCta.classList.remove('is-scroll-hidden')
+          updateMobileStickyCta()
         }, 1000)
       }
       document.addEventListener('scroll', scheduleMobileStickyCta, {
         passive: true,
       })
+      window.addEventListener('resize', updateMobileStickyCta)
       scheduleMobileStickyCta()
 
       // Smooth scroll for nav anchors — custom easing for a slower, nicer ride
@@ -7981,9 +8003,9 @@
         display: flex;
         align-items: center;
         gap: 16px;
-        min-height: 52px;
+        min-height: 44px;
         margin: 0 -6px;
-        padding: 4px 6px;
+        padding: 2px 6px;
         border-radius: 14px;
         color: #2e2a4a;
         font-size: 17px;
@@ -8002,28 +8024,22 @@
       .lk-mm-item span {
         flex: 1;
       }
-      .lk-mm-chev {
-        width: 18px;
-        height: 18px;
-        flex-shrink: 0;
-        color: var(--muted);
-      }
       .lk-mm-sep {
         height: 1px;
-        margin: 16px 0 20px;
+        margin: 12px 0 14px;
         background: var(--line);
       }
       .lk-mm-ctas {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        margin-top: 10px;
+        gap: 8px;
+        margin-top: 6px;
       }
       .lk-mm-cta {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        min-height: 54px;
+        min-height: 50px;
         padding: 0 20px 0 24px;
         border-radius: 14px;
         font-size: 16.5px;
@@ -8044,16 +8060,16 @@
       .lk-mm-cta.o:hover {
         background: var(--violet-tint);
       }
-      .lk-mm-cta svg {
-        width: 18px;
-        height: 18px;
-      }
-      [dir='rtl'] .lk-mm-chev,
-      [dir='rtl'] .lk-mm-cta svg {
-        transform: scaleX(-1);
-      }
       [dir='rtl'] .lk-mm-x {
         margin: -8px 0 0 -10px;
+      }
+      @media (min-width: 721px) {
+        .lk-mm {
+          justify-content: flex-end;
+        }
+        .lk-mm-card {
+          margin: 0;
+        }
       }
       body.lk-mm-lock {
         overflow: hidden;
@@ -8077,11 +8093,6 @@
               '</svg>'
             )
           }
-          var chev = S(
-              '<path d="M9 6l6 6-6 6"/>',
-              'lk-mm-chev',
-            ),
-            arr = S('<path d="M9 6l6 6-6 6" stroke-width="2"/>')
           var items = [
             [
               '#vault',
@@ -8140,9 +8151,7 @@
                   S(i[2]) +
                   '<span>' +
                   i[1] +
-                  '</span>' +
-                  chev +
-                  '</a>'
+                  '</span></a>'
                 )
               })
               .join('') +
@@ -8153,18 +8162,12 @@
             S(
               '<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c.6-3.8 3.7-6 7.5-6s6.9 2.2 7.5 6z"/>',
             ) +
-            '<span>My Loomkeeper</span>' +
-            chev +
-            '</a></div>' +
+            '<span>Login</span></a></div>' +
             '<div class="lk-mm-sep"></div><p class="lk-mm-lbl">Get started</p><div class="lk-mm-ctas"><a class="lk-mm-cta p" href="/auth/register"' +
             ext +
-            '>Create Free Account' +
-            arr +
-            '</a><a class="lk-mm-cta o" href="https://trustee.loomkeeper.com"' +
+            '>Create Free Account</a><a class="lk-mm-cta o" href="https://trustee.loomkeeper.com"' +
             ext +
-            '>Become a Trustee' +
-            arr +
-            '</a></div></div>'
+            '>Become a Trustee</a></div></div>'
           document.body.appendChild(el)
           function b() {
             return document.getElementById('lkBurger')
