@@ -28,3 +28,12 @@ entry route on `https://app.loomkeeper.com`.
 
 The exported landing document is served directly as the root page. React mounts
 only a hidden controller that supplies pricing and account-link routing; the visible page is not rendered inside an iframe.
+
+## Internal locale testing
+
+Add `?locale=es` (or `es-ES`) to the page URL to preview a translation. Supported
+languages are `en`, `es`, `pl`, `fr`, and `he`; Hebrew also applies RTL layout.
+Full locale codes, underscores, language names, and `iw` are accepted.
+`locale=default` and `locale=reset` select English. Missing or unsupported locales
+also use English. The override is URL-only and is not saved between visits.
+The language switcher remains hidden.

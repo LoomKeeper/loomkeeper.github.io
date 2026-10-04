@@ -7411,7 +7411,7 @@
         }
 
         function setLanguage(lang, persist) {
-          lang = 'en'
+          lang = LANGS.indexOf(lang) >= 0 ? lang : 'en'
           persist = false
           for (var i = 0; i < textReg.length; i++) {
             var r = textReg[i],
@@ -7469,18 +7469,23 @@
         }
 
         function detect() {
-          var saved = null
-          try {
-            saved = localStorage.getItem(STORE)
-          } catch (e) {}
-          if (saved && LANGS.indexOf(saved) >= 0) return saved
-          var list = navigator.languages || [navigator.language || 'en']
-          for (var i = 0; i < list.length; i++) {
-            var code = (list[i] || '').slice(0, 2).toLowerCase()
-            if (code === 'iw') code = 'he'
-            if (LANGS.indexOf(code) >= 0) return code
+          var params = new URLSearchParams(window.location.search)
+          var locale = params.get('locale')
+          if (!locale && window.location.hash.indexOf('locale=') >= 0) {
+            var queryIndex = window.location.hash.indexOf('?')
+            if (queryIndex >= 0) {
+              locale = new URLSearchParams(
+                window.location.hash.slice(queryIndex),
+              ).get('locale')
+            }
           }
-          return 'en'
+          var normalized = (locale || '').trim().toLowerCase().replace(/_/g, '-')
+          var aliases = {
+            english: 'en', spanish: 'es', polish: 'pl', french: 'fr',
+            hebrew: 'he', iw: 'he', default: 'en', reset: 'en',
+          }
+          var lang = aliases[normalized] || normalized.split('-')[0]
+          return LANGS.indexOf(lang) >= 0 ? lang : 'en'
         }
 
         function wireDropdown() {
@@ -7596,10 +7601,11 @@
           try {
             localStorage.removeItem(STORE)
           } catch (e) {}
+          // URL-only overrides are for internal testing; never persist them.
           window.lkSetLanguage = function () {
-            setLanguage('en', false)
+            setLanguage(detect(), false)
           }
-          setLanguage('en', false)
+          setLanguage(detect(), false)
         }
 
         if (document.readyState === 'loading')
