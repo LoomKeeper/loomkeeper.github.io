@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { readFileSync } from 'node:fs'
 
@@ -68,15 +68,21 @@ const analyticsConsentBootstrap = `    <script id="loomkeeper-consent-mode">
     </script>
 `
 
-const directLandingPage = () => ({
+const directLandingPage = (appOrigin: string) => ({
   name: 'direct-landing-page',
   transformIndexHtml: {
     order: 'pre' as const,
     handler: () => {
-      const html = readFileSync(landingDocument, 'utf8').replace(
-        /(["'(])assets\//g,
-        '$1/landing-page/assets/',
-      )
+      const html = readFileSync(landingDocument, 'utf8')
+        .replace(/(["'(])assets\//g, '$1/landing-page/assets/')
+        // Account links live on the web app, not this site. Point them there in
+        // the markup so new-tab, middle-click and pre-script clicks work too.
+        // The document's own a[href="/auth/..."] selectors contain the same
+        // literal, so they are rewritten identically and keep matching.
+        .replace(
+          /href="\/auth\/(login|register)"/g,
+          `href="${appOrigin}/auth/$1"`,
+        )
 
       return html
         .replace(
@@ -164,7 +170,17 @@ const directLandingPage = () => ({
   },
 })
 
-export default defineConfig({
-  base: '/',
-  plugins: [directLandingPage(), react()],
+export default defineConfig(({ mode }) => {
+  const appOrigin = (
+    loadEnv(mode, process.cwd(), 'VITE_').VITE_APP_ORIGIN || ''
+  ).replace(/\/+$/, '')
+
+  if (!appOrigin) {
+    throw new Error('VITE_APP_ORIGIN is required')
+  }
+
+  return {
+    base: '/',
+    plugins: [directLandingPage(appOrigin), react()],
+  }
 })
