@@ -3887,8 +3887,7 @@
             <h3>The people who confirm the handover.</h3>
             <p>
               Trusted contacts vote on a death inquiry before anything is
-              released. Multi-signature consent prevents accidental or premature
-              handover.
+              released. Nothing is released if the vote is tied or no one votes.
             </p>
 
             <div class="vote-card">
@@ -6012,8 +6011,6 @@
             'Verification Contacts': 'Kontakty weryfikacyjne',
             'The witnesses who unlock it.':
               'Świadkowie, którzy to odblokowują.',
-            'Trusted contacts vote on a death inquiry before anything is released. Multi-signature consent prevents accidental or premature handover.':
-              'Zaufane kontakty głosują w ramach dochodzenia w sprawie śmierci, zanim cokolwiek zostanie udostępnione. Zgoda wielu stron zapobiega przypadkowemu lub przedwczesnemu przekazaniu.',
             'Inquiry • Confirm passing for Eleanor Hart':
               'Dochodzenie • Potwierdź odejście Eleanor Hart',
             Confirmed: 'Potwierdzono',
@@ -6256,7 +6253,7 @@
           },
           es: {
             'Loomkeeper | Plan Your Digital Presence & Legacy':
-              'Loomkeeper | Planifica tu presencia y legado digitales',
+              'Loomkeeper | Planifica tu presencia y tu legado digital',
             'How it works': 'Cómo funciona',
             Vault: 'Bóveda',
             Features: 'Funciones',
@@ -6376,8 +6373,6 @@
             '1 folder': '1 carpeta',
             'Verification Contacts': 'Contactos de verificación',
             'The witnesses who unlock it.': 'Los testigos que lo desbloquean.',
-            'Trusted contacts vote on a death inquiry before anything is released. Multi-signature consent prevents accidental or premature handover.':
-              'Los contactos de confianza votan en una investigación de fallecimiento antes de que se libere nada. El consentimiento de varias firmas evita un traspaso accidental o prematuro.',
             'Inquiry • Confirm passing for Eleanor Hart':
               'Investigación • Confirmar el fallecimiento de Eleanor Hart',
             Confirmed: 'Confirmado',
@@ -6624,7 +6619,7 @@
           },
           fr: {
             'Loomkeeper | Plan Your Digital Presence & Legacy':
-              'Loomkeeper | Planifiez votre présence et votre héritage numériques',
+              'Loomkeeper | Votre présence et votre héritage numériques',
             'How it works': 'Comment ça marche',
             Vault: 'Coffre-fort',
             Features: 'Fonctionnalités',
@@ -6745,8 +6740,6 @@
             'Verification Contacts': 'Contacts de vérification',
             'The witnesses who unlock it.':
               'Les témoins qui le déverrouillent.',
-            'Trusted contacts vote on a death inquiry before anything is released. Multi-signature consent prevents accidental or premature handover.':
-              'Les contacts de confiance votent lors d’une enquête de décès avant toute divulgation. Le consentement multi-signatures empêche toute transmission accidentelle ou prématurée.',
             'Inquiry • Confirm passing for Eleanor Hart':
               'Enquête • Confirmer le décès d’Eleanor Hart',
             Confirmed: 'Confirmé',
@@ -7108,8 +7101,6 @@
             '1 folder': 'תיקייה אחת',
             'Verification Contacts': 'אנשי קשר לאימות',
             'The witnesses who unlock it.': 'העדים שפותחים את הנעילה.',
-            'Trusted contacts vote on a death inquiry before anything is released. Multi-signature consent prevents accidental or premature handover.':
-              'אנשי קשר מהימנים מצביעים בבירור פטירה לפני ששום דבר משוחרר. הסכמה מרובת חתימות מונעת מסירה מקרית או מוקדמת מדי.',
             'Inquiry • Confirm passing for Eleanor Hart':
               'בירור • אישור פטירתה של Eleanor Hart',
             Confirmed: 'אושר',
@@ -7367,10 +7358,10 @@
         // Hero H1 is translated as one sentence (s); u = the "digital life"
         // equivalent to underline. English markup is restored verbatim.
         var HERO = {
-          pl: { s: 'Twoje cyfrowe życie. Przemyślany plan dla osób, które wybierasz.', u: 'cyfrowe życie' },
-          es: { s: 'Tu vida digital. Un plan cuidadoso para las personas que elijas.', u: 'vida digital' },
+          pl: { s: 'Twoje cyfrowe życie. Przemyślany plan dla osób, które wybierzesz.', u: 'cyfrowe życie' },
+          es: { s: 'Tu vida digital. Un plan bien pensado para las personas que elijas.', u: 'vida digital' },
           fr: { s: 'Votre vie numérique. Un plan réfléchi pour les personnes que vous choisissez.', u: 'vie numérique' },
-          he: { s: 'החיים הדיגיטליים שלכם. תוכנית מושכלת לאנשים שתבחרו.', u: 'החיים הדיגיטליים' },
+          he: { s: 'החיים הדיגיטליים שלכם. תוכנית מוקפדת לאנשים שתבחרו.', u: 'החיים הדיגיטליים' },
         }
         var heroEl = null,
           heroOrig = null
