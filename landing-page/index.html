@@ -5891,8 +5891,8 @@
       ;(function () {
         var TR = {
           pl: {
-            'Loomkeeper — Your Secure Digital Content Vault':
-              'Loomkeeper — Twój bezpieczny cyfrowy skarbiec dziedzictwa',
+            'Loomkeeper | Plan Your Digital Presence & Legacy':
+              'Loomkeeper | Zaplanuj swoją cyfrową obecność i dziedzictwo',
             'How it works': 'Jak to działa',
             Vault: 'Skarbiec',
             Features: 'Funkcje',
@@ -6255,8 +6255,8 @@
             'Toggle banner': 'Przełącz baner',
           },
           es: {
-            'Loomkeeper — Your Secure Digital Content Vault':
-              'Loomkeeper — Tu bóveda digital segura para tu legado',
+            'Loomkeeper | Plan Your Digital Presence & Legacy':
+              'Loomkeeper | Planifica tu presencia y legado digitales',
             'How it works': 'Cómo funciona',
             Vault: 'Bóveda',
             Features: 'Funciones',
@@ -6623,8 +6623,8 @@
             'Toggle banner': 'Alternar banner',
           },
           fr: {
-            'Loomkeeper — Your Secure Digital Content Vault':
-              'Loomkeeper — Votre coffre-fort numérique sécurisé pour votre héritage',
+            'Loomkeeper | Plan Your Digital Presence & Legacy':
+              'Loomkeeper | Planifiez votre présence et votre héritage numériques',
             'How it works': 'Comment ça marche',
             Vault: 'Coffre-fort',
             Features: 'Fonctionnalités',
@@ -6993,8 +6993,8 @@
             'Toggle banner': 'Activer/désactiver la bannière',
           },
           he: {
-            'Loomkeeper — Your Secure Digital Content Vault':
-              'Loomkeeper — הכספת הדיגיטלית המאובטחת למורשת שלכם',
+            'Loomkeeper | Plan Your Digital Presence & Legacy':
+              'Loomkeeper | תכננו את הנוכחות והמורשת הדיגיטלית שלכם',
             'How it works': 'איך זה עובד',
             Vault: 'כספת',
             Features: 'תכונות',
@@ -7364,6 +7364,46 @@
           artOrig = null // lone article "A" before "death inquiry"
         var ART = { en: null, pl: '', es: 'Una ', fr: 'Une ', he: '' } // avatar "A" stays untouched
         var STORE = 'lk-lang'
+        // Hero H1 is translated as one sentence (s); u = the "digital life"
+        // equivalent to underline. English markup is restored verbatim.
+        var HERO = {
+          pl: { s: 'Twoje cyfrowe życie. Przemyślany plan dla osób, które wybierasz.', u: 'cyfrowe życie' },
+          es: { s: 'Tu vida digital. Un plan cuidadoso para las personas que elijas.', u: 'vida digital' },
+          fr: { s: 'Votre vie numérique. Un plan réfléchi pour les personnes que vous choisissez.', u: 'vie numérique' },
+          he: { s: 'החיים הדיגיטליים שלכם. תוכנית מושכלת לאנשים שתבחרו.', u: 'החיים הדיגיטליים' },
+        }
+        var heroEl = null,
+          heroOrig = null
+        function setHero(lang) {
+          if (!heroEl) return
+          var h = HERO[lang]
+          if (!h) {
+            if (heroEl.innerHTML !== heroOrig) heroEl.innerHTML = heroOrig
+            return
+          }
+          heroEl.textContent = ''
+          var cut = h.s.indexOf('. ')
+          var first = cut >= 0 ? h.s.slice(0, cut + 1) : h.s
+          var rest = cut >= 0 ? h.s.slice(cut + 2) : ''
+          var ui = first.indexOf(h.u)
+          if (ui >= 0) {
+            var span = document.createElement('span')
+            span.className = 'underline'
+            span.textContent = h.u
+            if (ui) heroEl.appendChild(document.createTextNode(first.slice(0, ui)))
+            heroEl.appendChild(span)
+            heroEl.appendChild(document.createTextNode(first.slice(ui + h.u.length)))
+          } else {
+            heroEl.appendChild(document.createTextNode(first))
+          }
+          if (rest) {
+            heroEl.appendChild(document.createTextNode(' '))
+            var acc = document.createElement('span')
+            acc.className = 'accent'
+            acc.textContent = rest
+            heroEl.appendChild(acc)
+          }
+        }
 
         function parts(s) {
           var m = s.match(/^(\s*)([\s\S]*?)(\s*)$/)
@@ -7395,6 +7435,7 @@
                   if (el.getAttribute) {
                     if (el.id === 'lk-lang') return NodeFilter.FILTER_REJECT
                   }
+                  if (el === heroEl) return NodeFilter.FILTER_REJECT
                   el = el.parentNode
                 }
                 var p = parts(n.nodeValue)
@@ -7467,6 +7508,7 @@
           if (artNode) {
             artNode.nodeValue = lang === 'en' ? artOrig : ART[lang]
           }
+          setHero(lang)
           document.documentElement.setAttribute('lang', HTMLLANG[lang] || lang)
           document.documentElement.setAttribute(
             'dir',
@@ -7606,6 +7648,8 @@
           if (!document.body) {
             return setTimeout(init, 0)
           }
+          heroEl = document.querySelector('h1.hero-title')
+          if (heroEl) heroOrig = heroEl.innerHTML
           registerText()
           registerAttrs()
           var ss = document.getElementsByTagName('strong')
