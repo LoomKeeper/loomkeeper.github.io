@@ -25,18 +25,35 @@ const sourceDocument = readFileSync(
   'utf8',
 )
 const countIn = (text, needle) => text.split(needle).length - 1
+const escapeRegExp = text => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
+// The query and hash of every href="<prefix>/auth/<route>..." in a document,
+// in document order. Account links may carry a query (UTM tags), so they are
+// matched by prefix rather than as exact literals.
+const accountHrefs = (text, prefix, route) =>
+  [
+    ...text.matchAll(
+      new RegExp(
+        `href="${escapeRegExp(prefix)}/auth/${route}((?:[?#][^"]*)?)"`,
+        'g',
+      ),
+    ),
+  ].map(match => match[1])
 
 // Every account link in the source document, so a rewrite that misses some of
 // them (or a document that loses them) fails rather than passing on "> 0".
 const sourceHrefs = Object.fromEntries(
-  ROUTES.map(route => [route, countIn(sourceDocument, `href="/auth/${route}"`)]),
+  ROUTES.map(route => [route, accountHrefs(sourceDocument, '', route)]),
 )
 const sourceSelectors = Object.fromEntries(
   ROUTES.map(route => [
     route,
-    countIn(sourceDocument, `a[href="/auth/${route}"]`),
+    countIn(sourceDocument, `a[href^="/auth/${route}"]`),
   ]),
 )
+
+// Marketing-to-app account links carry placement attribution (WEB-42).
+const UTM = /^\?utm_source=loomkeeper\.com&amp;utm_medium=website&amp;utm_campaign=[a-z0-9-]+$/
 
 const failures = []
 const expect = (label, actual, ok) => {
@@ -60,16 +77,29 @@ const checkDocument = (html, origin) => {
   const count = needle => countIn(html, needle)
 
   for (const route of ROUTES) {
-    expect(`source href="/auth/${route}"`, sourceHrefs[route], sourceHrefs[route] > 0)
+    const source = sourceHrefs[route]
+    expect(`source href="/auth/${route}..."`, source.length, source.length > 0)
 
-    const href = `href="${origin}/auth/${route}"`
+    const untagged = source.filter(suffix => !UTM.test(suffix))
     expect(
-      `${href} (source has ${sourceHrefs[route]})`,
-      count(href),
-      count(href) === sourceHrefs[route],
+      `source /auth/${route} links without UTM tags`,
+      untagged.length ? untagged.join(' ') : 0,
+      untagged.length === 0,
     )
 
-    const selector = `a[${href}]`
+    const built = accountHrefs(html, origin, route)
+    expect(
+      `href="${origin}/auth/${route}..." (source has ${source.length})`,
+      built.length,
+      built.length === source.length,
+    )
+    expect(
+      `/auth/${route} queries kept as written`,
+      built.join(' ') === source.join(' ') ? 'same' : built.join(' '),
+      built.join(' ') === source.join(' '),
+    )
+
+    const selector = `a[href^="${origin}/auth/${route}"]`
     expect(
       `${selector} (source has ${sourceSelectors[route]})`,
       count(selector),

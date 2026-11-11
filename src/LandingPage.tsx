@@ -133,7 +133,8 @@ const useAppNavigation = () => {
       }
 
       event.preventDefault()
-      const appUrl = `${APP_ORIGIN}${url.pathname}`
+      // Keep the query (UTM tags) and any hash on the way to the app.
+      const appUrl = `${APP_ORIGIN}${url.pathname}${url.search}${url.hash}`
 
       if (anchor.target === '_blank') {
         window.open(appUrl, '_blank', 'noopener,noreferrer')

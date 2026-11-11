@@ -77,11 +77,12 @@ const directLandingPage = (appOrigin: string) => ({
         .replace(/(["'(])assets\//g, '$1/landing-page/assets/')
         // Account links live on the web app, not this site. Point them there in
         // the markup so new-tab, middle-click and pre-script clicks work too.
-        // The document's own a[href="/auth/..."] selectors contain the same
-        // literal, so they are rewritten identically and keep matching.
+        // Any query or hash (UTM tags) is kept as written. The document's own
+        // a[href^="/auth/..."] prefix selectors are rewritten the same way, so
+        // they keep matching the rewritten links.
         .replace(
-          /href="\/auth\/(login|register)"/g,
-          `href="${appOrigin}/auth/$1"`,
+          /href(\^?)="\/auth\/(login|register)((?:[?#][^"]*)?)"/g,
+          `href$1="${appOrigin}/auth/$2$3"`,
         )
 
       return html

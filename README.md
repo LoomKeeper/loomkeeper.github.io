@@ -24,7 +24,8 @@ GitHub Actions builds and deploys `dist` on every push to `main`. Configure the
 repository's Pages source as **GitHub Actions**.
 
 Account links leave the landing page and open the corresponding authentication
-entry route on `https://app.loomkeeper.com`.
+entry route on `https://app.loomkeeper.com`. They carry UTM placement tags; see
+[docs/measurement.md](docs/measurement.md).
 
 The exported landing document is served directly as the root page. React mounts
 only a hidden controller that supplies pricing and account-link routing; the visible page is not rendered inside an iframe.

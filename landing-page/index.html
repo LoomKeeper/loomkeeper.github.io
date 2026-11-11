@@ -2847,14 +2847,14 @@
         <div class="nav-right">
           <div class="nav-cta">
             <a
-              href="/auth/login"
+              href="/auth/login?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=nav"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-ghost"
               >My Loomkeeper</a
             >
             <a
-              href="/auth/register"
+              href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=nav"
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-primary"
@@ -3048,7 +3048,7 @@
             </p>
             <div class="hero-cta">
               <a
-                href="/auth/register"
+                href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=hero"
                 class="btn btn-primary btn-lg"
               >
                 <span class="cta-label">Create your free account</span>
@@ -3958,7 +3958,7 @@
               Send on an exact day — a birthday, a wedding anniversary, the year
               a child turns 18. Not sent if you're still alive.
             </p>
-            <a href="/auth/register" class="btn btn-primary" style="width: 100%"
+            <a href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=messages" class="btn btn-primary" style="width: 100%"
               >Schedule</a
             >
           </article>
@@ -3991,7 +3991,7 @@
               "Their birthday, the year after I'm gone." Loomkeeper handles the
               timing — you focus on the message.
             </p>
-            <a href="/auth/register" class="btn btn-primary" style="width: 100%"
+            <a href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=messages" class="btn btn-primary" style="width: 100%"
               >Schedule</a
             >
           </article>
@@ -4034,7 +4034,7 @@
               Six months, one year, five years after you're gone. Perfect for
               messages that should land after the initial grief.
             </p>
-            <a href="/auth/register" class="btn btn-primary" style="width: 100%"
+            <a href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=messages" class="btn btn-primary" style="width: 100%"
               >Schedule</a
             >
           </article>
@@ -4324,7 +4324,7 @@
                 </li>
               </ul>
               <a
-                href="/auth/register"
+                href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=pricing"
                 class="btn btn-outline"
                 style="width: 100%; padding: 14px 22px"
                 >Start free</a
@@ -4414,7 +4414,7 @@
                 </li>
               </ul>
               <a
-                href="/auth/register"
+                href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=pricing"
                 class="btn btn-primary"
                 style="width: 100%; padding: 14px 22px"
                 >Subscribe now</a
@@ -4569,7 +4569,7 @@
                 One flat fee — no recurring charges
               </div>
               <a
-                href="/auth/register"
+                href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=messages-standalone"
                 class="btn btn-primary"
                 style="margin-top: 16px; padding: 12px 22px"
                 >Create a message</a
@@ -5227,11 +5227,11 @@
               "
             >
               <a
-                href="/auth/register"
+                href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=final-cta"
                 class="btn btn-lg"
                 >Create your free account</a
               >
-              <a href="/auth/login" class="btn btn-lg btn-ghost-w"
+              <a href="/auth/login?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=final-cta" class="btn btn-lg btn-ghost-w"
                 >I already have one</a
               >
             </div>
@@ -5241,7 +5241,7 @@
     </section>
 
     <a
-      href="/auth/register"
+      href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=mobile-sticky"
       class="mobile-sticky-cta is-scroll-hidden"
     >
       <span class="cta-label">Create your free account</span>
@@ -5548,7 +5548,7 @@
       })
 
       // Login CTA — when embedded, hand off to the host app instead of navigating
-      document.querySelectorAll('a[href="/auth/login"]').forEach(a => {
+      document.querySelectorAll('a[href^="/auth/login"]').forEach(a => {
         a.addEventListener('click', e => {
           if (window.parent === window) return
           e.preventDefault()
@@ -5560,7 +5560,7 @@
       })
 
       // Register CTA — same handoff pattern for signup links
-      document.querySelectorAll('a[href="/auth/register"]').forEach(a => {
+      document.querySelectorAll('a[href^="/auth/register"]').forEach(a => {
         a.addEventListener('click', e => {
           if (window.parent === window) return
           e.preventDefault()
@@ -5583,7 +5583,7 @@
       // the hero's regular signup button is no longer visible.
       const mobileStickyCta = document.querySelector('.mobile-sticky-cta')
       const heroRegisterCta = document.querySelector(
-        '.hero-cta a[href="/auth/register"]',
+        '.hero-cta a[href^="/auth/register"]',
       )
       let mobileStickyCtaTimer
       const shouldHideMobileStickyCta = () => {
@@ -8187,14 +8187,14 @@
               })
               .join('') +
             '</nav>' +
-            '<div class="lk-mm-sep"></div><p class="lk-mm-lbl">Your Loomkeeper</p><div class="lk-mm-list"><a class="lk-mm-item" href="/auth/login"' +
+            '<div class="lk-mm-sep"></div><p class="lk-mm-lbl">Your Loomkeeper</p><div class="lk-mm-list"><a class="lk-mm-item" href="/auth/login?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=mobile-nav"' +
             ext +
             '>' +
             S(
               '<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c.6-3.8 3.7-6 7.5-6s6.9 2.2 7.5 6z"/>',
             ) +
             '<span>Login</span></a></div>' +
-            '<div class="lk-mm-sep"></div><p class="lk-mm-lbl">Get started</p><div class="lk-mm-ctas"><a class="lk-mm-cta p" href="/auth/register"' +
+            '<div class="lk-mm-sep"></div><p class="lk-mm-lbl">Get started</p><div class="lk-mm-ctas"><a class="lk-mm-cta p" href="/auth/register?utm_source=loomkeeper.com&amp;utm_medium=website&amp;utm_campaign=mobile-nav"' +
             ext +
             '>Create Free Account</a><a class="lk-mm-cta o" href="https://trustee.loomkeeper.com"' +
             ext +
